@@ -10,10 +10,12 @@ import java.io.IOException;
 public class LoginPageView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginPageView.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginPageView.class.getResource("Login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setTitle("ClassRoom Manager");
         stage.setScene(scene);
+        stage.setMinHeight(450);
+        stage.setMinWidth(600);
         stage.show();
     }
 
