@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ControllerLogin">
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane style="-fx-background-color: rgb(155, 32, 48);" HBox.hgrow="ALWAYS">
+               <center>
+                  <VBox alignment="CENTER" fillWidth="false" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/Immagini/Username-Photoroom.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <TextField fx:id="Textfield_matricola" alignment="CENTER" promptText="Matricola" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="Label_errorematr" text="Matricola errata " textFill="WHITE" visible="false">
+                           <padding>
+                              <Insets top="2.0" />
+                           </padding>
+                        </Label>
+                        <HBox alignment="CENTER">
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/Immagini/lock-Photoroom.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <PasswordField fx:id="Passwordfield_password" alignment="CENTER" promptText="Password" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="Label_errorepass" text="Password errata" textFill="WHITE" visible="false">
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Button fx:id="Button_login" onAction="#login" alignment="CENTER" minWidth="130.0" mnemonicParsing="false" text="Login" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="28.0" top="8.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </center>
+               <bottom>
+                  <Label fx:id="Label_registra" onMouseClicked="#iscrizione" text="Non sei registrato? Clicca qui" textFill="WHITE" BorderPane.alignment="CENTER_LEFT">
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </bottom>
+            </BorderPane>
+            <Pane HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </center>
+</BorderPane>
