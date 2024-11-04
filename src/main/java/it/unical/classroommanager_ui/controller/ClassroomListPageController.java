@@ -77,8 +77,8 @@ public class ClassroomListPageController {
 
             }
 
-            classroomListPane.setMinHeight(150+classroomList.getItems().size() * 250);
-            classroomList.setMinHeight(classroomList.getItems().size() * 250);
+            classroomListPane.setMinHeight(150+classroomList.getItems().size() * 137);
+            classroomList.setMinHeight(classroomList.getItems().size() * 137);
 
         }
 

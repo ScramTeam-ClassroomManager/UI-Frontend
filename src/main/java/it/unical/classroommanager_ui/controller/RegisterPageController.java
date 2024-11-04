@@ -497,6 +497,9 @@ public class RegisterPageController {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
                 os.write(input, 0, input.length);
             }
+            catch(Exception e){
+                e.printStackTrace();
+            }
 
             // get results
             int responseCode = connection.getResponseCode();
