@@ -1,0 +1,75 @@
+package it.unical.classroommanager_ui.controller;
+
+
+import it.unical.classroommanager_ui.model.ClassroomDto;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+
+import java.io.IOException;
+
+
+public class ClassroomListInstanceController {
+
+    @FXML
+    private Label capabilityLabel;
+
+    @FXML
+    private Label cubeLabel;
+
+    @FXML
+    private Label floorLabel;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label num_socketLabel;
+
+    @FXML
+    private Label projectorLabel;
+
+    @FXML
+    private Button reserveButton;
+
+
+
+
+
+    MainPageController mainPageController;
+    ClassroomDto classroom;
+
+     @FXML
+     void reservePressed(ActionEvent event) throws IOException {
+     }
+
+
+
+
+
+
+    public void init(MainPageController mainPageController, ClassroomDto classroom){
+
+        this.mainPageController = mainPageController;
+        this.classroom = classroom;
+
+
+        capabilityLabel.setText(String.valueOf(classroom.getCapability()));
+        cubeLabel.setText(String.valueOf(classroom.getCube()));
+        floorLabel.setText(String.valueOf(classroom.getFloor()));
+        nameLabel.setText(classroom.getName());
+        num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
+        if(classroom.isProjector()){
+            projectorLabel.setText("Si");
+        }
+        else{
+            projectorLabel.setText("No");
+        }
+
+
+    }
+
+
+}

@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
 
 public class SceneHandler {
@@ -53,6 +55,24 @@ public class SceneHandler {
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void createMainPageScene() throws IOException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("mainPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1023, 676);
+            for (String style : List.of("css/custom.css")) {
+                String resource = Objects.requireNonNull(SceneHandler.class.getResource(style)).toExternalForm();
+                scene.getStylesheets().add(resource);
+            }
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        }
+        catch (IOException e) {
+                throw new RuntimeException(e);
+        }
+
     }
 
 
