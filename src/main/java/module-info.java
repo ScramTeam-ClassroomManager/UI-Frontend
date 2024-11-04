@@ -1,7 +1,8 @@
 module it.unical.classroommanager_ui {
     requires javafx.controls;
     requires javafx.fxml;
-
+    requires com.fasterxml.jackson.databind;
+    opens it.unical.classroommanager_ui.model to com.fasterxml.jackson.databind;
 
     opens it.unical.classroommanager_ui to javafx.fxml;
     exports it.unical.classroommanager_ui;
