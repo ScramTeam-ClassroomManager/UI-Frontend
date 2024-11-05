@@ -584,7 +584,11 @@ public class RegisterPageController {
     public void initialize(){
 
         loginAccessLabel.setOnMousePressed(event -> {
-            SceneHandler.getInstance().createLoginScene();
+            try {
+                SceneHandler.getInstance().createLoginScene();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
 
 
