@@ -11,7 +11,7 @@ public class LoginPageView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SceneHandler.getInstance().init(stage);
-        SceneHandler.getInstance().createRegisterScene();
+        SceneHandler.getInstance().createLoginScene();
     }
 
     public static void main(String[] args) {

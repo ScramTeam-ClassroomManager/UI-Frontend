@@ -22,6 +22,7 @@ public class ClassroomListPageController {
     @FXML
     private ListView<ClassroomListInstanceView> classroomList;
 
+
     @FXML
     private AnchorPane classroomListPane;
 
@@ -53,14 +54,13 @@ public class ClassroomListPageController {
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 ObjectMapper objectMapper = new ObjectMapper();
-                classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {});
-            }
-            else {
+                classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {
+                });
+            } else {
                 System.err.println("Failed : HTTP error code : " + responseCode);
             }
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Problemi nella ricezione delle classi.");
         }
@@ -77,7 +77,7 @@ public class ClassroomListPageController {
 
             }
 
-            classroomListPane.setMinHeight(150+classroomList.getItems().size() * 250);
+            classroomListPane.setMinHeight(150 + classroomList.getItems().size() * 250);
             classroomList.setMinHeight(classroomList.getItems().size() * 250);
 
         }
@@ -91,5 +91,10 @@ public class ClassroomListPageController {
 
         fillClassroomList();
     }
+
+    //catch (IOException e) {
+    //    throw new RuntimeException(e);
+    //}
+
 
 }

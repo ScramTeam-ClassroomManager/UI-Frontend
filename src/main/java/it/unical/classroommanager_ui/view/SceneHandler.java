@@ -29,17 +29,19 @@ public class SceneHandler {
         this.stage = stage;
     }
 
-    public void createLoginScene(){
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("loginPage.fxml"));
-        // INSERIRE LA GIUSTA GRANDEZZA
-        //Scene scene = new Scene(fxmlLoader.load(), 520, 569);
+    public void createLoginScene() throws IOException{
 
-        stage.setResizable(false);
+            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("loginPage.fxml"));
 
-        stage.setTitle("Classroom Manager");
-        //stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+
+            stage.setResizable(false);
+
+            stage.setTitle("Classroom Manager");
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+
     }
 
 
