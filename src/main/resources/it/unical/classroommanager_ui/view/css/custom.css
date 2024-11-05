@@ -1,0 +1,19 @@
+
+.list-cell{
+    -fx-background-color: transparent;
+
+}
+
+.list-cell{
+    -fx-background-color: white;
+
+}
+
+.list-view:focused .list-cell:filled:focused:selected {
+     -fx-background: white;
+
+}
+
+.list-cell:filled{
+    -fx-border-color: black;
+}

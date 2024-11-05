@@ -431,8 +431,6 @@ public class RegisterPageController {
         else {
 
             // RISPETTA I CRITERI
-            // TODO: CHECK COL BACKEND PER VEDERE SE ESISTE GIA QUESTA MATRICOLA ASSOCIATA AD UN ACCOUNT
-
 
             if (Pattern.matches("[0-9]{6}", serialnumberField.getText())) {
 
@@ -499,6 +497,9 @@ public class RegisterPageController {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
                 os.write(input, 0, input.length);
             }
+            catch(Exception e){
+                e.printStackTrace();
+            }
 
             // get results
             int responseCode = connection.getResponseCode();
@@ -513,13 +514,14 @@ public class RegisterPageController {
                     response.append(line);
                 }
             }
+
             catch (Exception e) {
                 // Handle any other exceptions that may occur
                 serialNOrEmailAlreadyInUse = true;
                 System.err.println("Problemi con la registrazione: " + e.getMessage());
             }
 
-            if (serialNOrEmailAlreadyInUse){
+            if (serialNOrEmailAlreadyInUse || response.toString().contains("Matricola o Email")){
 
                 email = false;
 
@@ -582,11 +584,7 @@ public class RegisterPageController {
     public void initialize(){
 
         loginAccessLabel.setOnMousePressed(event -> {
-            try {
-                SceneHandler.getInstance().createLoginScene();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            SceneHandler.getInstance().createLoginScene();
         });
 
 
