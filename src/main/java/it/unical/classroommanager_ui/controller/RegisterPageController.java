@@ -1,5 +1,6 @@
 package it.unical.classroommanager_ui.controller;
 
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import it.unical.classroommanager_ui.model.User;
 import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.SceneHandler;
@@ -7,7 +8,6 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -42,13 +42,13 @@ public class RegisterPageController {
     private VBox passwordErrorLabel;
 
     @FXML
-    private PasswordField passwordField;
+    private MFXPasswordField passwordField;
 
     @FXML
     private Label repeatPasswordErrorLabel;
 
     @FXML
-    private PasswordField repeatPasswordField;
+    private MFXPasswordField repeatPasswordField;
 
     @FXML
     private Label surnameErrorLabel;
@@ -104,7 +104,7 @@ public class RegisterPageController {
 
                 nameErrorLabel.setVisible(false);
                 nameErrorLabel.setText("✓");
-                nameErrorLabel.setStyle("-fx-text-fill: green");
+                nameErrorLabel.setStyle("-fx-text-fill: green; -fx-alignment: center;");
 
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), nameErrorLabel);
                 ft.setFromValue(0.0);
@@ -170,7 +170,7 @@ public class RegisterPageController {
 
                 surnameErrorLabel.setVisible(false);
                 surnameErrorLabel.setText("✓");
-                surnameErrorLabel.setStyle("-fx-text-fill: green");
+                surnameErrorLabel.setStyle("-fx-text-fill: green; -fx-alignment: center;");
 
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), surnameErrorLabel);
                 ft.setFromValue(0.0);
@@ -233,7 +233,7 @@ public class RegisterPageController {
 
                 emailErrorLabel.setVisible(false);
                 emailErrorLabel.setText("✓");
-                emailErrorLabel.setStyle("-fx-text-fill: green");
+                emailErrorLabel.setStyle("-fx-text-fill: green; -fx-alignment: center;");
 
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), emailErrorLabel);
                 ft.setFromValue(0.0);
@@ -440,7 +440,7 @@ public class RegisterPageController {
 
                 serialnumberErrorLabel.setVisible(false);
                 serialnumberErrorLabel.setText("✓");
-                serialnumberErrorLabel.setStyle("-fx-text-fill: green");
+                serialnumberErrorLabel.setStyle("-fx-text-fill: green; -fx-alignment: center;");
 
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), serialnumberErrorLabel);
                 ft.setFromValue(0.0);

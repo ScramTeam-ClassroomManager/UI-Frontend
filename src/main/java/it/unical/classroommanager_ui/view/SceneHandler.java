@@ -31,16 +31,16 @@ public class SceneHandler {
 
     public void createLoginScene() throws IOException{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("loginPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("loginPage.fxml"));
 
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load());
 
-            stage.setResizable(false);
+        stage.setResizable(false);
 
-            stage.setTitle("Classroom Manager");
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.show();
+        stage.setTitle("Classroom Manager");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
 
     }
 
@@ -48,7 +48,7 @@ public class SceneHandler {
     public void createRegisterScene() throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("registerPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 635, 681);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setResizable(false);
             stage.setScene(scene);
             stage.centerOnScreen();
@@ -72,7 +72,7 @@ public class SceneHandler {
             stage.show();
         }
         catch (IOException e) {
-                throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
 
     }
