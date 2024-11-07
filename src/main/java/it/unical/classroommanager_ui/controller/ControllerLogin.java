@@ -5,11 +5,8 @@ import jakarta.validation.constraints.Pattern;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,8 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Map;
 
@@ -28,8 +25,6 @@ import java.util.Map;
 
 public class ControllerLogin {
 
-    @FXML
-    private Button Button_login;
 
     @FXML
     private Label Label_errorematr;
@@ -38,22 +33,13 @@ public class ControllerLogin {
     private Label Label_errorepass;
 
     @FXML
-    private Label Label_registra;
+    private Label Label_sbagliati;
 
     @FXML
-    private PasswordField Passwordfield_password;
+    private MFXPasswordField Passwordfield_password;
 
     @FXML
     private TextField Textfield_matricola;
-
-    @FXML
-    private ImageView image_Username;
-
-    @FXML
-    private ImageView image_lock;
-
-    //@FXML
-    //private Label statusLabel;
 
     @Pattern(regexp = "\\d{10}")
     private String serialNumber;
@@ -117,7 +103,6 @@ public class ControllerLogin {
             if (response.getStatusCode() == HttpStatus.OK) {
                 String token = (String) response.getBody().get("token");
 
-                // Aggiornamento della UI nel thread principale di JavaFX
                 javafx.application.Platform.runLater(() -> {
                     try {
                         SceneHandler.getInstance().createMainPageScene();
@@ -125,24 +110,13 @@ public class ControllerLogin {
                         e.printStackTrace();
                     }
                 });
-            } else {
-                javafx.application.Platform.runLater(() -> {
-                    updateStatusLabel("Login failed: " + response.getBody().get("message"), Color.RED);
-                });
             }
 
         } catch (Exception e) {
             javafx.application.Platform.runLater(() -> {
-                updateStatusLabel("Error: " + e.getMessage(), Color.RED);
+                Label_sbagliati.setVisible(true);
             });
         }
     }
 
-
-    private void updateStatusLabel(String message, Color color) {
-        javafx.application.Platform.runLater(() -> {
-            //statusLabel.setText(message);
-            //statusLabel.setTextFill(color);
-        });
-    }
 }
