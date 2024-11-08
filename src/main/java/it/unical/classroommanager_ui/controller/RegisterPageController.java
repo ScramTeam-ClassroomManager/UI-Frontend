@@ -1,12 +1,15 @@
 package it.unical.classroommanager_ui.controller;
 
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import it.unical.classroommanager_ui.model.Role;
 import it.unical.classroommanager_ui.model.User;
 import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.SceneHandler;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -63,6 +66,12 @@ public class RegisterPageController {
     private Label serialnumberErrorLabel;
 
     @FXML
+    private MFXComboBox<Role> roleComboBox;
+
+    @FXML
+    private Label roleErrorLabel;
+
+    @FXML
     void registerAction(ActionEvent event) throws IOException {
 
         boolean name;
@@ -71,6 +80,7 @@ public class RegisterPageController {
         boolean serialNumber;
         boolean password;
         boolean repeatPassword;
+        boolean role;
 
         boolean serialNOrEmailAlreadyInUse = false;
 
@@ -476,9 +486,35 @@ public class RegisterPageController {
 
         }
 
+        //CHECK ROLE
+
+        if (roleComboBox.getValue() == null) {
+
+            role = false;
 
 
-        if (name && surname && email && password && repeatPassword && serialNumber){
+            roleErrorLabel.setVisible(false);
+
+            roleComboBox.setStyle("-fx-border-color: red");
+            roleErrorLabel.setText("Seleziona un ruolo");
+            roleErrorLabel.setStyle("-fx-text-fill: red");
+
+            FadeTransition ft = new FadeTransition(Duration.seconds(1), roleErrorLabel);
+            ft.setFromValue(0.0);
+            ft.setToValue(1.0);
+            ft.play();
+
+            roleErrorLabel.setVisible(true);
+        }
+
+        else {
+            role = true;
+        }
+
+
+
+
+        if (name && surname && email && password && repeatPassword && serialNumber && role){
 
             // start connection
             URL url = new URL("http://localhost:8080/api/v1/auth/register");
@@ -489,8 +525,8 @@ public class RegisterPageController {
 
             // prepare input
             String jsonInputString = String.format("{\"serialNumber\": \"%s\", \"firstName\": \"%s\"," +
-                            "\"lastName\": \"%s\", \"email\": \"%s\", \"password\": \"%s\"}",
-                    serialnumberField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(), passwordField.getText());
+                            "\"lastName\": \"%s\", \"email\": \"%s\", \"password\": \"%s\", \"role\": \"%s\"}",
+                    serialnumberField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(), passwordField.getText(), roleComboBox.getValue().toString());
 
 
             try (OutputStream os = connection.getOutputStream()) {
@@ -573,7 +609,7 @@ public class RegisterPageController {
 
             // LO PORTA ALLA PAG PRINCIPALE E LO FA LOGGARE
             UserManager.getInstance().setUser(new User(serialnumberField.getText(), nameField.getText(), surnameField.getText(),
-                    emailField.getText(), passwordField.getText()));
+                    emailField.getText(), passwordField.getText(), roleComboBox.getValue().toString()));
             SceneHandler.getInstance().createMainPageScene();
 
         }
@@ -582,6 +618,8 @@ public class RegisterPageController {
 
     @FXML
     public void initialize(){
+
+        roleComboBox.getItems().addAll(Role.values());
 
         loginAccessLabel.setOnMousePressed(event -> {
             try {
