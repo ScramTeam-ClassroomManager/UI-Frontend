@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="646.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.CreateClassroomPageController">
+   <children>
+      <StackPane fx:id="stackImage" layoutX="79.0" layoutY="104.0" prefHeight="250.0" prefWidth="250.0" AnchorPane.leftAnchor="79.0" AnchorPane.topAnchor="104.0">
+         <children>
+            <ImageView fx:id="imageContainer" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <MFXTextField fx:id="classroomName" floatingText="Inserisci il nome dell'aula *" layoutX="400.0" layoutY="151.0" prefHeight="54.0" prefWidth="312.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="151.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </MFXTextField>
+      <MFXTextField fx:id="classroomCube" floatingText="Inserisci il nome del cubo" layoutX="400.0" layoutY="280.0" prefHeight="54.0" prefWidth="312.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="280.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </MFXTextField>
+      <MFXTextField fx:id="classroomSocket" floatingText="Inserisci il numero di prese" layoutX="400.0" layoutY="410.0" prefHeight="54.0" prefWidth="312.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="410.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </MFXTextField>
+      <MFXTextField fx:id="classroomCapacity" floatingText="Inserisci la capienza" layoutX="725.0" layoutY="151.0" prefHeight="54.0" prefWidth="312.0" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="151.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </MFXTextField>
+      <MFXTextField fx:id="classroomFloor" floatingText="Inserisci a che piano si trova l'aula" layoutX="725.0" layoutY="280.0" prefHeight="54.0" prefWidth="312.0" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="280.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </MFXTextField>
+      <Label alignment="CENTER" layoutX="336.0" layoutY="23.0" prefHeight="17.0" prefWidth="453.0" text="Inserisci una nuova aula nel sistema" AnchorPane.leftAnchor="336.0" AnchorPane.topAnchor="23.0">
+         <font>
+            <Font name="Trebuchet MS Bold" size="25.0" />
+         </font>
+      </Label>
+      <MFXToggleButton fx:id="classroomProjector" gap="-40.0" layoutX="725.0" layoutY="417.0" prefHeight="41.0" prefWidth="250.0" text="Proiettore presente" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="417.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MFXToggleButton>
+      <MFXButton fx:id="insertPhotoButton" layoutX="86.0" layoutY="369.0" onAction="#insertPhoto" prefHeight="41.0" prefWidth="235.0" text="Inserisci una foto dell'aula" AnchorPane.leftAnchor="86.0" AnchorPane.topAnchor="369.0">
+         <font>
+            <Font name="Nunito Regular" size="12.5" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="removePhotoButton" disable="true" layoutX="86.0" layoutY="420.0" onAction="#deletePhoto" prefHeight="41.0" prefWidth="235.0" text="Rimuovi la foto" AnchorPane.leftAnchor="86.0" AnchorPane.topAnchor="420.0">
+         <font>
+            <Font name="Nunito Regular" size="12.5" />
+         </font>
+      </MFXButton>
+      <MFXButton layoutX="86.0" layoutY="541.0" onAction="#createClassroom" prefHeight="41.0" prefWidth="235.0" text="Crea la nuova aula" AnchorPane.leftAnchor="86.0" AnchorPane.topAnchor="541.0">
+         <font>
+            <Font name="Nunito Regular" size="14.0" />
+         </font>
+      </MFXButton>
+      <Label fx:id="nameAlert" layoutX="400.0" layoutY="212.0" prefHeight="17.0" prefWidth="312.0" text="La compilazione di questo campo è obbligatoria." visible="false" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="212.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="capacityAlert" layoutX="725.0" layoutY="212.0" prefHeight="17.0" prefWidth="312.0" text="Inserisci un numero o lascia vuoto questo campo." visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="212.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="floorAlert" layoutX="725.0" layoutY="342.0" prefHeight="17.0" prefWidth="312.0" text="Inserisci un numero o lascia vuoto questo campo." visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="342.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="socketAlert" layoutX="400.0" layoutY="470.0" prefHeight="17.0" prefWidth="312.0" text="Inserisci un numero o lascia vuoto questo campo." visible="false" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="470.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="cubeAlert" layoutX="400.0" layoutY="340.0" prefHeight="17.0" prefWidth="312.0" visible="false">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

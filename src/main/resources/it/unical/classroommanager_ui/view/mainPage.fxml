@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
+<BorderPane fx:id="mainPageBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
    <top>
-      <AnchorPane prefHeight="81.0" prefWidth="632.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="81.0" prefWidth="632.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  <Pane prefHeight="71.0" prefWidth="34.0" />
+                  <MFXButton onAction="#showClassrooms" prefHeight="44.0" prefWidth="226.0" rippleColor="#c93838" text="Elenco aule">
+                     <font>
+                        <Font name="Nunito Regular" size="17.0" />
+                     </font>
+                  </MFXButton>
+                  <Pane prefHeight="71.0" prefWidth="24.0" />
+                  <MFXButton onAction="#newClassroom" prefHeight="44.0" prefWidth="224.0" rippleColor="#c93838" text="Crea una nuova aula">
+                     <font>
+                        <Font name="Nunito Regular" size="17.0" />
+                     </font>
+                  </MFXButton>
+                  <Pane prefHeight="11.0" prefWidth="200.0" />
+               </items>
+            </ToolBar>
+         </children></AnchorPane>
    </top>
    <center>
       <ScrollPane fx:id="displaySection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">

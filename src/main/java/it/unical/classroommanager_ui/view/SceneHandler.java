@@ -62,13 +62,16 @@ public class SceneHandler {
     public void createMainPageScene() throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("mainPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1023, 676);
+            Scene scene = new Scene(fxmlLoader.load());
             for (String style : List.of("css/custom.css")) {
                 String resource = Objects.requireNonNull(SceneHandler.class.getResource(style)).toExternalForm();
                 scene.getStylesheets().add(resource);
             }
             stage.setScene(scene);
             stage.centerOnScreen();
+            stage.setMinWidth(1250);
+            stage.setMinHeight(800);
+            stage.setResizable(true);
             stage.show();
         }
         catch (IOException e) {

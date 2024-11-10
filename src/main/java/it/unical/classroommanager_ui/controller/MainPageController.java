@@ -1,18 +1,29 @@
 package it.unical.classroommanager_ui.controller;
 
 import it.unical.classroommanager_ui.view.ClassroomListPageView;
+import it.unical.classroommanager_ui.view.CreateClassroomPageView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
 
 public class MainPageController {
 
     @FXML
     private ScrollPane displaySection;
 
+    @FXML
+    private BorderPane mainPageBorderPane;
+
+    boolean currentlyShowingClassrooms = false;
+    boolean currentlyCreatingNewClassroom = false;
+
 
 
 
     public void displayClassrooms(){
+
+
 
 
 
@@ -27,6 +38,36 @@ public class MainPageController {
 
         // ritorna sulla cima della scrollbar
         displaySection.setVvalue(0);
+        this.currentlyShowingClassrooms = true;
+        this.currentlyCreatingNewClassroom = false;
+
+    }
+
+    @FXML
+    void newClassroom(ActionEvent event) {
+        if (!currentlyCreatingNewClassroom) {
+
+            CreateClassroomPageView createClassroomPageView = new CreateClassroomPageView(this);
+            displaySection.setContent(createClassroomPageView);
+
+            displaySection.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+
+            createClassroomPageView.prefWidthProperty().bind(displaySection.widthProperty());
+            createClassroomPageView.prefHeightProperty().bind(displaySection.heightProperty());
+
+            this.currentlyShowingClassrooms = false;
+            this.currentlyCreatingNewClassroom = true;
+        }
+
+
+    }
+
+    @FXML
+    void showClassrooms(ActionEvent event) {
+        if (!currentlyShowingClassrooms){
+            displayClassrooms();
+        }
 
     }
 
