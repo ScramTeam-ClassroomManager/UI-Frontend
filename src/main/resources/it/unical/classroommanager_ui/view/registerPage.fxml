@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -121,15 +122,22 @@
                      <font>
                         <Font size="12.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets right="275.0" />
+                     </VBox.margin>
                   </Label>
-                  <VBox fx:id="passwordErrorLabel" prefHeight="65.0" prefWidth="1340.0" visible="false">
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="360.0" spacing="5.0">
+               <children>
+                  <VBox fx:id="passwordErrorLabel" prefHeight="66.0" prefWidth="241.0" visible="false">
                      <children>
                         <Label text="La password:" textFill="WHITE">
                            <font>
                               <Font size="12.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="550.0" />
+                              <Insets left="60.0" />
                            </VBox.margin>
                         </Label>
                         <Label text="• Deve contenere dai 10 ai 20 caratteri" textFill="WHITE">
@@ -137,7 +145,7 @@
                               <Font size="11.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="550.0" />
+                              <Insets left="50.0" />
                            </VBox.margin>
                         </Label>
                         <Label text="• Non può contenere spazi" textFill="WHITE">
@@ -145,7 +153,7 @@
                               <Font size="11.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="550.0" />
+                              <Insets left="50.0" />
                            </VBox.margin>
                         </Label>
                         <Label text="• Non può contenere caratteri speciali" textFill="WHITE">
@@ -153,16 +161,33 @@
                               <Font size="11.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="550.0" />
+                              <Insets left="50.0" />
                            </VBox.margin>
                         </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="330.0">
+                     <children>
+                        <MFXComboBox fx:id="roleComboBox" alignment="CENTER" prefHeight="50.0" prefWidth="250.0" promptText="Seleziona il ruolo">
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </MFXComboBox>
+                        <Label fx:id="roleErrorLabel" prefHeight="18.0" prefWidth="211.0" text="Scegli un ruolo" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="65.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
                   </VBox>
                </children>
-            </VBox>
+            </HBox>
 
             <MFXButton fx:id="registerButton" mnemonicParsing="false" onAction="#registerAction" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #9b2030; -fx-text-fill: white; -fx-font-size: 16;" text="Registrati">
                <VBox.margin>
