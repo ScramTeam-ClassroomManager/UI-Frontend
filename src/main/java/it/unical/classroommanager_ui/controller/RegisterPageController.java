@@ -610,7 +610,7 @@ public class RegisterPageController {
             // LO PORTA ALLA PAG PRINCIPALE E LO FA LOGGARE
             UserManager.getInstance().setUser(new User(serialnumberField.getText(), nameField.getText(), surnameField.getText(),
                     emailField.getText(), passwordField.getText(), roleComboBox.getValue().toString()));
-            SceneHandler.getInstance().createMainPageScene();
+            SceneHandler.getInstance().createLoginScene();
 
         }
 
