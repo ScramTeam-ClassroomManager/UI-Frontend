@@ -1,41 +1,95 @@
 package it.unical.classroommanager_ui.controller;
 
-import it.unical.classroommanager_ui.view.ClassroomListPageView;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTableView;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import it.unical.classroommanager_ui.view.SceneHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollPane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class MainPageController {
 
     @FXML
-    private ScrollPane displaySection;
+    private Label labelAule;
 
+    @FXML
+    private BorderPane mainBorderPane;
 
+    @FXML
+    private Label labelLogout;
 
+    @FXML
+    private Label labelProfilo;
 
-    public void displayClassrooms(){
-
-
-
-        ClassroomListPageView classroomListPageView = new ClassroomListPageView(this);
-        displaySection.setContent(classroomListPageView);
-
-        displaySection.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-
-        classroomListPageView.prefWidthProperty().bind(displaySection.widthProperty());
-        classroomListPageView.minHeightProperty().bind(displaySection.heightProperty());
-
-
-        // ritorna sulla cima della scrollbar
-        displaySection.setVvalue(0);
-
-    }
-
+    @FXML
+    private Label labelRichieste;
 
 
     @FXML
-    public void initialize(){
+    private MFXButton buttonAccetta;
 
-        displayClassrooms();
+    @FXML
+    private MFXButton buttonRifiuta;
+
+    @FXML
+    private BorderPane requestsView;
+
+    @FXML
+    private MFXTableView<?> tableview;
+
+    @FXML
+    private MFXTextField textfield;
+
+    @FXML
+    private VBox mainVbox;
+
+    @FXML
+    void accetta(ActionEvent event) {
 
     }
+
+    @FXML
+    void rifiuta(ActionEvent event) {
+
+    }
+
+    private void loadRequestsPage() {
+        BorderPane requestsView = SceneHandler.getInstance().createRequestsView();
+
+        mainVbox.getChildren().add(requestsView);
+    }
+
+    @FXML
+    void clickAule(MouseEvent event) {
+
+    }
+
+    @FXML
+    void clickLogout(MouseEvent event) throws IOException {
+        SceneHandler.getInstance().createLoginScene();
+
+    }
+
+    @FXML
+    void clickProfilo(MouseEvent event) {
+
+    }
+
+    @FXML
+    void clickRichieste(MouseEvent event) {
+        loadRequestsPage();
+    }
+
+
+
+
 }

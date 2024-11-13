@@ -9,7 +9,7 @@ public class LoginPageView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SceneHandler.getInstance().init(stage);
-        SceneHandler.getInstance().createLoginScene();
+        SceneHandler.getInstance().createMainPageScene();
     }
 
     public static void main(String[] args) {
