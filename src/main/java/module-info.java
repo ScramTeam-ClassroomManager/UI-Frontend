@@ -6,6 +6,8 @@ module it.unical.classroommanager_ui {
     requires java.desktop;
     requires jakarta.validation;
     requires MaterialFX;
+    requires jjwt.api;
+    requires jjwt.impl;
     opens it.unical.classroommanager_ui.model to com.fasterxml.jackson.databind;
 
     opens it.unical.classroommanager_ui to javafx.fxml;
