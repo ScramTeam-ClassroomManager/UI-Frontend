@@ -2,6 +2,8 @@ package it.unical.classroommanager_ui.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -62,11 +64,17 @@ public class SceneHandler {
     public void createMainPageScene() throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("mainPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1023, 676);
+            Scene scene = new Scene(fxmlLoader.load(), 1500, 760);
+
+            /*
             for (String style : List.of("css/custom.css")) {
                 String resource = Objects.requireNonNull(SceneHandler.class.getResource(style)).toExternalForm();
                 scene.getStylesheets().add(resource);
             }
+
+             */
+
+
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.show();
@@ -76,6 +84,19 @@ public class SceneHandler {
         }
 
     }
+
+    public BorderPane createRequestsView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("requestsPage.fxml"));
+            return new BorderPane(fxmlLoader.load());
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 
 
 
