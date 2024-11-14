@@ -112,8 +112,6 @@ public class ControllerLogin {
                 UserManager.getInstance().setUser(new User(tokenDecoder.serialNumber(), tokenDecoder.sub(), tokenDecoder.sub(),
                         tokenDecoder.email(), "NIENTE", tokenDecoder.role()));
                 UserManager.getInstance().setToken(token);
-                System.out.println(UserManager.getInstance().toString());
-
 
                 javafx.application.Platform.runLater(() -> {
                     try {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.scene.Cursor?>
@@ -47,7 +48,7 @@
             <Font name="Trebuchet MS Bold" size="25.0" />
          </font>
       </Label>
-      <MFXToggleButton fx:id="classroomProjector" gap="-40.0" layoutX="725.0" layoutY="417.0" prefHeight="41.0" prefWidth="250.0" text="Proiettore presente" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="417.0">
+      <MFXToggleButton fx:id="classroomProjector" gap="-40.0" layoutX="725.0" layoutY="513.0" prefHeight="41.0" prefWidth="250.0" text="Proiettore presente" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="513.0">
          <font>
             <Font name="Trebuchet MS" size="14.0" />
          </font>
@@ -90,7 +91,17 @@
             <Font name="Trebuchet MS" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="cubeAlert" layoutX="400.0" layoutY="340.0" prefHeight="17.0" prefWidth="312.0" visible="false">
+      <MFXComboBox fx:id="typeCBox" floatingText="Tipo aula" graphicTextGap="20.0" layoutX="725.0" layoutY="410.0" prefHeight="54.0" prefWidth="183.0" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="410.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </MFXComboBox>
+      <Label fx:id="typeAlert" layoutX="725.0" layoutY="470.0" prefHeight="17.0" prefWidth="312.0" text="La scelta del tipo dell'aula è obbligatoria." visible="false" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="470.0">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="cubeAlert" layoutX="400.0" layoutY="340.0" prefHeight="17.0" prefWidth="312.0" text="Inserisci un numero o lascia vuoto questo campo." visible="false" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="342.0">
          <font>
             <Font name="Trebuchet MS" size="14.0" />
          </font>

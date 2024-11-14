@@ -26,6 +26,10 @@ public class UserManager {
         this.token = token;
     }
 
+    public String getToken() {
+        return token;
+    }
+
     public void logout(){
 
         user = null;

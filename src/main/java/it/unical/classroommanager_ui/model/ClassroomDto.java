@@ -9,6 +9,8 @@ public class ClassroomDto {
     private boolean projector;
     private boolean available;
 
+    private String type;
+
     public ClassroomDto() {}
     public long getId() {
         return id;
@@ -36,9 +38,11 @@ public class ClassroomDto {
 
     public boolean isProjector() {
         return projector;
-
     }
     public boolean getAvailable() {
         return available;
+    }
+    public String getType() {
+        return type;
     }
 }
