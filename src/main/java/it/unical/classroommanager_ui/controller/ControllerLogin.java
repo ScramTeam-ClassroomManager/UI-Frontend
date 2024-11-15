@@ -1,5 +1,8 @@
 package it.unical.classroommanager_ui.controller;
 
+import it.unical.classroommanager_ui.model.TokenDecoder;
+import it.unical.classroommanager_ui.model.User;
+import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.SceneHandler;
 import jakarta.validation.constraints.Pattern;
 import javafx.concurrent.Task;
@@ -101,7 +104,14 @@ public class ControllerLogin {
             ResponseEntity<Map> response = restTemplate.exchange(LOGIN_URL, HttpMethod.POST, request, Map.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
+
                 String token = (String) response.getBody().get("token");
+
+                TokenDecoder tokenDecoder = new TokenDecoder(token);
+
+                UserManager.getInstance().setUser(new User(tokenDecoder.serialNumber(), tokenDecoder.sub(), tokenDecoder.sub(),
+                        tokenDecoder.email(), "NIENTE", tokenDecoder.role()));
+                UserManager.getInstance().setToken(token);
 
                 javafx.application.Platform.runLater(() -> {
                     try {
@@ -113,6 +123,7 @@ public class ControllerLogin {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             javafx.application.Platform.runLater(() -> {
                 Label_sbagliati.setVisible(true);
             });

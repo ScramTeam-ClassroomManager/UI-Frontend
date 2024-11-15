@@ -77,6 +77,9 @@ public class SceneHandler {
 
             stage.setScene(scene);
             stage.centerOnScreen();
+            stage.setMinWidth(1250);
+            stage.setMinHeight(800);
+            stage.setResizable(true);
             stage.show();
         }
         catch (IOException e) {

@@ -9,7 +9,6 @@ import it.unical.classroommanager_ui.view.SceneHandler;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -287,7 +286,7 @@ public class RegisterPageController {
 
             passwordField.setStyle("-fx-border-color: red");
 
-            repeatPasswordField.setText(null);
+            repeatPasswordField.setText("");
 
             FadeTransition ft = new FadeTransition(Duration.seconds(1), passwordErrorLabel);
             ft.setFromValue(0.0);
@@ -348,7 +347,7 @@ public class RegisterPageController {
 
             repeatPasswordErrorLabel.setVisible(false);
 
-            passwordField.setText(null);
+            passwordField.setText("");
 
 
 
