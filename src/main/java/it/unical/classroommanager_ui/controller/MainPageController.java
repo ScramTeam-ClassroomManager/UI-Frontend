@@ -1,11 +1,9 @@
 package it.unical.classroommanager_ui.controller;
 
+import it.unical.classroommanager_ui.model.ClassroomDto;
 import it.unical.classroommanager_ui.model.Role;
 import it.unical.classroommanager_ui.model.UserManager;
-import it.unical.classroommanager_ui.view.ClassroomListPageView;
-import it.unical.classroommanager_ui.view.CreateClassroomPageView;
-import it.unical.classroommanager_ui.view.RequestListPageView;
-import it.unical.classroommanager_ui.view.SceneHandler;
+import it.unical.classroommanager_ui.view.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -36,13 +34,15 @@ public class MainPageController {
     @FXML
     private Label labelRichieste;
 
-    boolean currentlyShowingClassrooms = false;
-    boolean currentlyCreatingNewClassroom = false;
-    boolean currentlyShowingRequests = false;
+    String currPage = "";
 
     @FXML
     void clickAule(MouseEvent event) {
-        if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())){
+        displayClassrooms();
+    }
+
+    void displayClassrooms(){
+        if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString()) && !currPage.equals("aule")){
             try {
                 FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
                 AnchorPane nuovoAnchorPane = loader.load();
@@ -51,31 +51,48 @@ public class MainPageController {
                 createClassroomPageController.setBPane(BPane);
                 BPane.setCenter(nuovoAnchorPane);
 
+                currPage = "aule";
 
             }   catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         else{
-            try {
-                FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
-                AnchorPane nuovoAnchorPane = loader.load();
-                ClassroomListPageController classroomListPageController = loader.getController();
-                classroomListPageController.init(this);
+            if(!currPage.equals("aule")) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
+                    AnchorPane nuovoAnchorPane = loader.load();
+                    ClassroomListPageController classroomListPageController = loader.getController();
+                    classroomListPageController.init(this);
 
-                classroomListPageController.setBPane(BPane);
-                BPane.setCenter(nuovoAnchorPane);
+                    classroomListPageController.setBPane(BPane);
+                    BPane.setCenter(nuovoAnchorPane);
+
+                    currPage = "aule";
 
 
-            }   catch (IOException e) {
-                throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
+    }
+
+    void displayClassroomDetails(ClassroomDto classroomDto){
+        ClassroomDetailsPageView classroomDetailsPageView = new ClassroomDetailsPageView(this, classroomDto);
+
+        BPane.setCenter(classroomDetailsPageView);
+
+        currPage = "dettagliAula";
+
+
     }
 
     @FXML
     void clickLogout(MouseEvent event) {
         try {
+            UserManager.getInstance().logout();
             SceneHandler.getInstance().createLoginScene();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -99,6 +116,8 @@ public class MainPageController {
 
             BPane.setCenter(nuovoAnchorPane);
 
+            currPage = "richieste";
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -108,18 +127,22 @@ public class MainPageController {
         displayRequests();
     }
 
-
     @FXML
     void clickRichieste(MouseEvent event) throws IOException {
-        displayRequests();
+        if(!currPage.equals("richieste")) {
+            displayRequests();
+        }
     }
 
     public void init() {
         if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())){
             labelAule.setText("Aggiungi Aula");
+
         }
         else {
             labelAule.setText("Prenota Aula");
+            displayClassrooms();
         }
+
     }
 }

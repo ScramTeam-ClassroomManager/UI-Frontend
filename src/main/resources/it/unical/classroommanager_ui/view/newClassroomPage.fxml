@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="646.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.CreateClassroomPageController">
+<AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.CreateClassroomPageController">
    <children>
       <StackPane fx:id="stackImage" layoutX="79.0" layoutY="104.0" prefHeight="250.0" prefWidth="250.0" AnchorPane.leftAnchor="79.0" AnchorPane.topAnchor="104.0">
          <children>

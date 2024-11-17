@@ -129,7 +129,7 @@ public class RegisterPageController {
 
                 name = false;
 
-                nameField.setText(null);
+                nameField.setText("");
                 nameField.setStyle("-fx-border-color: red");
 
                 nameErrorLabel.setText("Nome non valido");
@@ -195,7 +195,7 @@ public class RegisterPageController {
 
                 surname = false;
 
-                surnameField.setText(null);
+                surnameField.setText("");
                 surnameField.setStyle("-fx-border-color: red");
 
                 surnameErrorLabel.setText("Cognome non valido");
@@ -259,7 +259,7 @@ public class RegisterPageController {
 
                 email = false;
 
-                emailField.setText(null);
+                emailField.setText("");
 
                 emailField.setStyle("-fx-border-color: red");
                 emailErrorLabel.setText("Email non valida");
@@ -318,8 +318,8 @@ public class RegisterPageController {
 
                 password = false;
 
-                passwordField.setText(null);
-                repeatPasswordField.setText(null);
+                passwordField.setText("");
+                repeatPasswordField.setText("");
 
                 passwordField.setStyle("-fx-border-color: red");
 
@@ -371,8 +371,8 @@ public class RegisterPageController {
                 repeatPassword = false;
 
 
-                passwordField.setText(null);
-                repeatPasswordField.setText(null);
+                passwordField.setText("");
+                repeatPasswordField.setText("");
 
                 repeatPasswordErrorLabel.setVisible(false);
 
@@ -466,7 +466,7 @@ public class RegisterPageController {
 
                 serialNumber = false;
 
-                serialnumberField.setText(null);
+                serialnumberField.setText("");
 
                 serialnumberField.setStyle("-fx-border-color: red");
                 serialnumberErrorLabel.setText("Matricola non valida");
@@ -561,7 +561,7 @@ public class RegisterPageController {
                 email = false;
 
                 // EMAIL GIA IN UTILIZZO
-                emailField.setText(null);
+                emailField.setText("");
 
                 emailField.setStyle("-fx-border-color: red");
                 emailErrorLabel.setText("L'email potrebbe essere già in uso");
@@ -577,7 +577,7 @@ public class RegisterPageController {
                 serialNumber = false;
 
                 // MATRICOLA GIA IN UTILIZZO
-                serialnumberField.setText(null);
+                serialnumberField.setText("");
 
                 serialnumberField.setStyle("-fx-border-color: red");
                 serialnumberErrorLabel.setText("La matricola potrebbe essere già in uso");
@@ -619,6 +619,9 @@ public class RegisterPageController {
     public void initialize(){
 
         roleComboBox.getItems().addAll(Role.values());
+
+        passwordField.setText("");
+        repeatPasswordField.setText("");
 
         loginAccessLabel.setOnMousePressed(event -> {
             try {

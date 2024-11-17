@@ -27,7 +27,7 @@ public class ClassroomListInstanceController {
     private Label floorLabel;
 
     @FXML
-    private Label nameLabel;
+    private Label classroomNameLabel;
 
     @FXML
     private Label num_socketLabel;
@@ -89,7 +89,7 @@ public class ClassroomListInstanceController {
         capabilityLabel.setText(String.valueOf(classroom.getCapability()));
         cubeLabel.setText(String.valueOf(classroom.getCube()));
         floorLabel.setText(String.valueOf(classroom.getFloor()));
-        nameLabel.setText(classroom.getName());
+        classroomNameLabel.setText(classroom.getName());
         num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
         if(classroom.isProjector()){
             projectorLabel.setText("Si");
@@ -102,6 +102,11 @@ public class ClassroomListInstanceController {
             reserveButton.setStyle("-fx-background-color: red;");
             reserveButton.setDisable(true);
         }
+
+        classroomNameLabel.setOnMousePressed(event -> {
+            mainPageController.displayClassroomDetails(classroom);
+        });
+
 
 
     }

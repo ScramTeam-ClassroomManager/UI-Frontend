@@ -3,7 +3,6 @@ package it.unical.classroommanager_ui.view;
 import it.unical.classroommanager_ui.controller.MainPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -69,13 +68,13 @@ public class SceneHandler {
             MainPageController mainPageController = fxmlLoader.getController();
             mainPageController.init();
 
-            /*
+
             for (String style : List.of("css/custom.css")) {
                 String resource = Objects.requireNonNull(SceneHandler.class.getResource(style)).toExternalForm();
                 scene.getStylesheets().add(resource);
             }
 
-             */
+
 
 
             stage.setScene(scene);
