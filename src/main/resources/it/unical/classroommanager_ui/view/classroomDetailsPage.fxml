@@ -231,7 +231,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </MFXDatePicker>
-                  <Label fx:id="dateAlert" prefHeight="17.0" prefWidth="312.0" text="Se vuoi prenotare l'aula devi inserire una data." visible="false">
+                  <Label fx:id="dateAlert" prefHeight="17.0" prefWidth="430.0" text="Se vuoi prenotare l'aula devi inserire una data." visible="false">
                      <font>
                         <Font name="Trebuchet MS" size="14.0" />
                      </font>

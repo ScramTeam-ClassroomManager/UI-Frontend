@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.FontIconClass;
 import it.unical.classroommanager_ui.view.imageSelector;
 import javafx.animation.FadeTransition;
@@ -14,8 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.YearMonth;
 
 public class ClassroomDetailsPageController {
 
@@ -81,24 +86,22 @@ public class ClassroomDetailsPageController {
     ClassroomDto classroomDto;
 
     @FXML
-    void bookClass(ActionEvent event) {
+    void bookClass(ActionEvent event) throws IOException {
 
         boolean date;
         boolean startHour;
         boolean endHour;
 
 
-
-
         // CHECK DATE
 
-        if(datePicker.getValue() == null){
+        if(datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
             date = false;
 
             datePicker.setStyle("-fx-border-color: red");
 
             dateAlert.setStyle("-fx-text-fill: red");
-            dateAlert.setText("Se vuoi prenotare l'aula devi inserire una data.");
+            dateAlert.setText("Se vuoi prenotare l'aula devi inserire una data successiva ad oggi.");
 
             FadeTransition ft = new FadeTransition(Duration.seconds(1), dateAlert);
             ft.setFromValue(0.0);
@@ -157,7 +160,7 @@ public class ClassroomDetailsPageController {
         }
 
         // CHECK END HOUR
-
+        // TODO: DEAL WITH TIME, STARTHOUR << ENDHOUR
         if(endHourCB.getValue() == null){
             endHour = false;
 
@@ -193,7 +196,45 @@ public class ClassroomDetailsPageController {
 
 
         if (date && startHour && endHour){
-            // TODO: BACKEND CALL
+
+            URL url = new URL("http://localhost:8080/api/v1/request/addRequest");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setDoOutput(true);
+
+            connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
+
+
+            // prepare input
+            String formattedStartHour = startHourCB.getValue() + ":00";
+            String formattedEndHour = endHourCB.getValue() + ":00";
+
+            if (!(startHourCB.getValue().startsWith("1")))
+                formattedStartHour = "0" + formattedStartHour;
+
+            if (!(endHourCB.getValue().startsWith("1")))
+                formattedEndHour = "0" + formattedEndHour;
+
+            String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
+                            "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
+                    "", classroomDto.getId(), formattedStartHour, formattedEndHour, datePicker.getValue());
+
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+            catch(Exception e){
+                throw new IOException();
+            }
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                System.out.println("Richiesta inserita nel sistema con successo.");
+            }
+            else{
+                System.out.println("Insuccesso nell'inserimento della richiesta nel sistema.");
+            }
         }
 
     }
@@ -245,6 +286,7 @@ public class ClassroomDetailsPageController {
         // TODO: DEAL WITH PAST DATES (SHOULD NOT BE AVAILABLE)
         // TODO: DYNAMIC SYSTEM TO CHOSE HOURS
         // TODO: BACKEND CALL
+        // TODO: DEAL WITH TIME, STARTHOUR << ENDHOUR
 
 
     }
