@@ -136,7 +136,7 @@ public class RequestListInstanceController {
                     System.err.println("Failed to update status. HTTP error code : " + responseCode);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Errore nell'aggiornamento delle richieste");
             }
         });
     }

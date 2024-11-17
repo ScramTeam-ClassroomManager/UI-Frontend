@@ -15,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -78,6 +79,13 @@ public class CreateClassroomPageController {
 
     @FXML
     private Label typeAlert;
+
+    @FXML
+    private BorderPane BPaneListPage;
+
+    public void setBPane(BorderPane BPane){
+        this.BPaneListPage = BPane;
+    }
 
 
     MainPageController mainPageController;

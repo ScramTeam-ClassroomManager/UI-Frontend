@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.layout.BorderPane;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,6 +25,13 @@ public class ClassroomListPageController {
 
     @FXML
     private AnchorPane classroomListPane;
+
+    @FXML
+    private BorderPane BPaneListPage;
+
+    public void setBPane(BorderPane BPane){
+        this.BPaneListPage = BPane;
+    }
 
     MainPageController mainPageController;
 

@@ -71,7 +71,6 @@ public class RequestListPageController {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("Problemi nella ricezione delle richieste.");
         }
 

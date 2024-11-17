@@ -1,5 +1,6 @@
 package it.unical.classroommanager_ui.view;
 
+import it.unical.classroommanager_ui.controller.MainPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Border;
@@ -65,6 +66,8 @@ public class SceneHandler {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("Main.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1500, 760);
+            MainPageController mainPageController = fxmlLoader.getController();
+            mainPageController.init();
 
             /*
             for (String style : List.of("css/custom.css")) {
