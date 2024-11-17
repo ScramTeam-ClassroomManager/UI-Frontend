@@ -1,28 +1,26 @@
 package it.unical.classroommanager_ui.controller;
 
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.MFXTextField;
-import it.unical.classroommanager_ui.view.SceneHandler;
-import javafx.event.ActionEvent;
+import it.unical.classroommanager_ui.view.RequestListPageView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
 public class MainPageController {
 
-    @FXML
-    private Label labelAule;
+    public BorderPane getBPane() {
+        return BPane;
+    }
 
     @FXML
-    private BorderPane mainBorderPane;
+    private BorderPane BPane;
+
+    @FXML
+    private Label labelAule;
 
     @FXML
     private Label labelLogout;
@@ -33,40 +31,9 @@ public class MainPageController {
     @FXML
     private Label labelRichieste;
 
-
-    @FXML
-    private MFXButton buttonAccetta;
-
-    @FXML
-    private MFXButton buttonRifiuta;
-
-    @FXML
-    private BorderPane requestsView;
-
-    @FXML
-    private MFXTableView<?> tableview;
-
-    @FXML
-    private MFXTextField textfield;
-
-    @FXML
-    private VBox mainVbox;
-
-    @FXML
-    void accetta(ActionEvent event) {
-
-    }
-
-    @FXML
-    void rifiuta(ActionEvent event) {
-
-    }
-
-    private void loadRequestsPage() {
-        BorderPane requestsView = SceneHandler.getInstance().createRequestsView();
-
-        mainVbox.getChildren().add(requestsView);
-    }
+    boolean currentlyShowingClassrooms = false;
+    boolean currentlyCreatingNewClassroom = false;
+    boolean currentlyShowingRequests = false;
 
     @FXML
     void clickAule(MouseEvent event) {
@@ -74,8 +41,7 @@ public class MainPageController {
     }
 
     @FXML
-    void clickLogout(MouseEvent event) throws IOException {
-        SceneHandler.getInstance().createLoginScene();
+    void clickLogout(MouseEvent event) {
 
     }
 
@@ -84,12 +50,29 @@ public class MainPageController {
 
     }
 
-    @FXML
-    void clickRichieste(MouseEvent event) {
-        loadRequestsPage();
+    public void displayRequests() {
+        try {
+            FXMLLoader loader = new FXMLLoader(RequestListPageView.class.getResource("requestListPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            RequestListPageController requestListPageController = loader.getController();
+            requestListPageController.init(this);
+
+            requestListPageController.setBPane(BPane);
+
+            BPane.setCenter(nuovoAnchorPane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshRequestList() {
+        displayRequests();
     }
 
 
-
-
+    @FXML
+    void clickRichieste(MouseEvent event) throws IOException {
+        displayRequests();
+    }
 }

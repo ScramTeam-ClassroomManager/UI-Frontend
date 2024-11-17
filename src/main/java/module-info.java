@@ -6,6 +6,9 @@ module it.unical.classroommanager_ui {
     requires spring.web;
     requires jakarta.validation;
     requires MaterialFX;
+    requires jjwt.api;
+    requires jjwt.impl;
+    requires com.fasterxml.jackson.datatype.jsr310;
     requires org.springdoc.openapi.common;
     requires javafx.base;
     opens it.unical.classroommanager_ui.model to com.fasterxml.jackson.databind;

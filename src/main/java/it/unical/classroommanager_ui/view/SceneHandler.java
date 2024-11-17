@@ -63,7 +63,7 @@ public class SceneHandler {
 
     public void createMainPageScene() throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("mainPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("Main.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1500, 760);
 
             /*
@@ -79,7 +79,7 @@ public class SceneHandler {
             stage.centerOnScreen();
             stage.setMinWidth(1250);
             stage.setMinHeight(800);
-            stage.setResizable(true);
+            stage.setResizable(false);
             stage.show();
         }
         catch (IOException e) {
@@ -98,10 +98,4 @@ public class SceneHandler {
         }
 
     }
-
-
-
-
-
-
 }

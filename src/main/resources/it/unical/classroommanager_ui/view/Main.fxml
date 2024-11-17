@@ -2,22 +2,24 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
+<BorderPane fx:id="BPane" focusTraversable="true" minHeight="725.0" minWidth="1450.0" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="760.0" prefWidth="326.0" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox prefHeight="760.0" prefWidth="379.0" spacing="20.0">
                <children>
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER" prefHeight="151.0" prefWidth="347.0">
                      <children>
                         <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -26,15 +28,22 @@
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
                         </ImageView>
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UNICAL">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UNICAL">
                                  <font>
                                     <Font name="Georgia" size="24.0" />
                                  </font>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSROOM MANAGER">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSROOM MANAGER">
                                  <font>
                                     <Font name="Georgia" size="24.0" />
                                  </font>
@@ -45,51 +54,42 @@
                            </HBox.margin>
                         </VBox>
                      </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
                   </HBox>
-                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo">
+                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
                      </font>
                      <VBox.margin>
-                        <Insets />
+                        <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule">
+                  <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste">
+                  <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="labelLogout" onMouseClicked="#clickLogout" text="Log out">
+                  <Label fx:id="labelLogout" onMouseClicked="#clickLogout" text="Log out" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
                </children>
-               <padding>
-                  <Insets left="30.0" right="30.0" top="30.0" />
-               </padding>
             </VBox>
          </children>
       </AnchorPane>
    </left>
-   <center>
-      <VBox fx:id="mainVbox" alignment="CENTER" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>
