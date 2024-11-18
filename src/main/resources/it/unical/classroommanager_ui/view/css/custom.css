@@ -26,10 +26,12 @@
     -fx-background-color: transparent;
 }
 
-#classroomNameLabel:hover {
-    -fx-text-fill: green;
-}
+/*#classroomNameLabel:hover {*/
+/*    -fx-text-fill: green;*/
+/*}*/
 
 .icons-color{
     -fx-icon-color: black;
 }
+
+

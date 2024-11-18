@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="137.0" prefWidth="1014.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomListInstanceController">
+<AnchorPane prefHeight="137.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomListInstanceController">
    <children>
       <Label layoutX="32.0" layoutY="19.0" prefHeight="30.0" prefWidth="496.0" text="Nome:">
          <font>
@@ -42,9 +42,6 @@
          <font>
             <Font name="Nunito Regular" size="20.0" />
          </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </Label>
       <Label fx:id="capabilityLabel" layoutX="741.0" layoutY="16.0" prefHeight="30.0" prefWidth="83.0">
          <font>
