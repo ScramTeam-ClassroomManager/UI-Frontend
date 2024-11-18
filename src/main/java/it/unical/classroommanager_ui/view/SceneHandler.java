@@ -89,15 +89,4 @@ public class SceneHandler {
         }
 
     }
-
-    public BorderPane createRequestsView() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("requestsPage.fxml"));
-            return new BorderPane(fxmlLoader.load());
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }

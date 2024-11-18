@@ -47,6 +47,7 @@ public class MainPageController {
                 FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
                 AnchorPane nuovoAnchorPane = loader.load();
                 CreateClassroomPageController createClassroomPageController = loader.getController();
+                createClassroomPageController.init(this);
 
                 createClassroomPageController.setBPane(BPane);
                 BPane.setCenter(nuovoAnchorPane);
