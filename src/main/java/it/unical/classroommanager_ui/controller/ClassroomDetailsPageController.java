@@ -216,6 +216,7 @@ public class ClassroomDetailsPageController {
             if (!(endHourCB.getValue().startsWith("1")))
                 formattedEndHour = "0" + formattedEndHour;
 
+
             String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
                             "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
                     "", classroomDto.getId(), formattedStartHour, formattedEndHour, datePicker.getValue());
@@ -283,9 +284,8 @@ public class ClassroomDetailsPageController {
         NumberRange<Integer> numberRange = new NumberRange<Integer>(2024,2025);
         datePicker.setYearsRange(numberRange);
 
-        // TODO: DEAL WITH PAST DATES (SHOULD NOT BE AVAILABLE)
+
         // TODO: DYNAMIC SYSTEM TO CHOSE HOURS
-        // TODO: BACKEND CALL
         // TODO: DEAL WITH TIME, STARTHOUR << ENDHOUR
 
 
