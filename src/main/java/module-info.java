@@ -11,6 +11,7 @@ module it.unical.classroommanager_ui {
     requires com.fasterxml.jackson.datatype.jsr310;
     requires org.springdoc.openapi.common;
     requires javafx.base;
+    requires org.kordamp.ikonli.javafx;
     opens it.unical.classroommanager_ui.model to com.fasterxml.jackson.databind;
 
     opens it.unical.classroommanager_ui to javafx.fxml;

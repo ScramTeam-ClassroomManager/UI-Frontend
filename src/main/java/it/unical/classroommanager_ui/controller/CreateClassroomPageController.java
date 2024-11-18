@@ -451,7 +451,7 @@ public class CreateClassroomPageController {
                     os.write(input, 0, input.length);
                 }
                 catch(Exception e){
-                    e.printStackTrace();
+                    throw new IOException();
                 }
 
 

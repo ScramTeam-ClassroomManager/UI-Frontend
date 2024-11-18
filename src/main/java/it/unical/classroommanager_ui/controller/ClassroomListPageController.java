@@ -69,7 +69,6 @@ public class ClassroomListPageController {
 
         }
         catch (Exception e) {
-            e.printStackTrace();
             System.out.println("Problemi nella ricezione delle classi.");
         }
 
@@ -85,8 +84,8 @@ public class ClassroomListPageController {
 
             }
 
-            classroomListPane.setMinHeight(150+classroomList.getItems().size() * 137);
-            classroomList.setMinHeight(classroomList.getItems().size() * 137);
+//            classroomListPane.setMinHeight(150+classroomList.getItems().size() * 137);
+//            classroomList.setMinHeight(classroomList.getItems().size() * 137);
 
         }
 
