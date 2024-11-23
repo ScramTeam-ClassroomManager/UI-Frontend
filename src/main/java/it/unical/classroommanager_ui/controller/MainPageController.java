@@ -34,50 +34,29 @@ public class MainPageController {
     @FXML
     private Label labelRichieste;
 
+    @FXML
+    private Label labelInserimentoAula;
     String currPage = "";
 
-    @FXML
-    void clickAule(MouseEvent event) {
-        displayClassrooms();
-    }
 
     void displayClassrooms(){
-        if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString()) && !currPage.equals("aule")){
+        if(!currPage.equals("aule")) {
             try {
-                FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
-                AnchorPane nuovoAnchorPane = loader.load();
-                CreateClassroomPageController createClassroomPageController = loader.getController();
-                createClassroomPageController.init(this);
 
-                createClassroomPageController.setBPane(BPane);
+                FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
+                AnchorPane nuovoAnchorPane = loader.load();
+                ClassroomListPageController classroomListPageController = loader.getController();
+                classroomListPageController.init(this);
+
+                classroomListPageController.setBPane(BPane);
                 BPane.setCenter(nuovoAnchorPane);
 
                 currPage = "aule";
-
-            }   catch (IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
         }
-        else{
-            if(!currPage.equals("aule")) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
-                    AnchorPane nuovoAnchorPane = loader.load();
-                    ClassroomListPageController classroomListPageController = loader.getController();
-                    classroomListPageController.init(this);
-
-                    classroomListPageController.setBPane(BPane);
-                    BPane.setCenter(nuovoAnchorPane);
-
-                    currPage = "aule";
-
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
     }
 
     void displayClassroomDetails(ClassroomDto classroomDto){
@@ -86,23 +65,6 @@ public class MainPageController {
         BPane.setCenter(classroomDetailsPageView);
 
         currPage = "dettagliAula";
-
-
-    }
-
-    @FXML
-    void clickLogout(MouseEvent event) {
-        try {
-            UserManager.getInstance().logout();
-            SceneHandler.getInstance().createLoginScene();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    @FXML
-    void clickProfilo(MouseEvent event) {
 
     }
 
@@ -129,6 +91,45 @@ public class MainPageController {
     }
 
     @FXML
+    void clickInserisciAula(MouseEvent event) {
+        if(!currPage.equals("inserimentoAula")) {
+            try {
+                FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
+                AnchorPane nuovoAnchorPane = loader.load();
+                CreateClassroomPageController createClassroomPageController = loader.getController();
+                createClassroomPageController.init(this);
+
+                createClassroomPageController.setBPane(BPane);
+                BPane.setCenter(nuovoAnchorPane);
+
+                currPage = "inserimentoAula";
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @FXML
+    void clickAule(MouseEvent event) throws IOException {
+        displayClassrooms();
+    }
+
+    @FXML
+    void clickLogout(MouseEvent event) {
+        try {
+            UserManager.getInstance().logout();
+            SceneHandler.getInstance().createLoginScene();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void clickProfilo(MouseEvent event) {
+
+    }
+
+    @FXML
     void clickRichieste(MouseEvent event) throws IOException {
         if(!currPage.equals("richieste")) {
             displayRequests();
@@ -137,13 +138,13 @@ public class MainPageController {
 
     public void init() {
         if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())){
-            labelAule.setText("Aggiungi Aula");
-
+            labelInserimentoAula.setDisable(false);
         }
         else {
-            labelAule.setText("Prenota Aula");
-            displayClassrooms();
+            labelInserimentoAula.setDisable(true);
         }
+
+        displayClassrooms();
 
     }
 }

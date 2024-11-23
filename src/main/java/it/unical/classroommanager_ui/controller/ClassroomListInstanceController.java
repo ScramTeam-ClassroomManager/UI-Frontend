@@ -6,13 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 
 
 public class ClassroomListInstanceController {
@@ -67,17 +62,6 @@ public class ClassroomListInstanceController {
         else{
             projectorLabel.setText("No");
         }
-
-//        if(!classroom.getAvailable()) {
-//            reserveButton.setStyle("-fx-background-color: red;");
-//            reserveButton.setDisable(true);
-//        }
-
-//        classroomNameLabel.setOnMousePressed(event -> {
-//            mainPageController.displayClassroomDetails(classroom);
-//        });
-
-
 
     }
 
