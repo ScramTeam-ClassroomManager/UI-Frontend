@@ -1,6 +1,7 @@
 package it.unical.classroommanager_ui.controller;
 
 import io.github.palexdev.materialfx.beans.NumberRange;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import it.unical.classroommanager_ui.model.ClassroomDto;
@@ -21,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ClassroomDetailsPageController {
 
@@ -70,16 +72,21 @@ public class ClassroomDetailsPageController {
     private MFXDatePicker datePicker;
 
     @FXML
-    private MFXComboBox<String> endHourCB;
+    private MFXComboBox<LocalTime> endHourCB;
 
     @FXML
-    private MFXComboBox<String> startHourCB;
+    private MFXComboBox<LocalTime> startHourCB;
 
     @FXML
     private Label dateAlert;
 
     @FXML
     private Label hourAlert;
+
+    @FXML
+    private Label bookAlert;
+    @FXML
+    private MFXButton bookButton;
 
 
     MainPageController mainPageController;
@@ -94,7 +101,6 @@ public class ClassroomDetailsPageController {
 
 
         // CHECK DATE
-
         if(datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
             date = false;
 
@@ -127,7 +133,6 @@ public class ClassroomDetailsPageController {
         }
 
         // CHECK START HOUR
-
         if(startHourCB.getValue() == null){
             startHour = false;
 
@@ -145,11 +150,17 @@ public class ClassroomDetailsPageController {
         }
         else{
             startHour = true;
+        }
 
-            startHourCB.setStyle("-fx-border-color: green");
+        // CHECK END HOUR
+        if(endHourCB.getValue() == null ){
 
-            hourAlert.setStyle("-fx-text-fill: green");
-            hourAlert.setText("✓");
+            endHour = false;
+
+            endHourCB.setStyle("-fx-border-color: red");
+
+            hourAlert.setStyle("-fx-text-fill: red");
+            hourAlert.setText("Se vuoi prenotare l'aula devi inserire un ora di inizio e di fine.");
 
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
@@ -158,16 +169,15 @@ public class ClassroomDetailsPageController {
 
             hourAlert.setVisible(true);
         }
-
-        // CHECK END HOUR
-        // TODO: DEAL WITH TIME, STARTHOUR << ENDHOUR
-        if(endHourCB.getValue() == null){
+        else if(endHourCB.getValue().isBefore(startHourCB.getValue()) ||
+                endHourCB.getValue().equals(startHourCB.getValue())){
             endHour = false;
 
             endHourCB.setStyle("-fx-border-color: red");
+            startHourCB.setStyle("-fx-border-color: red");
 
             hourAlert.setStyle("-fx-text-fill: red");
-            hourAlert.setText("Se vuoi prenotare l'aula devi inserire un ora di inizio e di fine.");
+            hourAlert.setText("L'ora finale deve essere succesiva a quella di inizio.");
 
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
@@ -184,10 +194,17 @@ public class ClassroomDetailsPageController {
             hourAlert.setStyle("-fx-text-fill: green");
             hourAlert.setText("✓");
 
+            startHourCB.setStyle("-fx-border-color: green");
+
+            hourAlert.setStyle("-fx-text-fill: green");
+            hourAlert.setText("✓");
+
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
+
+            hourAlert.setVisible(true);
 
             hourAlert.setVisible(true);
         }
@@ -206,20 +223,10 @@ public class ClassroomDetailsPageController {
             connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
 
 
-            // prepare input
-            String formattedStartHour = startHourCB.getValue() + ":00";
-            String formattedEndHour = endHourCB.getValue() + ":00";
-
-            if (!(startHourCB.getValue().startsWith("1")))
-                formattedStartHour = "0" + formattedStartHour;
-
-            if (!(endHourCB.getValue().startsWith("1")))
-                formattedEndHour = "0" + formattedEndHour;
-
-
+            // Prepare input
             String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
                             "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
-                    "", classroomDto.getId(), formattedStartHour, formattedEndHour, datePicker.getValue());
+                    "", classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
 
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
@@ -235,6 +242,22 @@ public class ClassroomDetailsPageController {
             }
             else{
                 System.out.println("Insuccesso nell'inserimento della richiesta nel sistema.");
+
+                startHourCB.setStyle("-fx-border-color: red");
+                endHourCB.setStyle("-fx-border-color: red");
+                hourAlert.setVisible(false);
+
+                datePicker.setStyle("-fx-border-color: red");
+                dateAlert.setVisible(false);
+
+                bookAlert.setStyle("-fx-text-fill: red");
+                bookButton.setStyle("-fx-border-color: red");
+
+                FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAlert);
+                ft.setFromValue(0.0);
+                ft.setToValue(1.0);
+                ft.play();
+                bookAlert.setVisible(true);
             }
         }
 
@@ -274,21 +297,15 @@ public class ClassroomDetailsPageController {
 
         classroomImage.setImage(imageSelector.classroomImage(classroomDto.getName()));
 
-        // TODO: DYNAMIC SYSTEM NEEDS TO BE CREATED
-        startHourCB.getItems().addAll("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30",
-                "14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00");
-        endHourCB.getItems().addAll("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30",
-                "14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00");
+        for (int i = 8; i < 21; i++){
+            startHourCB.getItems().add(LocalTime.of(i,0));
+            startHourCB.getItems().add(LocalTime.of(i, 30));
 
-        // TODO: DEAL WITH PAST DATES (SHOULD NOT BE AVAILABLE) NO DAYS OR MONTHS THAT HAVE PASSED (YEARS HAVE BEEN DEALT WITH)
+            endHourCB.getItems().add(LocalTime.of(i,0));
+            endHourCB.getItems().add(LocalTime.of(i, 30));
+        }
         NumberRange<Integer> numberRange = new NumberRange<Integer>(2024,2025);
         datePicker.setYearsRange(numberRange);
-
-
-        // TODO: DYNAMIC SYSTEM TO CHOSE HOURS
-        // TODO: DEAL WITH TIME, STARTHOUR << ENDHOUR
-
-
     }
 
 }
