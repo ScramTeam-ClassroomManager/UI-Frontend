@@ -34,6 +34,9 @@ public class MainPageController {
     @FXML
     private Label labelRichieste;
 
+    @FXML
+    private Label labelStoricoPren;
+
     String currPage = "";
 
     @FXML
@@ -185,4 +188,29 @@ public class MainPageController {
         }
 
     }
+
+    @FXML
+    void clickStoricoPren(MouseEvent event) {
+        if (!currPage.equals("storico")) {
+            displayRequestHistory();
+        }
+    }
+
+    public void displayRequestHistory() {
+        try {
+            FXMLLoader loader = new FXMLLoader(RequestHistoryPageView.class.getResource("requestHistoryPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            RequestHistoryPageController requestHistoryPageController = loader.getController();
+            requestHistoryPageController.init(this);
+
+            requestHistoryPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+
+            currPage = "storico";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
