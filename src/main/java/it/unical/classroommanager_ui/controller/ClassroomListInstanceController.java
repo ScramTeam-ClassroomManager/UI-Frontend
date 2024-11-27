@@ -2,6 +2,7 @@ package it.unical.classroommanager_ui.controller;
 
 
 import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -66,6 +67,10 @@ public class ClassroomListInstanceController {
         }
         else{
             projectorLabel.setText("No");
+        }
+
+        if (UserManager.getInstance().getToken().isEmpty()){
+            reserveButton.setDisable(true);
         }
     }
 
