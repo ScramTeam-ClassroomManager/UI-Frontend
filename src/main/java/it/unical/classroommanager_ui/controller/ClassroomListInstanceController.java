@@ -57,7 +57,7 @@ public class ClassroomListInstanceController {
 
 
         capabilityLabel.setText(String.valueOf(classroom.getCapability()));
-        cubeLabel.setText(String.valueOf(classroom.getCube()));
+        cubeLabel.setText(String.valueOf(classroom.getCubeNumber()));
         floorLabel.setText(String.valueOf(classroom.getFloor()));
         classroomNameLabel.setText(classroom.getName());
         num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
@@ -67,18 +67,6 @@ public class ClassroomListInstanceController {
         else{
             projectorLabel.setText("No");
         }
-
-//        if(!classroom.getAvailable()) {
-//            reserveButton.setStyle("-fx-background-color: red;");
-//            reserveButton.setDisable(true);
-//        }
-
-//        classroomNameLabel.setOnMousePressed(event -> {
-//            mainPageController.displayClassroomDetails(classroom);
-//        });
-
-
-
     }
 
 

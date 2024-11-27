@@ -440,11 +440,12 @@ public class CreateClassroomPageController {
                 connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
 
                 // prepare input
-                String jsonInputString = String.format("{\"name\": \"%s\", \"cube\": \"%s\"," +
-                                "\"floor\": \"%s\", \"capability\": \"%s\", \"numSocket\": \"%s\", " +
-                                "\"projector\": \"%s\", \"available\": \"%s\", \"type\": \"%s\"}",
-                        nameText, cubeText, floorText, capacityText,
-                        socketText, projectorText, availableText, typeText);
+                String jsonInputString = String.format(
+                        "{\"name\": \"%s\", \"cubeNumber\": \"%s\", \"floor\": \"%s\", \"capability\": \"%s\", " +
+                                "\"numSocket\": \"%s\", \"projector\": \"%s\", \"available\": \"%s\", \"type\": \"%s\"}",
+                        nameText, cubeText, floorText, capacityText, socketText, projectorText, availableText, typeText
+                );
+
 
                 try (OutputStream os = connection.getOutputStream()) {
                     byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
