@@ -45,29 +45,28 @@ public class ClassroomListInstanceController {
     MainPageController mainPageController;
     ClassroomDto classroom;
 
-     @FXML
-     void reservePressed(ActionEvent event) throws IOException {
-         mainPageController.displayClassroomDetails(classroom);
-     }
 
-    public void init(MainPageController mainPageController, ClassroomDto classroom){
+    @FXML
+    void reservePressed(ActionEvent event) throws IOException {
+        if (mainPageController != null) {
+            mainPageController.displayClassroomDetails(classroom);
+        } else {
+            System.err.println("Errore: mainPageController è null!");
+        }
+    }
 
+    public void init(MainPageController mainPageController, ClassroomDto classroom) {
         this.mainPageController = mainPageController;
         this.classroom = classroom;
-
 
         capabilityLabel.setText(String.valueOf(classroom.getCapability()));
         cubeLabel.setText(String.valueOf(classroom.getCubeNumber()));
         floorLabel.setText(String.valueOf(classroom.getFloor()));
         classroomNameLabel.setText(classroom.getName());
         num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
-        if(classroom.isProjector()){
-            projectorLabel.setText("Si");
-        }
-        else{
-            projectorLabel.setText("No");
-        }
+        projectorLabel.setText(classroom.isProjector() ? "Si" : "No");
     }
+
 
 
 }

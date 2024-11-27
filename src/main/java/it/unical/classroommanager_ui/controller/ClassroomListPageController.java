@@ -39,20 +39,58 @@ public class ClassroomListPageController {
 
 
     public void fillClassroomList() throws IOException {
+        classroomList.getItems().clear();
         try {
             URL url = new URL("http://localhost:8080/api/v1/class/classrooms");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
 
-            // LETTURA RISPOSTA
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
 
             try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
-                            (responseCode == HttpURLConnection.HTTP_OK) ?
-                                    connection.getInputStream() : connection.getErrorStream()))) {
+                            (responseCode == HttpURLConnection.HTTP_OK) ? connection.getInputStream() : connection.getErrorStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {});
+            } else {
+                System.err.println("Failed : HTTP error code : " + responseCode);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Problemi nella ricezione delle classi.");
+        }
+
+        if (classRooms != null && !classRooms.isEmpty()) {
+            for (ClassroomDto classroom : classRooms) {
+                ClassroomListInstanceView classroomListInstanceView = new ClassroomListInstanceView(mainPageController, classroom);
+                classroomList.getItems().add(classroomListInstanceView);
+            }
+        }
+    }
+
+
+    public void fillClassroomListByCube(int cubeNumber) throws IOException {
+        try {
+            URL url = new URL("http://localhost:8080/api/v1/class/classroomsByCube/" + cubeNumber);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            StringBuilder response = new StringBuilder();
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            (responseCode == HttpURLConnection.HTTP_OK) ? connection.getInputStream() : connection.getErrorStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
@@ -63,34 +101,21 @@ public class ClassroomListPageController {
                 ObjectMapper objectMapper = new ObjectMapper();
                 classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {});
             }
-            else {
-                System.err.println("Failed : HTTP error code : " + responseCode);
-            }
 
-        }
-        catch (Exception e) {
-            System.out.println("Problemi nella ricezione delle classi.");
+        } catch (Exception e) {
+            System.out.println("Problemi nella ricezione delle aule.");
         }
 
-        if (!classRooms.isEmpty()) {
-
+        if (classRooms != null && !classRooms.isEmpty()) {
+            classroomList.getItems().clear();
             for (ClassroomDto classroom : classRooms) {
-
-
                 ClassroomListInstanceView classroomListInstanceView = new ClassroomListInstanceView(mainPageController, classroom);
-
                 classroomList.getItems().add(classroomListInstanceView);
-
-
             }
-
-//            classroomListPane.setMinHeight(150+classroomList.getItems().size() * 137);
-//            classroomList.setMinHeight(classroomList.getItems().size() * 137);
-
         }
-
-
     }
+
+
 
 
     public void init(MainPageController mainPageController) throws IOException {

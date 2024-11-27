@@ -38,7 +38,9 @@ public class MainPageController {
 
     @FXML
     void clickAule(MouseEvent event) {
-        displayClassrooms();
+        if (!currPage.equals("cubi")) {
+            displayCubes();
+        }
     }
 
     void displayClassrooms(){
@@ -79,6 +81,43 @@ public class MainPageController {
         }
 
     }
+
+    public void displayClassroomsByCube(int cubeNumber) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            ClassroomListPageController classroomListPageController = loader.getController();
+            classroomListPageController.init(this);
+
+            classroomListPageController.fillClassroomListByCube(cubeNumber);
+            classroomListPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+
+            currPage = "aulePerCubo";
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void displayCubes() {
+        try {
+            FXMLLoader loader = new FXMLLoader(CubeListPageView.class.getResource("cubeListPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            CubeListPageController cubeListPageController = loader.getController();
+            cubeListPageController.fillCubeList(this);
+
+            cubeListPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+
+            currPage = "cubi";
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     void displayClassroomDetails(ClassroomDto classroomDto){
         ClassroomDetailsPageView classroomDetailsPageView = new ClassroomDetailsPageView(this, classroomDto);
@@ -142,7 +181,7 @@ public class MainPageController {
         }
         else {
             labelAule.setText("Prenota Aula");
-            displayClassrooms();
+            displayCubes();
         }
 
     }
