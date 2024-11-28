@@ -242,19 +242,34 @@ public class MainPageController {
             } else {
                 labelAule.setText("Prenota Aula");
                 displayCubes();
+                labelStoricoPren.setVisible(false);
             }
         }
         else{
             labelLogout.setText("Login");
             labelAule.setText("Aule");
+            labelStoricoPren.setVisible(false);
             displayCubes();
         }
     }
 
     @FXML
     void clickStoricoPren(MouseEvent event) {
-        if (!currPage.equals("storico")) {
-            displayRequestHistory();
+        if (!(UserManager.getInstance().getToken().isEmpty())) {
+            if (!currPage.equals("storico")) {
+                displayRequestHistory();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+            alert.setTitle("Storico Prenotazioni");
+            alert.setHeaderText("Avviso");
+            alert.setContentText("Per poter visualizzare lo storico delle prenotazioni devi essere loggato.");
+
+            alert.getDialogPane().setMinHeight(200);
+            alert.getDialogPane().setMinWidth(200);
+            alert.show();
         }
     }
 
