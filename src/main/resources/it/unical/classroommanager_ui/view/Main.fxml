@@ -56,17 +56,6 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
                   <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
@@ -84,6 +73,28 @@
                      </font>
                      <VBox.margin>
                         <Insets left="10.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="labelStoricoPren" onMouseClicked="#clickStoricoPren" text="Storico prenotazioni" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="280.0" />
                      </VBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
