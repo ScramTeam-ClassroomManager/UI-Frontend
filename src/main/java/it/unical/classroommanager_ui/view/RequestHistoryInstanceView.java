@@ -16,11 +16,15 @@ public class RequestHistoryInstanceView extends Pane {
         try {
             AnchorPane root = loader.load();
             RequestHistoryInstanceController controller = loader.getController();
-            controller.init(mainPageController, request);
+            controller.init(request);
+            controller.setMainPageController(mainPageController);
             this.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Errore nel caricamento del file FXML: " + e.getMessage());
         }
     }
+
+
+
 }

@@ -2,10 +2,12 @@ package it.unical.classroommanager_ui.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import it.unical.classroommanager_ui.model.RequestDto;
 import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.RequestHistoryInstanceView;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +18,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
 public class RequestHistoryPageController {
 
     @FXML
@@ -28,21 +29,30 @@ public class RequestHistoryPageController {
     @FXML
     private AnchorPane historyListPane;
 
+    @FXML
+    private MFXComboBox<String> statusFilter;
+
     private MainPageController mainPageController;
     private List<RequestDto> requests;
 
-    public void init(MainPageController mainPageController) throws IOException {
+    public void init(MainPageController mainPageController, boolean isAdmin) throws IOException {
         this.mainPageController = mainPageController;
-        fillRequestHistoryList();
+        if (isAdmin) {
+            fillRequestHistoryList("http://localhost:8080/api/v1/request/nonPendingRequests");
+            statusFilter.getItems().addAll("ALL", "ACCEPTED", "REJECTED");
+        } else {
+            fillRequestHistoryList("http://localhost:8080/api/v1/request/userRequests");
+            statusFilter.getItems().addAll("ALL", "ACCEPTED", "PENDING", "REJECTED");
+        }
     }
 
     public void setBPane(BorderPane BPane) {
         this.BPaneListPage = BPane;
     }
 
-    public void fillRequestHistoryList() throws IOException {
+    private void fillRequestHistoryList(String apiUrl) throws IOException {
         try {
-            URL url = new URL("http://localhost:8080/api/v1/request/nonPendingRequests");
+            URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
@@ -80,11 +90,36 @@ public class RequestHistoryPageController {
                 RequestHistoryInstanceView requestHistoryInstanceView = new RequestHistoryInstanceView(mainPageController, request);
                 historyList.getItems().add(requestHistoryInstanceView);
             }
-
-            historyListPane.setMinHeight(150 + historyList.getItems().size() * 137);
-            historyList.setMinHeight(historyList.getItems().size() * 137);
         }
     }
+
+    public void filterRequestsByStatus(String status) throws IOException {
+        historyList.getItems().clear();
+
+        if (requests != null && !requests.isEmpty()) {
+            for (RequestDto request : requests) {
+                if ("ALL".equalsIgnoreCase(status) || request.getStatus().equalsIgnoreCase(status)) {
+                    RequestHistoryInstanceView requestHistoryInstanceView = new RequestHistoryInstanceView(mainPageController, request);
+                    historyList.getItems().add(requestHistoryInstanceView);
+                }
+            }
+        }
+    }
+    @FXML
+    private void onFilterChanged() {
+        String selectedStatus = statusFilter.getSelectionModel().getSelectedItem();
+        if (selectedStatus != null) {
+            try {
+                filterRequestsByStatus(selectedStatus);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 }
+
 
 
