@@ -1,12 +1,15 @@
 package it.unical.classroommanager_ui.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import it.unical.classroommanager_ui.model.RequestDto;
 import it.unical.classroommanager_ui.model.User;
 import it.unical.classroommanager_ui.model.UserManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
@@ -25,35 +28,57 @@ public class RequestHistoryInstanceController {
     private Label classroomNameLabel;
 
     @FXML
-    private Label endHourLabel;
-
-    @FXML
     private Label reasonLabel;
-
-    @FXML
-    private Label requestCreationDateLabel;
 
     @FXML
     private Label requestDateLabel;
 
     @FXML
+    private Label userNameLabel;
+
+    @FXML
     private Label startHourLabel;
 
     @FXML
-    private Label userNameLabel;
+    private Label requestCreationDateLabel;
 
-    public void init(MainPageController mainPageController, RequestDto request) {
+    @FXML
+    private Label endHourLabel;
+
+    @FXML
+    private MFXButton deleteButton;
+
+    private RequestDto request;
+
+    @FXML
+    private BorderPane BPaneListPage;
+
+    private MainPageController mainPageController;
+
+    public void setBPane(BorderPane BPane){
+        this.BPaneListPage = BPane;
+    }
+
+    public BorderPane getPane() {
+        return BPaneListPage;
+    }
+
+    public void init(RequestDto request) {
+        this.request = request;
+
         reasonLabel.setText(request.getReason());
         requestDateLabel.setText("" + request.getRequestDate());
         startHourLabel.setText("" + request.getStartHour());
         endHourLabel.setText("" + request.getEndHour());
         requestCreationDateLabel.setText("" + request.getCreationDate());
 
-        StatusLabel.setText(request.getStatus().toString());
+        StatusLabel.setText(request.getStatus());
         if ("ACCEPTED".equals(request.getStatus().toString())) {
             StatusLabel.setTextFill(Color.GREEN);
         } else if ("REJECTED".equals(request.getStatus().toString())) {
             StatusLabel.setTextFill(Color.RED);
+        } else if ("PENDING".equals(request.getStatus().toString())) {
+            StatusLabel.setTextFill(Color.ORANGE);
         }
 
         CompletableFuture.runAsync(() -> {
@@ -75,6 +100,52 @@ public class RequestHistoryInstanceController {
                 Platform.runLater(() -> userNameLabel.setText("Errore"));
             }
         });
+
+        boolean isAdmin = UserManager.getInstance().getUser().role().equalsIgnoreCase("ADMIN");
+
+        if (!isAdmin && ("ACCEPTED".equals(request.getStatus().toString()) || "PENDING".equals(request.getStatus().toString()))) {
+            deleteButton.setVisible(true);
+        } else {
+            deleteButton.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void deleteRequest() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Conferma Eliminazione");
+        alert.setHeaderText("Vuoi eliminare questa richiesta?");
+        alert.setContentText("Questa azione non può essere annullata.");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response.getText().equalsIgnoreCase("OK") || response.getText().equalsIgnoreCase("Yes")) {
+                try {
+                    deleteRequestAPI(request.getId());
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("Eliminazione Completata");
+                    successAlert.setHeaderText(null);
+                    successAlert.setContentText("La richiesta è stata eliminata con successo.");
+                    successAlert.showAndWait();
+
+                    mainPageController.displayRequestHistory();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    private void deleteRequestAPI(long requestId) throws Exception {
+        String apiUrl = "http://localhost:8080/api/v1/request/deleteRequest/" + requestId;
+        HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+        connection.setRequestMethod("DELETE");
+        connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode != HttpURLConnection.HTTP_OK) {
+            throw new Exception("Errore HTTP: " + responseCode);
+        }
     }
 
     private String getClassroomName(long classroomId) throws IOException {
@@ -90,6 +161,7 @@ public class RequestHistoryInstanceController {
         }
     }
 
+
     private String getUserName(String userSerialNumber) throws IOException {
         String apiUrl = "http://localhost:8080/api/v1/auth/getFirstSecondUser/" + userSerialNumber;
 
@@ -104,4 +176,9 @@ public class RequestHistoryInstanceController {
             return user.firstName() + " " + user.lastName();
         }
     }
+
+    public void setMainPageController(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
+    }
+
 }

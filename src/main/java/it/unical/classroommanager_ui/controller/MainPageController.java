@@ -278,7 +278,9 @@ public class MainPageController {
             FXMLLoader loader = new FXMLLoader(RequestHistoryPageView.class.getResource("requestHistoryPage.fxml"));
             AnchorPane nuovoAnchorPane = loader.load();
             RequestHistoryPageController requestHistoryPageController = loader.getController();
-            requestHistoryPageController.init(this);
+
+            boolean isAdmin = UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString());
+            requestHistoryPageController.init(this, isAdmin);
 
             requestHistoryPageController.setBPane(BPane);
             BPane.setCenter(nuovoAnchorPane);
@@ -288,6 +290,5 @@ public class MainPageController {
             throw new RuntimeException(e);
         }
     }
-
 
 }

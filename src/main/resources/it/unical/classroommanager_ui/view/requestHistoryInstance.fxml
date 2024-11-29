@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -159,6 +160,14 @@
                         <Font name="Nunito Regular" size="20.0" />
                      </font>
                   </Label>
+                  <MFXButton fx:id="deleteButton" onAction="#deleteRequest" prefHeight="42.0" prefWidth="173.0" style="-fx-background-color: #e33030; -fx-background-radius: 10;" text="Elimina richiesta" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Trebuchet MS" size="19.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="280.0" />
+                     </HBox.margin>
+                  </MFXButton>
                </children>
             </HBox>
          </children>
