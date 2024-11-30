@@ -2,7 +2,7 @@ package it.unical.classroommanager_ui.model;
 public class ClassroomDto {
     private long id;
     private String name;
-    private int cube;
+    private int cubeNumber;
     private int floor;
     private int capability;
     private int numSocket;
@@ -21,7 +21,7 @@ public class ClassroomDto {
     }
 
     public int getCube() {
-        return cube;
+        return cubeNumber;
     }
 
     public int getFloor() {

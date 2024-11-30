@@ -69,6 +69,7 @@ public class ClassroomListPageController {
 
         }
         catch (Exception e) {
+            System.out.println(e);
             System.out.println("Problemi nella ricezione delle classi.");
         }
 

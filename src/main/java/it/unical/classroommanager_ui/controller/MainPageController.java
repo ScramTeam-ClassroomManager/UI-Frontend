@@ -86,6 +86,16 @@ public class MainPageController {
         }
     }
 
+    public void displayModifyClassroomPage(ClassroomDto classroomDto){
+        ModifyClassroomPageView modifyClassroomPageView = new ModifyClassroomPageView(this, classroomDto);
+
+        BPane.setCenter(modifyClassroomPageView);
+
+        currPage = "modificaAula";
+
+    }
+
+
     public void refreshRequestList() {
         displayRequests();
     }

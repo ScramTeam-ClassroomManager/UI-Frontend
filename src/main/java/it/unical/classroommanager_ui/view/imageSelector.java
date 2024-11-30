@@ -33,5 +33,10 @@ public class imageSelector {
         }
     }
 
+    public static Image unspecifiedImage(){
+        File file = new File("src/main/resources/it/unical/classroommanager_ui/view/classroomImagesDB/imageUnavailable.png");
+        return new Image(file.toURI().toString());
+    }
+
 
 }
