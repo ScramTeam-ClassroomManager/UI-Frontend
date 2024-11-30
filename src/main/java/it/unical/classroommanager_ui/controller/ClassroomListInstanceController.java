@@ -6,8 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import java.io.IOException;
 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class ClassroomListInstanceController {
@@ -40,30 +45,28 @@ public class ClassroomListInstanceController {
     MainPageController mainPageController;
     ClassroomDto classroom;
 
-     @FXML
-     void reservePressed(ActionEvent event) throws IOException {
-         mainPageController.displayClassroomDetails(classroom);
-     }
 
-    public void init(MainPageController mainPageController, ClassroomDto classroom){
+    @FXML
+    void reservePressed(ActionEvent event) throws IOException {
+        if (mainPageController != null) {
+            mainPageController.displayClassroomDetails(classroom);
+        } else {
+            System.err.println("Errore: mainPageController è null!");
+        }
+    }
 
+    public void init(MainPageController mainPageController, ClassroomDto classroom) {
         this.mainPageController = mainPageController;
         this.classroom = classroom;
 
-
         capabilityLabel.setText(String.valueOf(classroom.getCapability()));
-        cubeLabel.setText(String.valueOf(classroom.getCube()));
+        cubeLabel.setText(String.valueOf(classroom.getCubeNumber()));
         floorLabel.setText(String.valueOf(classroom.getFloor()));
         classroomNameLabel.setText(classroom.getName());
         num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
-        if(classroom.isProjector()){
-            projectorLabel.setText("Si");
-        }
-        else{
-            projectorLabel.setText("No");
-        }
-
+        projectorLabel.setText(classroom.isProjector() ? "Si" : "No");
     }
+
 
 
 }

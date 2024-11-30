@@ -8,7 +8,6 @@ public class ClassroomDto {
     private int numSocket;
     private boolean projector;
     private boolean available;
-
     private String type;
 
     public ClassroomDto() {}
@@ -20,8 +19,11 @@ public class ClassroomDto {
         return name;
     }
 
-    public int getCube() {
+    public int getCubeNumber() {
         return cubeNumber;
+    }
+    public void setCubeNumber(int cubeNumber) {
+        this.cubeNumber = cubeNumber;
     }
 
     public int getFloor() {

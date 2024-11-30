@@ -263,7 +263,7 @@ public class ClassroomDetailsPageController {
 
 
         textName.setText(classroomDto.getName());
-        cubeLabel.setText("("+ classroomDto.getCube() +")");
+        cubeLabel.setText("(" + classroomDto.getCubeNumber() + ")");
         floorLabel.setText("("+ classroomDto.getFloor() +")");
         capabilityLabel.setText("("+ classroomDto.getCapability() +")");
         socketLabel.setText("("+classroomDto.getNumSocket()+")");

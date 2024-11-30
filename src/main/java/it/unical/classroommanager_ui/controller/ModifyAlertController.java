@@ -114,7 +114,7 @@ public class ModifyAlertController {
 
         previousName.setText(classroomDto.getName());
         previousCapability.setText("("+classroomDto.getCapability()+")");
-        previousCube.setText("("+classroomDto.getCube()+")");
+        previousCube.setText("("+classroomDto.getCubeNumber()+")");
         previousFloor.setText("("+classroomDto.getFloor()+")");
         previousSocket.setText("("+classroomDto.getNumSocket()+")");
         previousType.setText(classroomDto.getType());

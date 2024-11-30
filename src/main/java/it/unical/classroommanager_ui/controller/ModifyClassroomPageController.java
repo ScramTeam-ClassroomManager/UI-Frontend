@@ -442,7 +442,7 @@ public class ModifyClassroomPageController {
         textName.setText(classroomDto.getName());
         classroomName.setText(classroomDto.getName());
         classroomCapacity.setText(Integer.toString(classroomDto.getCapability()));
-        classroomCube.setText(Integer.toString(classroomDto.getCube()));
+        classroomCube.setText(Integer.toString(classroomDto.getCubeNumber()));
         classroomFloor.setText(Integer.toString(classroomDto.getFloor()));
         classroomSocket.setText(Integer.toString(classroomDto.getNumSocket()));
 

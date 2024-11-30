@@ -36,7 +36,17 @@ public class MainPageController {
 
     @FXML
     private Label labelInserimentoAula;
+
+    @FXML
+    private Label labelStoricoPren;
     String currPage = "";
+
+    @FXML
+    void clickAule(MouseEvent event) {
+        if (!currPage.equals("cubi")) {
+            displayCubes();
+        }
+    }
 
 
     void displayClassrooms(){
@@ -58,6 +68,43 @@ public class MainPageController {
 
         }
     }
+
+    public void displayClassroomsByCube(int cubeNumber) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            ClassroomListPageController classroomListPageController = loader.getController();
+            classroomListPageController.init(this);
+
+            classroomListPageController.fillClassroomListByCube(cubeNumber);
+            classroomListPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+
+            currPage = "aulePerCubo";
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void displayCubes() {
+        try {
+            FXMLLoader loader = new FXMLLoader(CubeListPageView.class.getResource("cubeListPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            CubeListPageController cubeListPageController = loader.getController();
+            cubeListPageController.fillCubeList(this);
+
+            cubeListPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+
+            currPage = "cubi";
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     void displayClassroomDetails(ClassroomDto classroomDto){
         ClassroomDetailsPageView classroomDetailsPageView = new ClassroomDetailsPageView(this, classroomDto);
@@ -102,7 +149,7 @@ public class MainPageController {
 
     @FXML
     void clickInserisciAula(MouseEvent event) {
-        if(!currPage.equals("inserimentoAula")) {
+        if (!currPage.equals("inserimentoAula")) {
             try {
                 FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
                 AnchorPane nuovoAnchorPane = loader.load();
@@ -117,11 +164,6 @@ public class MainPageController {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    @FXML
-    void clickAule(MouseEvent event) throws IOException {
-        displayClassrooms();
     }
 
     @FXML
@@ -151,10 +193,38 @@ public class MainPageController {
             labelInserimentoAula.setDisable(false);
         }
         else {
-            labelInserimentoAula.setDisable(true);
-        }
 
-        displayClassrooms();
+            labelInserimentoAula.setDisable(true);
+
+            labelAule.setText("Prenota Aula");
+        }
+        displayCubes();
 
     }
+
+    @FXML
+    void clickStoricoPren(MouseEvent event) {
+        if (!currPage.equals("storico")) {
+            displayRequestHistory();
+        }
+    }
+
+    public void displayRequestHistory() {
+        try {
+            FXMLLoader loader = new FXMLLoader(RequestHistoryPageView.class.getResource("requestHistoryPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            RequestHistoryPageController requestHistoryPageController = loader.getController();
+
+            boolean isAdmin = UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString());
+            requestHistoryPageController.init(this, isAdmin);
+
+            requestHistoryPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+
+            currPage = "storico";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
