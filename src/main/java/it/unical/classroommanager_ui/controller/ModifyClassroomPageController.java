@@ -5,6 +5,7 @@ import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.SceneHandler;
 import it.unical.classroommanager_ui.view.imageSelector;
 import javafx.animation.FadeTransition;
@@ -23,8 +24,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import static it.unical.classroommanager_ui.controller.CreateClassroomPageController.isNotInteger;
 
@@ -90,6 +93,7 @@ public class ModifyClassroomPageController {
     private File currentImage = null;
 
     boolean imageCheck = false;
+    boolean photoExists = false;
 
 
     @FXML
@@ -411,7 +415,7 @@ public class ModifyClassroomPageController {
 
             ModifyAlertController controller = loader.getController();
             controller.init(this, mainPageController, classroomDto, nameText, cubeText, floorText,
-                    capacityText, socketText, projectorText, availableText, typeText, currentImage);
+                    capacityText, socketText, projectorText, availableText, typeText, currentImage, photoExists);
 
             Stage modalStage = new Stage();
             modalStage.setTitle("Finestra di conferma delle modifiche");
@@ -422,16 +426,84 @@ public class ModifyClassroomPageController {
 
 
             if(controller.getConfirmation()){
-                //TODO: SE ALERTA CONFERMA, CHIAMA IL BACKEND
-                //TODO: ELIMINA IMMAGINE NEL DB SE NON ERA QUELLA UNKNOWN, ALTRIMENTI SALVA LA NUOVA O ELIMINA LA PRECEDENTE
-                //TODO: TORNA ALLA PAGINA PRINCIPALE
+
+                // start connection
+                URL url = new URL("http://localhost:8080/api/v1/class/updateClass/"+classroomDto.getId());
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("PUT");
+                connection.setRequestProperty("Content-Type","application/json");
+                connection.setDoOutput(true);
+
+                connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
+
+                // prepare input
+                String jsonInputString = String.format(
+                        "{\"name\": \"%s\", \"cubeNumber\": \"%s\", \"floor\": \"%s\", \"capability\": \"%s\", " +
+                                "\"numSocket\": \"%s\", \"projector\": \"%s\", \"available\": \"%s\", \"type\": \"%s\"}",
+                        nameText, cubeText, floorText, capacityText, socketText, projectorText, availableText, typeText
+                );
+
+
+                try (OutputStream os = connection.getOutputStream()) {
+                    byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
+                }
+                catch(Exception e){
+                    throw new IOException();
+                }
+
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                    System.out.println("Successo nella modifica dell'aula nel sistema.");
+
+                    if(currentImage!=null){
+
+                        // a photo already exists? it gets deleted
+                        if(photoExists){
+                            imageSelector.deleteImage(classroomDto.getName());
+                        }
+
+                        FileInputStream in = new FileInputStream(currentImage);
+
+                        String newImageName = nameText + ".png";
+                        FileOutputStream ou = new FileOutputStream("src/main/resources/it/unical/classroommanager_ui/view/classroomImagesDB/" + newImageName);
+
+                        BufferedInputStream bin = new BufferedInputStream(in);
+                        BufferedOutputStream bou = new BufferedOutputStream(ou);
+
+                        int b = 0;
+                        while (b != -1) {
+
+                            b = bin.read();
+                            bou.write(b);
+                        }
+                        bin.close();
+                        bou.close();
+                    }
+                    else{
+
+                        // photo was not modified from the user, but there's one saved specifically for this classroom in the db
+                        if(photoExists) {
+                            // photo was not modified, but name has changed
+                            if (!classroomDto.getName().equals(nameText)) {
+                                imageSelector.renameImage(classroomDto.getName(), nameText);
+                            }
+                        }
+
+                    }
+
+                    SceneHandler.getInstance().createMainPageScene();
+                }
+
+                else{
+                    System.out.println("Insuccesso nella modifica dell'aula nel sistema.");
+                }
+
             }
-
         }
-
     }
-
-
 
     public void init(MainPageController mainPageController, ClassroomDto classroomDto){
         this.mainPageController = mainPageController;
@@ -449,9 +521,12 @@ public class ModifyClassroomPageController {
         typeCBox.setText(classroomDto.getType());
         typeCBox.setValue(classroomDto.getType());
 
+
         if(classroomDto.isProjector()){
             classroomProjector.setSelected(true);
         }
+
+        this.photoExists = imageSelector.classroomImageExists(classroomDto.getName());
 
         imageContainer.setImage(imageSelector.classroomImage(classroomDto.getName()));
         stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");

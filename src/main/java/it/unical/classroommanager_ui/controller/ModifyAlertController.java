@@ -72,6 +72,8 @@ public class ModifyAlertController {
     ModifyClassroomPageController modifyClassroomPageController;
     MainPageController mainPageController;
 
+    boolean photoExists;
+
     boolean confirmation = false;
 
     boolean getConfirmation(){
@@ -87,10 +89,11 @@ public class ModifyAlertController {
 
     public void init(ModifyClassroomPageController modifyClassroomPageController, MainPageController mainPageController,
                      ClassroomDto classroomDto, String nameText, String cubeText, String floorText,
-                     String capacityText, String socketText, String projectorText, String availableText, String typeText, File currentImage){
+                     String capacityText, String socketText, String projectorText, String availableText, String typeText, File currentImage, boolean photoExists){
 
         this.modifyClassroomPageController = modifyClassroomPageController;
         this.mainPageController = mainPageController;
+        this.photoExists = photoExists;
 
 
         arrowLabel.setGraphic((new FontIconClass("mdi2a-arrow-right-bold", 20)));
@@ -106,7 +109,12 @@ public class ModifyAlertController {
             newImage.setImage(image);
         }
         else{
-            newImage.setImage(imageSelector.unspecifiedImage());
+            if (photoExists){
+                newImage.setImage(imageSelector.classroomImage(classroomDto.getName()));
+            }
+            else{
+                newImage.setImage(imageSelector.unspecifiedImage());
+            }
         }
 
         // SET ALTRI CAMPI

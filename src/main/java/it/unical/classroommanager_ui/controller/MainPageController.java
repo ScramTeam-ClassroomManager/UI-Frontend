@@ -193,13 +193,9 @@ public class MainPageController {
             labelInserimentoAula.setDisable(false);
         }
         else {
-
             labelInserimentoAula.setDisable(true);
-
-            labelAule.setText("Prenota Aula");
         }
         displayCubes();
-
     }
 
     @FXML

@@ -34,7 +34,7 @@
                      <children>
                         <HBox prefHeight="24.0" prefWidth="585.0">
                            <children>
-                              <Label text="Tipologia dell'aula">
+                              <Label minHeight="-Infinity" minWidth="-Infinity" text="Tipologia dell'aula">
                                  <font>
                                     <Font name="Trebuchet MS" size="18.0" />
                                  </font>
@@ -55,6 +55,9 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
                   </VBox>
                </children>
             </VBox>
