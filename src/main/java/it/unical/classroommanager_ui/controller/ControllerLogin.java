@@ -109,7 +109,7 @@ public class ControllerLogin {
 
                 TokenDecoder tokenDecoder = new TokenDecoder(token);
 
-                UserManager.getInstance().setUser(new User(tokenDecoder.serialNumber(), tokenDecoder.sub(), tokenDecoder.sub(),
+                UserManager.getInstance().setUser(new User(tokenDecoder.serialNumber(), tokenDecoder.name(), tokenDecoder.surname(),
                         tokenDecoder.email(), "NIENTE", tokenDecoder.role()));
                 UserManager.getInstance().setToken(token);
 

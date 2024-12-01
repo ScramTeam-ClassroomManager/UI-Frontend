@@ -179,6 +179,15 @@ public class MainPageController {
     @FXML
     void clickProfilo(MouseEvent event) {
 
+        if(!currPage.equals("profilo")){
+
+            ProfilePageView profilePageView = new ProfilePageView(this);
+            BPane.setCenter(profilePageView);
+
+            currPage = "profilo";
+
+        }
+
     }
 
     @FXML
