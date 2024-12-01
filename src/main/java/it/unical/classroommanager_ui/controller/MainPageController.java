@@ -247,12 +247,16 @@ public class MainPageController {
 
     @FXML
     void clickRichieste(MouseEvent event) throws IOException {
-        if (!(UserManager.getInstance().getToken().isEmpty())){
-            if(!currPage.equals("richieste")) {
-                displayRequests();
+        if (!(UserManager.getInstance().getToken().isEmpty())) {
+            if (!currPage.equals("richieste")) {
+                if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())) {
+                    displayRequests();
+                }
+                else {
+                    displayRequestHistory();
+                }
             }
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
             alert.setTitle("Richieste");
