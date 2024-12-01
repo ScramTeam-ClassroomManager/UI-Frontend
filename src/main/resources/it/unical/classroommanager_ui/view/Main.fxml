@@ -67,6 +67,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Label fx:id="labelInserimentoAula" onMouseClicked="#clickInserisciAula" text="Inserisci un aula" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
                   <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />

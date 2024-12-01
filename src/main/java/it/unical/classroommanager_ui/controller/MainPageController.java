@@ -36,6 +36,9 @@ public class MainPageController {
     private Label labelRichieste;
 
     @FXML
+    private Label labelInserimentoAula;
+
+    @FXML
     private Label labelStoricoPren;
 
     String currPage = "";
@@ -209,8 +212,37 @@ public class MainPageController {
         }
     }
 
+    public void displayModifyClassroomPage(ClassroomDto classroomDto){
+        ModifyClassroomPageView modifyClassroomPageView = new ModifyClassroomPageView(this, classroomDto);
+
+        BPane.setCenter(modifyClassroomPageView);
+
+        currPage = "modificaAula";
+
+    }
+
+
     public void refreshRequestList() {
         displayRequests();
+    }
+
+    @FXML
+    void clickInserisciAula(MouseEvent event) {
+        if (!currPage.equals("inserimentoAula")) {
+            try {
+                FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
+                AnchorPane nuovoAnchorPane = loader.load();
+                CreateClassroomPageController createClassroomPageController = loader.getController();
+                createClassroomPageController.init(this);
+
+                createClassroomPageController.setBPane(BPane);
+                BPane.setCenter(nuovoAnchorPane);
+
+                currPage = "inserimentoAula";
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @FXML
@@ -236,18 +268,18 @@ public class MainPageController {
 
     public void init() {
         if (!(UserManager.getInstance().getToken().isEmpty())) {
-            if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())) {
-                labelAule.setText("Aggiungi Aula");
-
-            } else {
-                labelAule.setText("Prenota Aula");
-                displayCubes();
+            if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())){
+                labelInserimentoAula.setDisable(false);
+            }
+            else {
+                labelInserimentoAula.setDisable(true);
                 labelStoricoPren.setVisible(false);
             }
+            displayCubes();
         }
         else{
             labelLogout.setText("Login");
-            labelAule.setText("Aule");
+            labelInserimentoAula.setDisable(true);;
             labelStoricoPren.setVisible(false);
             displayCubes();
         }

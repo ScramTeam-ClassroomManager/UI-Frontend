@@ -101,8 +101,8 @@ public class ClassroomListPageController {
                 ObjectMapper objectMapper = new ObjectMapper();
                 classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {});
             }
-
-        } catch (Exception e) {
+        }
+         catch (Exception e) {
             System.out.println("Problemi nella ricezione delle aule.");
         }
 
