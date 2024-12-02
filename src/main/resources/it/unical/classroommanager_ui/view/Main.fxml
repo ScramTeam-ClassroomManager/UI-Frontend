@@ -14,11 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="BPane" focusTraversable="true" minHeight="725.0" minWidth="1450.0" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
+<BorderPane fx:id="BPane" focusTraversable="true" minHeight="725.0" minWidth="1450.0" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
    <left>
       <AnchorPane prefHeight="760.0" prefWidth="326.0" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="760.0" prefWidth="379.0" spacing="20.0">
+            <VBox fx:id="labelCubi" prefHeight="760.0" prefWidth="379.0" spacing="20.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="151.0" prefWidth="347.0">
                      <children>
@@ -56,17 +56,6 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
                   <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
@@ -78,12 +67,45 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Label fx:id="labelInserimentoAula" onMouseClicked="#clickInserisciAula" text="Inserisci un aula" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
                   <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="10.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="labelStoricoPren" onMouseClicked="#clickStoricoPren" text="Storico prenotazioni" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="280.0" />
                      </VBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />

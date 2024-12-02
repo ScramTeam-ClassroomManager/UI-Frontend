@@ -22,7 +22,6 @@ public class ClassroomDto {
     public int getCubeNumber() {
         return cubeNumber;
     }
-
     public void setCubeNumber(int cubeNumber) {
         this.cubeNumber = cubeNumber;
     }
