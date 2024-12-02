@@ -7,21 +7,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+
 public class ClassroomListInstanceView extends Pane {
-    public ClassroomListInstanceView(MainPageController mainController, ClassroomDto classroom){
+    public ClassroomListInstanceView(MainPageController mainPageController, ClassroomDto classroom) {
         FXMLLoader loader = new FXMLLoader(ClassroomListInstanceView.class.getResource("classroomListInstance.fxml"));
         try {
-
-
             AnchorPane root = loader.load();
             ClassroomListInstanceController controller = loader.getController();
-            controller.init(mainController, classroom);
+            controller.init(mainPageController, classroom);
             this.getChildren().add(root);
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        catch(Exception ignoredException) {
-        }
-
     }
 }

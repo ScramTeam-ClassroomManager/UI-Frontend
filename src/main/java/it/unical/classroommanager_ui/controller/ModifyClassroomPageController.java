@@ -4,20 +4,23 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
+import it.unical.classroommanager_ui.model.ClassroomDto;
 import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.SceneHandler;
 import it.unical.classroommanager_ui.view.imageSelector;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,9 +28,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
-public class CreateClassroomPageController {
+import static it.unical.classroommanager_ui.controller.CreateClassroomPageController.isNotInteger;
+
+public class ModifyClassroomPageController {
 
     @FXML
     private Label capacityAlert;
@@ -51,13 +55,22 @@ public class CreateClassroomPageController {
     private MFXTextField classroomSocket;
 
     @FXML
+    private Label cubeAlert;
+
+    @FXML
     private Label floorAlert;
 
     @FXML
     private ImageView imageContainer;
 
     @FXML
+    private MFXButton insertPhotoButton;
+
+    @FXML
     private Label nameAlert;
+
+    @FXML
+    private MFXButton removePhotoButton;
 
     @FXML
     private Label socketAlert;
@@ -66,33 +79,22 @@ public class CreateClassroomPageController {
     private StackPane stackImage;
 
     @FXML
-    private MFXButton insertPhotoButton;
-
-    @FXML
-    private MFXButton removePhotoButton;
-
-    @FXML
-    private Label cubeAlert;
-
-    @FXML
-    private MFXComboBox<String> typeCBox;
+    private Text textName;
 
     @FXML
     private Label typeAlert;
 
     @FXML
-    private BorderPane BPaneListPage;
-
-    public void setBPane(BorderPane BPane){
-        this.BPaneListPage = BPane;
-    }
-
+    private MFXComboBox<String> typeCBox;
 
     MainPageController mainPageController;
+    ClassroomDto classroomDto;
 
     private File currentImage = null;
 
     boolean imageCheck = false;
+    boolean photoExists = false;
+
 
     @FXML
     void insertPhoto(ActionEvent event) {
@@ -136,17 +138,11 @@ public class CreateClassroomPageController {
 
     }
 
-    public static boolean isNotInteger(String str) {
-        try {
-            Integer.parseInt(str);
-            return false;
-        } catch (NumberFormatException e) {
-            return true;
-        }
-    }
+
 
     @FXML
-    void createClassroom(ActionEvent event) throws IOException {
+    void modifyClassroom(ActionEvent event) throws IOException {
+
         boolean name;
         boolean capacity = true;
         boolean floor = true;
@@ -203,7 +199,7 @@ public class CreateClassroomPageController {
         // CAPACITY CHECK
 
         if (!(classroomCapacity.getText()==null || classroomCapacity.getText().isEmpty()) &&
-        isNotInteger(classroomCapacity.getText())){
+                isNotInteger(classroomCapacity.getText())){
 
             capacity = false;
 
@@ -414,26 +410,27 @@ public class CreateClassroomPageController {
 
         if(name && capacity && floor && socket && type && cube){
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            FXMLLoader loader = new FXMLLoader(SceneHandler.class.getResource("modifyAlert.fxml"));
+            AnchorPane root = loader.load();
 
-            alert.setTitle("Conferma inserimento");
-            alert.setHeaderText("Inserimento");
-            alert.setContentText("Cliccare 'OK' completerà la procedura di inserimento della nuova aula nel sistema.");
+            ModifyAlertController controller = loader.getController();
+            controller.init(this, mainPageController, classroomDto, nameText, cubeText, floorText,
+                    capacityText, socketText, projectorText, availableText, typeText, currentImage, photoExists);
 
-            alert.getDialogPane().setGraphic(new ImageView(imageSelector.checkMark()));
+            Stage modalStage = new Stage();
+            modalStage.setTitle("Finestra di conferma delle modifiche");
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+
+            modalStage.setScene(new Scene(root));
+            modalStage.showAndWait();
 
 
-            alert.getDialogPane().setMinHeight(200);
-            alert.getDialogPane().setMinWidth(200);
-
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if(result.isPresent() && result.get() == ButtonType.OK){
+            if(controller.getConfirmation()){
 
                 // start connection
-                URL url = new URL("http://localhost:8080/api/v1/class/addClass");
+                URL url = new URL("http://localhost:8080/api/v1/class/updateClass/"+classroomDto.getId());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
+                connection.setRequestMethod("PUT");
                 connection.setRequestProperty("Content-Type","application/json");
                 connection.setDoOutput(true);
 
@@ -457,57 +454,83 @@ public class CreateClassroomPageController {
 
 
                 int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_CREATED) {
-                    System.out.println("Aula inserita nel sistema con successo.");
-                }
-                else{
-                    System.out.println("Insuccesso nell'inserimento dell'aula nel sistema.");
-                }
+                if (responseCode == HttpURLConnection.HTTP_OK) {
 
+                    System.out.println("Successo nella modifica dell'aula nel sistema.");
 
+                    if(currentImage!=null){
 
-                // FOTO INSERITA NEL DB SE PRESENTE
-                if (imageCheck && currentImage!=null && responseCode == HttpURLConnection.HTTP_CREATED) {
-                    FileInputStream in = new FileInputStream(currentImage);
+                        // a photo already exists? it gets deleted
+                        if(photoExists){
+                            imageSelector.deleteImage(classroomDto.getName());
+                        }
 
-                    String newImageName = classroomName.getText() + ".png";
-                    FileOutputStream ou = new FileOutputStream("src/main/resources/it/unical/classroommanager_ui/view/classroomImagesDB/" + newImageName);
+                        FileInputStream in = new FileInputStream(currentImage);
 
-                    BufferedInputStream bin = new BufferedInputStream(in);
-                    BufferedOutputStream bou = new BufferedOutputStream(ou);
+                        String newImageName = nameText + ".png";
+                        FileOutputStream ou = new FileOutputStream("src/main/resources/it/unical/classroommanager_ui/view/classroomImagesDB/" + newImageName);
 
-                    int b = 0;
-                    while (b != -1) {
+                        BufferedInputStream bin = new BufferedInputStream(in);
+                        BufferedOutputStream bou = new BufferedOutputStream(ou);
 
-                        b = bin.read();
-                        bou.write(b);
+                        int b = 0;
+                        while (b != -1) {
+
+                            b = bin.read();
+                            bou.write(b);
+                        }
+                        bin.close();
+                        bou.close();
                     }
-                    bin.close();
-                    bou.close();
+                    else{
+
+                        // photo was not modified from the user, but there's one saved specifically for this classroom in the db
+                        if(photoExists) {
+                            // photo was not modified, but name has changed
+                            if (!classroomDto.getName().equals(nameText)) {
+                                imageSelector.renameImage(classroomDto.getName(), nameText);
+                            }
+                        }
+
+                    }
+
+                    SceneHandler.getInstance().createMainPageScene();
                 }
 
-                SceneHandler.getInstance().createMainPageScene();
-
-
-
-
-
+                else{
+                    System.out.println("Insuccesso nella modifica dell'aula nel sistema.");
+                }
 
             }
-
         }
-
-
     }
 
-    public void init(MainPageController mainPageController){
+    public void init(MainPageController mainPageController, ClassroomDto classroomDto){
         this.mainPageController = mainPageController;
-        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+        this.classroomDto = classroomDto;
 
         typeCBox.getItems().addAll("NORMAL", "AUDITORIUM");
 
+        textName.setText(classroomDto.getName());
+        classroomName.setText(classroomDto.getName());
+        classroomCapacity.setText(Integer.toString(classroomDto.getCapability()));
+        classroomCube.setText(Integer.toString(classroomDto.getCubeNumber()));
+        classroomFloor.setText(Integer.toString(classroomDto.getFloor()));
+        classroomSocket.setText(Integer.toString(classroomDto.getNumSocket()));
+
+        typeCBox.setText(classroomDto.getType());
+        typeCBox.setValue(classroomDto.getType());
+
+
+        if(classroomDto.isProjector()){
+            classroomProjector.setSelected(true);
+        }
+
+        this.photoExists = imageSelector.classroomImageExists(classroomDto.getName());
+
+        imageContainer.setImage(imageSelector.classroomImage(classroomDto.getName()));
+        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+
+
     }
-
-
-
 }

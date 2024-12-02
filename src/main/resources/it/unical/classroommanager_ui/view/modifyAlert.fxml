@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="752.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ModifyAlertController">
+   <children>
+      <SplitPane dividerPositions="0.125" layoutX="137.0" layoutY="98.0" orientation="VERTICAL" prefHeight="752.0" prefWidth="468.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label layoutX="55.0" layoutY="28.0" text="Riepilogo delle modifiche">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="707.0" prefWidth="466.0">
+               <children>
+                  <VBox prefHeight="653.0" prefWidth="466.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox prefHeight="179.0" prefWidth="434.0">
+                           <children>
+                              <AnchorPane prefHeight="203.0" prefWidth="490.0">
+                                 <children>
+                                    <ImageView fx:id="previousImage" fitHeight="150.0" fitWidth="150.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="15.0" />
+                                    <Label fx:id="arrowLabel" layoutX="205.0" layoutY="72.0" prefHeight="36.0" prefWidth="57.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="204.0" AnchorPane.topAnchor="72.0" />
+                                    <ImageView fx:id="newImage" fitHeight="150.0" fitWidth="150.0" layoutX="302.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="302.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <AnchorPane prefHeight="483.0" prefWidth="466.0">
+                           <children>
+                              <Text fx:id="previousName" layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="177.0" AnchorPane.bottomAnchor="252.4453125" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="37.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="arrowLabel1" layoutX="205.0" layoutY="33.0" prefHeight="36.0" prefWidth="57.0" AnchorPane.bottomAnchor="405.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="204.0" AnchorPane.topAnchor="33.0" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Nome dell'aula:" AnchorPane.bottomAnchor="439.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="321.0" AnchorPane.topAnchor="14.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Text fx:id="nextName" layoutX="275.0" layoutY="52.0234375" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="177.0" AnchorPane.bottomAnchor="252.4453125" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="37.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Text>
+                              <Label layoutX="14.0" layoutY="82.0" text="Capienza dell'aula:" AnchorPane.bottomAnchor="371.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="292.0" AnchorPane.topAnchor="82.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="previousCapability" layoutX="14.0" layoutY="105.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="349.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="105.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nextCapability" layoutX="275.0" layoutY="105.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="349.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="105.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <MFXButton layoutX="145.0" layoutY="417.0" onAction="#confirmAction" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: LimeGreen;" text="Conferma le modifiche" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="417.0">
+                                 <font>
+                                    <Font name="Nunito Regular" size="14.5" />
+                                 </font>
+                              </MFXButton>
+                              <Label layoutX="14.0" layoutY="136.0" text="Nome del cubo:" AnchorPane.bottomAnchor="317.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="136.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="previousCube" layoutX="14.0" layoutY="157.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="297.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="157.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nextCube" layoutX="275.0" layoutY="157.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="297.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="157.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="188.0" text="Piano dell'aula:" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="322.0" AnchorPane.topAnchor="188.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nextFloor" layoutX="275.0" layoutY="209.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="245.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="209.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="previousFloor" layoutX="14.0" layoutY="209.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="245.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="209.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="237.0" text="Numero di prese:" AnchorPane.bottomAnchor="216.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="305.0" AnchorPane.topAnchor="237.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="previousSocket" layoutX="14.0" layoutY="257.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="257.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nextSocket" layoutX="275.0" layoutY="256.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="256.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="286.0" text="Tipo dell'aula:" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="332.0" AnchorPane.topAnchor="286.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="previousType" layoutX="14.0" layoutY="306.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="306.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nextType" layoutX="275.0" layoutY="306.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="306.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="335.0" text="Proiettore presente:" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="335.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="previousProjector" layoutX="14.0" layoutY="356.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="356.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nextProjector" layoutX="275.0" layoutY="356.0" prefHeight="20.0" prefWidth="177.0" text="Label" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="356.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="275.0" layoutY="14.0" prefHeight="21.0" prefWidth="174.0" text="Nuove informazioni:" AnchorPane.bottomAnchor="439.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="14.0">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

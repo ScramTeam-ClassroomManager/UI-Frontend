@@ -7,24 +7,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class ClassroomListPageView extends Pane {
-    public ClassroomListPageView(MainPageController mainPageController){
+    public ClassroomListPageView(MainPageController mainPageController) {
         FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
         try {
-
             AnchorPane root = loader.load();
             ClassroomListPageController controller = loader.getController();
-
             controller.init(mainPageController);
-
-
             this.getChildren().add(root);
-
             root.prefWidthProperty().bind(this.widthProperty());
             root.prefHeightProperty().bind(this.heightProperty());
-
-        }
-        catch(Exception ignoredException) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

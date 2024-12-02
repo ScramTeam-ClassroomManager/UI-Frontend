@@ -3,7 +3,7 @@ package it.unical.classroommanager_ui.model;
 public class UserManager {
     private static UserManager instance;
 
-    private String token;
+    private String token = "";
     private User user;
 
     private UserManager(){}

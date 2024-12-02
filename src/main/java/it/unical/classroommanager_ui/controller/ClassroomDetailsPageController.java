@@ -5,12 +5,14 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.Role;
 import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.FontIconClass;
 import it.unical.classroommanager_ui.view.imageSelector;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -88,6 +90,8 @@ public class ClassroomDetailsPageController {
     @FXML
     private MFXButton bookButton;
 
+    @FXML
+    private Button modifyButton;
 
     MainPageController mainPageController;
     ClassroomDto classroomDto;
@@ -263,12 +267,25 @@ public class ClassroomDetailsPageController {
 
     }
 
+    @FXML
+    void modifyClassroom(ActionEvent event) {
+        mainPageController.displayModifyClassroomPage(classroomDto);
+    }
+
     public void init(MainPageController mainPageController, ClassroomDto classroomDto){
         this.mainPageController = mainPageController;
         this.classroomDto = classroomDto;
 
+        modifyButton.setGraphic((new FontIconClass("mdi2p-pencil-box",25)));
+        textName.setFocusTraversable(true);
+
+        if(!UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())) {
+            modifyButton.setDisable(true);
+        }
+
+
         textName.setText(classroomDto.getName());
-        cubeLabel.setText("("+ classroomDto.getCube() +")");
+        cubeLabel.setText("(" + classroomDto.getCubeNumber() + ")");
         floorLabel.setText("("+ classroomDto.getFloor() +")");
         capabilityLabel.setText("("+ classroomDto.getCapability() +")");
         socketLabel.setText("("+classroomDto.getNumSocket()+")");
