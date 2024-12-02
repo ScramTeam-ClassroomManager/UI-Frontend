@@ -22,7 +22,6 @@ public class UserManager {
     }
 
     public void setToken(String token){
-
         this.token = token;
     }
 
@@ -33,6 +32,7 @@ public class UserManager {
     public void logout(){
 
         user = null;
+        token = "";
 
     }
 

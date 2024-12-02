@@ -31,6 +31,10 @@ public class TokenDecoder {
         return getChosenField("email");
     }
 
+    public String name() { return getChosenField("name");}
+
+    public String surname() { return getChosenField("surname");}
+
     public String sub(){
         return getChosenField("sub");
     }
