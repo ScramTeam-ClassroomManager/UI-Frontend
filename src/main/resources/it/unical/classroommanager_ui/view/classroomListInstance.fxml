@@ -1,77 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="137.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomListInstanceController">
+<AnchorPane prefHeight="93.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomListInstanceController">
    <children>
-      <Label layoutX="32.0" layoutY="19.0" prefHeight="30.0" prefWidth="496.0" text="Nome:">
+      <Label layoutX="656.0" layoutY="31.0" prefHeight="30.0" prefWidth="64.0" text="Cubo:">
          <font>
             <Font name="Nunito Regular" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="32.0" layoutY="72.0" prefHeight="30.0" prefWidth="147.0" text="Cubo:">
+      <Label layoutX="380.0" layoutY="31.0" prefHeight="30.0" prefWidth="92.0" text="Capienza:">
          <font>
             <Font name="Nunito Regular" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="185.0" layoutY="72.0" prefHeight="30.0" prefWidth="123.0" text="Piano:">
+      <Label fx:id="classroomNameLabel" layoutX="151.0" layoutY="31.0" prefHeight="30.0" prefWidth="150.0">
          <font>
             <Font name="Nunito Regular" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="645.0" layoutY="16.0" prefHeight="30.0" prefWidth="182.0" text="Capienza:">
+      <Label fx:id="capabilityLabel" layoutX="478.0" layoutY="31.0" prefHeight="30.0" prefWidth="83.0">
          <font>
             <Font name="Nunito Regular" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="327.0" layoutY="72.0" prefHeight="30.0" prefWidth="221.0" text="Numero di prese:">
+      <Label fx:id="cubeLabel" layoutX="720.0" layoutY="31.0" prefHeight="30.0" prefWidth="83.0">
          <font>
             <Font name="Nunito Regular" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="645.0" layoutY="72.0" prefHeight="30.0" prefWidth="141.0" text="Proiettore:">
+      <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="32.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/college-university-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="57.0" fitWidth="51.0" layoutX="599.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/logo-Copia.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-1.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="317.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/community-icon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="93.0" layoutY="31.0" text="Aula:">
          <font>
-            <Font name="Nunito Regular" size="20.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="classroomNameLabel" layoutX="98.0" layoutY="19.0" prefHeight="30.0" prefWidth="452.0">
+      <MFXButton fx:id="reserveButton" layoutX="856.0" layoutY="24.0" onAction="#reservePressed" prefHeight="42.0" prefWidth="123.0" style="-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);" text="PRENOTA" textFill="WHITE">
          <font>
-            <Font name="Nunito Regular" size="20.0" />
+            <Font name="Trebuchet MS" size="20.0" />
          </font>
-      </Label>
-      <Label fx:id="capabilityLabel" layoutX="741.0" layoutY="16.0" prefHeight="30.0" prefWidth="83.0">
-         <font>
-            <Font name="Nunito Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="cubeLabel" layoutX="96.0" layoutY="72.0" prefHeight="30.0" prefWidth="83.0">
-         <font>
-            <Font name="Nunito Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="floorLabel" layoutX="248.0" layoutY="72.0" prefHeight="30.0" prefWidth="64.0">
-         <font>
-            <Font name="Nunito Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="num_socketLabel" layoutX="487.0" layoutY="72.0" prefHeight="30.0" prefWidth="123.0">
-         <font>
-            <Font name="Nunito Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="projectorLabel" layoutX="747.0" layoutY="72.0" prefHeight="30.0" prefWidth="72.0">
-         <font>
-            <Font name="Nunito Regular" size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="reserveButton" layoutX="863.0" layoutY="49.0" mnemonicParsing="false" onAction="#reservePressed" prefHeight="40.0" prefWidth="92.0" text="Prenota">
-         <font>
-            <Font name="Nunito Regular" size="18.0" />
-         </font>
-      </Button>
+      </MFXButton>
    </children>
 </AnchorPane>

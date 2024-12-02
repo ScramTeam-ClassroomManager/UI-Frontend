@@ -25,16 +25,7 @@ public class ClassroomListInstanceController {
     private Label cubeLabel;
 
     @FXML
-    private Label floorLabel;
-
-    @FXML
     private Label classroomNameLabel;
-
-    @FXML
-    private Label num_socketLabel;
-
-    @FXML
-    private Label projectorLabel;
 
     @FXML
     private Button reserveButton;
@@ -62,10 +53,7 @@ public class ClassroomListInstanceController {
 
         capabilityLabel.setText(String.valueOf(classroom.getCapability()));
         cubeLabel.setText(String.valueOf(classroom.getCubeNumber()));
-        floorLabel.setText(String.valueOf(classroom.getFloor()));
         classroomNameLabel.setText(classroom.getName());
-        num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
-        projectorLabel.setText(classroom.isProjector() ? "Si" : "No");
 
         if (UserManager.getInstance().getToken().isEmpty()){
             reserveButton.setDisable(true);
