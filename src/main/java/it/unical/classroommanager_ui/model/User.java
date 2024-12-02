@@ -1,6 +1,6 @@
 package it.unical.classroommanager_ui.model;
 
-public record User(String serialNumber, String firstName, String lastName, String email, String password) {
+public record User(String serialNumber, String firstName, String lastName, String email, String password, String role) {
 
     @Override
     public String serialNumber() {
@@ -25,5 +25,20 @@ public record User(String serialNumber, String firstName, String lastName, Strin
     @Override
     public String password() {
         return password;
+    }
+
+    @Override
+    public String role() { return role;}
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "serialNumber='" + serialNumber + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

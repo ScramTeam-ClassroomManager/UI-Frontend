@@ -1,90 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ControllerLogin">
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1500.0" xmlns:mfx="http://github.com/palexdev/materialfx" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ControllerLogin">
+   <children>
+      <ImageView fitHeight="915.0" fitWidth="1705.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-107.0">
+         <image>
+            <Image url="@resources/Immagini/aula.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="15.0" />
+         </effect>
+      </ImageView>
+
+      <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: rgba(0, 0, 0, 0.6);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <BorderPane style="-fx-background-color: rgb(155, 32, 48);" HBox.hgrow="ALWAYS">
-               <center>
-                  <VBox alignment="CENTER" fillWidth="false" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
-                     <children>
-                        <HBox alignment="CENTER">
-                           <children>
-                              <ImageView fx:id="image_Username" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@resources/Immagini/Username-Photoroom.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets right="3.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <TextField fx:id="Textfield_matricola" alignment="CENTER" promptText="Matricola" />
-                           </children>
-                        </HBox>
-                        <Label fx:id="Label_errorematr" text="Matricola errata " textFill="WHITE" visible="false">
-                           <padding>
-                              <Insets top="2.0" />
-                           </padding>
-                        </Label>
-                        <HBox alignment="CENTER">
-                           <VBox.margin>
-                              <Insets top="8.0" />
-                           </VBox.margin>
-                           <children>
-                              <ImageView fx:id="image_lock" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@resources/Immagini/lock-Photoroom.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets right="3.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <PasswordField fx:id="Passwordfield_password" alignment="CENTER" promptText="Password" />
-                           </children>
-                        </HBox>
-                        <Label fx:id="Label_errorepass" text="Password errata" textFill="WHITE" visible="false">
-                           <VBox.margin>
-                              <Insets top="2.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Button fx:id="login_button" mnemonicParsing="false" onAction="#login" text="Login">
-                           <VBox.margin>
-                              <Insets left="25.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-               </center>
-               <bottom>
-                  <Label fx:id="Label_registra" alignment="BOTTOM_LEFT" onMouseClicked="#iscrizione" text="Clicca qui" textFill="WHITE" BorderPane.alignment="BOTTOM_LEFT">
-                     <graphic>
-                        <Label alignment="BOTTOM_LEFT" text="  Non sei iscritto? " textFill="WHITE">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                     </graphic>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/Immagini/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="450.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UNICAL CLASSROOM MANAGER">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="Georgia" size="31.0" />
                      </font>
-                  </Label>
-               </bottom>
-            </BorderPane>
-            <Pane HBox.hgrow="ALWAYS" />
+                     <HBox.margin>
+                        <Insets left="10.0" top="50.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <ImageView fx:id="image_Username" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/Immagini/account.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+                  <MFXTextField fx:id="Textfield_matricola" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Matricola" />
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+
+            <Label fx:id="Label_errorematr" prefHeight="17.0" prefWidth="101.0" text="Inserisci Matricola" textFill="RED" visible="false">
+               <font>
+                  <Font size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="47.0" />
+               </VBox.margin>
+            </Label>
+
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <ImageView fx:id="image_lock" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/Immagini/lock.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+                  <MFXPasswordField fx:id="Passwordfield_password" alignment="CENTER" prefHeight="50.0" prefWidth="250.0" promptText="Password" />
+               </children>
+            </HBox>
+
+            <Label fx:id="Label_errorepass" prefHeight="17.0" prefWidth="101.0" text="Inserisci Password" textFill="RED" visible="false">
+               <font>
+                  <Font size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="47.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="Label_sbagliati" layoutX="733.0" layoutY="518.0" prefHeight="17.0" prefWidth="152.0" text="Matricola o Password errate" textFill="RED" visible="false">
+               <font>
+                  <Font size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="47.0" />
+               </VBox.margin>
+            </Label>
+
+            <MFXButton fx:id="login_button" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #9b2030; -fx-text-fill: white; -fx-font-size: 16;" text="Login">
+               <VBox.margin>
+                  <Insets left="35.0" top="10.0" />
+               </VBox.margin>
+            </MFXButton>
+
+            <Label fx:id="Label_registra" alignment="CENTER" onMouseClicked="#iscrizione" style="-fx-underline: true;" text="Non sei iscritto? Clicca qui" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="35.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
          </children>
-      </HBox>
-   </center>
-</BorderPane>
+
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

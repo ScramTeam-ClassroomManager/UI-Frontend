@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
+   <children>
+      <BorderPane fx:id="requestsView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: rgb(155, 32, 48);">
+         <center>
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXTableView fx:id="tableview" prefHeight="300.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </MFXTableView>
+                  <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                     <children>
+                        <MFXTextField fx:id="textfield" prefHeight="200.0" prefWidth="650.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets top="50.0" />
+                           </HBox.margin>
+                        </MFXTextField>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <MFXButton fx:id="buttonAccetta" depthLevel="LEVEL3" onAction="#accetta" prefHeight="60.0" prefWidth="130.0" style="-fx-background-color: rgb(150,210,110);" text="Accetta">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </MFXButton>
+                              <MFXButton fx:id="buttonRifiuta" onAction="#rifiuta" prefHeight="60.0" prefWidth="130.0" style="-fx-background-color: rgb(210,85,70);" text="Rifiuta" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </MFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</HBox>

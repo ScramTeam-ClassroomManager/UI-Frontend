@@ -17,3 +17,21 @@
 .list-cell:filled{
     -fx-border-color: black;
 }
+
+.list-cell:focused {
+    -fx-background-color: transparent;
+}
+
+.list-cell:selected {
+    -fx-background-color: transparent;
+}
+
+/*#classroomNameLabel:hover {*/
+/*    -fx-text-fill: green;*/
+/*}*/
+
+.icons-color{
+    -fx-icon-color: black;
+}
+
+

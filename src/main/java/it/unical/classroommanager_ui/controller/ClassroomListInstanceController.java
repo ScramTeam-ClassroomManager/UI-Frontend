@@ -2,6 +2,7 @@ package it.unical.classroommanager_ui.controller;
 
 
 import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ public class ClassroomListInstanceController {
     private Label floorLabel;
 
     @FXML
-    private Label nameLabel;
+    private Label classroomNameLabel;
 
     @FXML
     private Label num_socketLabel;
@@ -45,66 +46,32 @@ public class ClassroomListInstanceController {
     MainPageController mainPageController;
     ClassroomDto classroom;
 
-     @FXML
-     void reservePressed(ActionEvent event) throws IOException {
-         URL url = new URL("http://localhost:8080/api/v1/class/booking/"+classroom.getId());
-         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-         connection.setRequestMethod("PUT");
-         connection.setRequestProperty("Accept", "application/json");
 
-         // LETTURA RISPOSTA
-         int responseCode = connection.getResponseCode();
-         StringBuilder response = new StringBuilder();
+    @FXML
+    void reservePressed(ActionEvent event) throws IOException {
+        if (mainPageController != null) {
+            mainPageController.displayClassroomDetails(classroom);
+        } else {
+            System.err.println("Errore: mainPageController è null!");
+        }
+    }
 
-         try (BufferedReader reader = new BufferedReader(
-                 new InputStreamReader(
-                         (responseCode == HttpURLConnection.HTTP_OK) ?
-                                 connection.getInputStream() : connection.getErrorStream()))) {
-             String line;
-             while ((line = reader.readLine()) != null) {
-                 response.append(line);
-             }
-         }
-         catch (Exception e) {
-             // Handle any other exceptions that may occur
-             System.err.println("Problemi con la prenotazione: " + e.getMessage());
-             return;
-         }
-
-         reserveButton.setStyle("-fx-background-color: red;");
-         reserveButton.setDisable(true);
-
-
-
-
-
-     }
-
-    public void init(MainPageController mainPageController, ClassroomDto classroom){
-
+    public void init(MainPageController mainPageController, ClassroomDto classroom) {
         this.mainPageController = mainPageController;
         this.classroom = classroom;
 
-
         capabilityLabel.setText(String.valueOf(classroom.getCapability()));
-        cubeLabel.setText(String.valueOf(classroom.getCube()));
+        cubeLabel.setText(String.valueOf(classroom.getCubeNumber()));
         floorLabel.setText(String.valueOf(classroom.getFloor()));
-        nameLabel.setText(classroom.getName());
+        classroomNameLabel.setText(classroom.getName());
         num_socketLabel.setText(String.valueOf(classroom.getNumSocket()));
-        if(classroom.isProjector()){
-            projectorLabel.setText("Si");
-        }
-        else{
-            projectorLabel.setText("No");
-        }
+        projectorLabel.setText(classroom.isProjector() ? "Si" : "No");
 
-        if(!classroom.getAvailable()) {
-            reserveButton.setStyle("-fx-background-color: red;");
+        if (UserManager.getInstance().getToken().isEmpty()){
             reserveButton.setDisable(true);
         }
-
-
     }
+
 
 
 }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="BPane" focusTraversable="true" minHeight="725.0" minWidth="1450.0" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
+   <left>
+      <AnchorPane prefHeight="760.0" prefWidth="326.0" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="labelCubi" prefHeight="760.0" prefWidth="379.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="151.0" prefWidth="347.0">
+                     <children>
+                        <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/logo.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UNICAL">
+                                 <font>
+                                    <Font name="Georgia" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSROOM MANAGER">
+                                 <font>
+                                    <Font name="Georgia" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="labelInserimentoAula" onMouseClicked="#clickInserisciAula" text="Inserisci un aula" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="labelStoricoPren" onMouseClicked="#clickStoricoPren" text="Storico prenotazioni" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="280.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="labelLogout" onMouseClicked="#clickLogout" text="Log out" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

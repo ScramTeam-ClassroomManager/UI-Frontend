@@ -1,7 +1,9 @@
 package it.unical.classroommanager_ui.view;
 
+import it.unical.classroommanager_ui.controller.MainPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,16 +33,16 @@ public class SceneHandler {
 
     public void createLoginScene() throws IOException{
 
-            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("loginPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("loginPage.fxml"));
 
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load());
 
-            stage.setResizable(false);
+        stage.setResizable(false);
 
-            stage.setTitle("Classroom Manager");
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.show();
+        stage.setTitle("Classroom Manager");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
 
     }
 
@@ -48,7 +50,7 @@ public class SceneHandler {
     public void createRegisterScene() throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("registerPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 635, 681);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setResizable(false);
             stage.setScene(scene);
             stage.centerOnScreen();
@@ -61,23 +63,30 @@ public class SceneHandler {
 
     public void createMainPageScene() throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("mainPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1023, 676);
+            FXMLLoader fxmlLoader = new FXMLLoader(SceneHandler.class.getResource("Main.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1500, 760);
+            MainPageController mainPageController = fxmlLoader.getController();
+            mainPageController.init();
+
+
             for (String style : List.of("css/custom.css")) {
                 String resource = Objects.requireNonNull(SceneHandler.class.getResource(style)).toExternalForm();
                 scene.getStylesheets().add(resource);
             }
+
+
+
+
             stage.setScene(scene);
             stage.centerOnScreen();
+            stage.setMinWidth(1250);
+            stage.setMinHeight(800);
+            stage.setResizable(false);
             stage.show();
         }
         catch (IOException e) {
-                throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
 
     }
-
-
-
-
 }
