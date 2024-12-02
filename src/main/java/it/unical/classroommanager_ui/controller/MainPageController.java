@@ -98,15 +98,13 @@ public class MainPageController {
                     classroomListPageController.setBPane(BPane);
                     BPane.setCenter(nuovoAnchorPane);
 
-                    currPage = "aule";
-
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                currPage = "aule";
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
 
+        }
     }
 
     public void displayClassroomsByCube(int cubeNumber) {
@@ -152,45 +150,6 @@ public class MainPageController {
         BPane.setCenter(classroomDetailsPageView);
 
         currPage = "dettagliAula";
-
-
-    }
-
-    @FXML
-    void clickLogout(MouseEvent event) {
-        if (!(UserManager.getInstance().getToken().isEmpty())) {
-            try {
-                UserManager.getInstance().logout();
-                SceneHandler.getInstance().createLoginScene();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        else{
-            try {
-                SceneHandler.getInstance().createLoginScene();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    @FXML
-    void clickProfilo(MouseEvent event) {
-        if (!(UserManager.getInstance().getToken().isEmpty())){
-
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-            alert.setTitle("Profilo");
-            alert.setHeaderText("Avviso");
-            alert.setContentText("Per poter visualizzare il profilo devi essere loggato.");
-
-            alert.getDialogPane().setMinHeight(200);
-            alert.getDialogPane().setMinWidth(200);
-            alert.show();
-        }
 
     }
 
@@ -242,6 +201,50 @@ public class MainPageController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    @FXML
+    void clickLogout(MouseEvent event) {
+        if (!(UserManager.getInstance().getToken().isEmpty())) {
+            try {
+                UserManager.getInstance().logout();
+                SceneHandler.getInstance().createLoginScene();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else{
+            try {
+                SceneHandler.getInstance().createLoginScene();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @FXML
+    void clickProfilo(MouseEvent event) {
+        if (!(UserManager.getInstance().getToken().isEmpty())){
+            if(!currPage.equals("profilo")){
+
+                ProfilePageView profilePageView = new ProfilePageView(this);
+                BPane.setCenter(profilePageView);
+
+                currPage = "profilo";
+
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+            alert.setTitle("Profilo");
+            alert.setHeaderText("Avviso");
+            alert.setContentText("Per poter visualizzare il profilo devi essere loggato.");
+
+            alert.getDialogPane().setMinHeight(200);
+            alert.getDialogPane().setMinWidth(200);
+            alert.show();
         }
     }
 
