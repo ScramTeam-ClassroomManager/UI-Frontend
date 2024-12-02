@@ -276,17 +276,17 @@ public class MainPageController {
     public void init() {
         if (!(UserManager.getInstance().getToken().isEmpty())) {
             if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())){
-                labelInserimentoAula.setDisable(false);
+                labelInserimentoAula.setVisible(true);
             }
             else {
-                labelInserimentoAula.setDisable(true);
+                labelInserimentoAula.setVisible(false);
                 labelStoricoPren.setVisible(false);
             }
             displayCubes();
         }
         else{
             labelLogout.setText("Login");
-            labelInserimentoAula.setDisable(true);;
+            labelInserimentoAula.setVisible(false);;
             labelStoricoPren.setVisible(false);
             displayCubes();
         }
