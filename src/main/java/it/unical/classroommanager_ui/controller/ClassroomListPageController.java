@@ -115,6 +115,43 @@ public class ClassroomListPageController {
         }
     }
 
+    public void fillClassroomListByDepartment(long departmentId) throws IOException {
+        try {
+            URL url = new URL("http://localhost:8080/api/v1/class/classroomsByDepartment/" + departmentId);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            StringBuilder response = new StringBuilder();
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            (responseCode == HttpURLConnection.HTTP_OK) ? connection.getInputStream() : connection.getErrorStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {});
+            }
+        } catch (Exception e) {
+            System.out.println("Problemi nella ricezione delle aule per dipartimento.");
+        }
+
+        if (classRooms != null && !classRooms.isEmpty()) {
+            classroomList.getItems().clear();
+            for (ClassroomDto classroom : classRooms) {
+                ClassroomListInstanceView classroomListInstanceView = new ClassroomListInstanceView(mainPageController, classroom);
+                classroomList.getItems().add(classroomListInstanceView);
+            }
+        }
+    }
+
+
 
 
 
