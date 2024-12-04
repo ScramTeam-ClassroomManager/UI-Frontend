@@ -78,6 +78,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Label fx:id="labelCalendario" onMouseClicked="#clickCalendario" text="Calendario" textFill="WHITE">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
                   <Label fx:id="labelStoricoPren" onMouseClicked="#clickStoricoPren" text="Storico prenotazioni" textFill="WHITE">
                      <font>
                         <Font name="Georgia" size="36.0" />

@@ -1,6 +1,5 @@
 module it.unical.classroommanager_ui {
 
-    requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
     requires spring.web;
@@ -10,8 +9,9 @@ module it.unical.classroommanager_ui {
     requires jjwt.impl;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires org.springdoc.openapi.common;
-    requires javafx.base;
-    requires org.kordamp.ikonli.javafx;
+    requires com.calendarfx.view;
+    requires org.kordamp.ikonli.fontawesome;
+
     opens it.unical.classroommanager_ui.model to com.fasterxml.jackson.databind;
 
     opens it.unical.classroommanager_ui to javafx.fxml;

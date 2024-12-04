@@ -41,6 +41,9 @@ public class MainPageController {
     @FXML
     private Label labelStoricoPren;
 
+    @FXML
+    private Label labelCalendario;
+
     String currPage = "";
 
     @FXML
@@ -220,6 +223,21 @@ public class MainPageController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    @FXML
+    void clickCalendario(MouseEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(CalendarPageView.class.getResource("calendarPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            CalendarController calendarController = loader.getController();
+            calendarController.init(this);
+
+            calendarController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
