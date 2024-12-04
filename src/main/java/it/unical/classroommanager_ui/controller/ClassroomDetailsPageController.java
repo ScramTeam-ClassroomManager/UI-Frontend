@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -92,6 +93,9 @@ public class ClassroomDetailsPageController {
 
     @FXML
     private Button modifyButton;
+
+    @FXML
+    private TextArea reasonTextArea;
 
     MainPageController mainPageController;
     ClassroomDto classroomDto;
@@ -203,6 +207,8 @@ public class ClassroomDetailsPageController {
             hourAlert.setStyle("-fx-text-fill: green");
             hourAlert.setText("✓");
 
+            reasonTextArea.setStyle("-fx-border-color: green");
+
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
@@ -230,7 +236,7 @@ public class ClassroomDetailsPageController {
             // Prepare input
             String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
                             "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
-                    "", classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
+                    reasonTextArea.getText(), classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
 
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
@@ -243,6 +249,8 @@ public class ClassroomDetailsPageController {
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_CREATED) {
                 System.out.println("Richiesta inserita nel sistema con successo.");
+                bookButton.setStyle("-fx-border-color: green");
+                bookAlert.setVisible(false);
             }
             else{
                 System.out.println("Insuccesso nell'inserimento della richiesta nel sistema.");
@@ -256,6 +264,8 @@ public class ClassroomDetailsPageController {
 
                 bookAlert.setStyle("-fx-text-fill: red");
                 bookButton.setStyle("-fx-border-color: red");
+
+                reasonTextArea.setStyle("-fx-border-color: red");
 
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAlert);
                 ft.setFromValue(0.0);
