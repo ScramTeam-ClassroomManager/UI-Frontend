@@ -228,16 +228,19 @@ public class MainPageController {
 
     @FXML
     void clickCalendario(MouseEvent event){
-        try{
-            FXMLLoader loader = new FXMLLoader(CalendarPageView.class.getResource("calendarPage.fxml"));
-            AnchorPane nuovoAnchorPane = loader.load();
-            CalendarController calendarController = loader.getController();
-            calendarController.init(this);
+        if (!currPage.equals("calendario")) {
+            try{
+                FXMLLoader loader = new FXMLLoader(CalendarPageView.class.getResource("calendarPage.fxml"));
+                AnchorPane nuovoAnchorPane = loader.load();
+                CalendarController calendarController = loader.getController();
+                calendarController.init(this);
 
-            calendarController.setBPane(BPane);
-            BPane.setCenter(nuovoAnchorPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+                calendarController.setBPane(BPane);
+                BPane.setCenter(nuovoAnchorPane);
+                currPage = "calendario";
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

@@ -91,7 +91,6 @@ public class CalendarController {
 
         HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
         connection.setRequestMethod("GET");
-        connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
         connection.setRequestProperty("Accept", "application/json");
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -105,7 +104,6 @@ public class CalendarController {
 
         HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
         connection.setRequestMethod("GET");
-        connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
         connection.setRequestProperty("Accept", "application/json");
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -115,14 +113,12 @@ public class CalendarController {
         }
     }
 
-//TODO: REMINDER: MODIFICARE PERMESSI BACKEND PER USARE ENDPOINT ALLREQUESTS
 
     private List<RequestDto> getAllRequests() throws IOException {
         try {
             URL url = new URL("http://localhost:8080/api/v1/request/requests");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken()); // Se necessario
             connection.setRequestProperty("Accept", "application/json");
 
             int responseCode = connection.getResponseCode();
@@ -154,3 +150,4 @@ public class CalendarController {
 
 
 //TODO: REMINDER: MODIFICARE PERMESSI BACKEND PER USARE ENDPOINT ALLREQUESTS
+//TODO: NON PERMETTERE L'ELIMINAZIONE DI RICHIESTE SE NON SI E' ADMIN FACENDO TASTO DESTRO
