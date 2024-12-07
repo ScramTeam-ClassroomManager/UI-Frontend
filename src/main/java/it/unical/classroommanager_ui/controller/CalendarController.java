@@ -23,15 +23,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CalendarController {
 
     @FXML
     private CalendarView calendarView;
-
-    private Calendar calendar = new Calendar("Requests");
-    private CalendarSource calendarSource = new CalendarSource("Calendario");
+    private Set<String> departments = new HashSet<>();
+//    private Calendar calendar = new Calendar("Requests");
+    private CalendarSource calendarSource = new CalendarSource("Request");
     private MainPageController mainPageController;
 
     @FXML
@@ -43,6 +45,21 @@ public class CalendarController {
 
         try{
             requests = getAllRequests();
+            List <DepartmentDto> departmentList = new ArrayList<>();
+            departmentList.addAll(getAllDepartments());
+            int length = departmentList.size();
+            int index = 1;
+            for (DepartmentDto departmentDto : departmentList) {
+                String department = departmentDto.getDepartment();
+                if (!(departments.contains(department))) {
+                    departments.add(department);
+                    Calendar calendar = new Calendar(department);
+                    calendar.setStyle(Calendar.Style.getStyle(index%length));
+                    index++;
+                    calendarSource.getCalendars().add(calendar);
+                }
+
+            }
         }
         catch (IOException e){
             e.printStackTrace();
@@ -60,8 +77,13 @@ public class CalendarController {
                     entry.setTitle(getUserName(request.getUserSerialNumber()) + ": "
                             + request.getReason() + "\n"
                             + "Aula: " + entry.getLocation() + "\n");
-                    entry.setUserObject(request);
-                    calendar.addEntries(entry);
+
+                    for (Calendar c : calendarSource.getCalendars()) {
+                        if (c.getName().equals(getDepartment(request.getClassroomId()))) {
+                            entry.setCalendar(c);
+                            c.addEntries(entry);
+                        }
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -143,9 +165,11 @@ public class CalendarController {
 
         this.mainPageController = mainPageController;
         addAllEvent();
-        calendar.addEventHandler(new CustomCalendarEventHandler());
-        if (UserManager.getInstance().getToken().isEmpty() || !(UserManager.getInstance().getUser().role().equals("ADMIN"))) {
-            calendar.setReadOnly(true);
+        for (Calendar calendar : calendarSource.getCalendars()) {
+            calendar.addEventHandler(new CustomCalendarEventHandler());
+            if (UserManager.getInstance().getToken().isEmpty() || !(UserManager.getInstance().getUser().role().equals("ADMIN"))) {
+                calendar.setReadOnly(true);
+            }
         }
         calendarView.setEntryDetailsPopOverContentCallback(param -> new CustomEntryDetailsView(param.getEntry()));
 
@@ -157,18 +181,28 @@ public class CalendarController {
             MenuItem addEntry = new MenuItem("Aggiungi Richiesta");
             addEntry.setOnAction(e -> {
 
+                String department;
                 Entry<RequestDto> entry = createEntry();
-                entry.setCalendar(calendar);
-                calendar.addEntry(entry);
+                try {
+                    Long classroomId = getClassroomId(entry.getLocation());
+                    department = getDepartment(classroomId);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                for (Calendar c : calendarSource.getCalendars()) {
+                    if (c.getName().equals(department)) {
+                        entry.setCalendar(c);
+                        c.addEntry(entry);
+                    }
+                }
             });
 
             contextMenu.getItems().add(addEntry);
             return contextMenu;
         });
 
-        calendarSource.getCalendars().add(calendar);
         calendarView.getCalendarSources().add(calendarSource);
-
+        calendarView.setShowAddCalendarButton(false);
         calendarView.showDayPage();
     }
 
@@ -189,6 +223,40 @@ public class CalendarController {
         }
     }
 
+    private Long getClassroomId(String classroomName) throws IOException {
+        ClassroomDto classroom = new ClassroomDto();
+        try {
+            URL urlClassroom = new URL("http://localhost:8080/api/v1/class/classroomByName/" + classroomName);
+
+            HttpURLConnection connectionClassroom = (HttpURLConnection) urlClassroom.openConnection();
+            connectionClassroom.setRequestMethod("GET");
+            connectionClassroom.setRequestProperty("Accept", "application/json");
+
+            int responseCodeClassroom = connectionClassroom.getResponseCode();
+            StringBuilder responseClassroom = new StringBuilder();
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            (responseCodeClassroom == HttpURLConnection.HTTP_OK) ? connectionClassroom.getInputStream() : connectionClassroom.getErrorStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseClassroom.append(line);
+                }
+            }
+
+            if (responseCodeClassroom == HttpURLConnection.HTTP_OK) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                classroom = objectMapper.readValue(responseClassroom.toString(), new TypeReference<ClassroomDto>() {
+                });
+            } else {
+                System.err.println("Failed : HTTP error code : " + responseCodeClassroom);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return classroom.getId();
+    }
+
 
     private String getUserName(String userSerialNumber) throws IOException {
         String apiUrl = "http://localhost:8080/api/v1/auth/getFirstSecondUser/" + userSerialNumber;
@@ -202,6 +270,49 @@ public class CalendarController {
             User user = mapper.readValue(reader, User.class);
             return user.firstName() + " " + user.lastName();
         }
+    }
+
+    private String getDepartment(long classroomId) throws IOException {
+        String apiUrl = "http://localhost:8080/api/v1/department/departmentByClassroom/" + classroomId;
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/json");
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            return reader.readLine();
+        }
+    }
+
+    private List<DepartmentDto> getAllDepartments(){
+        try {
+            URL url = new URL("http://localhost:8080/api/v1/department/allDepartments");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            StringBuilder response = new StringBuilder();
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            (responseCode == HttpURLConnection.HTTP_OK) ?
+                                    connection.getInputStream() : connection.getErrorStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readValue(response.toString(), new TypeReference<List<DepartmentDto>>() {});
+            } else {
+                System.err.println("Failed : HTTP error code : " + responseCode);
+            }
+        } catch (Exception e) {
+            System.out.println("Problema con la connessione al server");
+        }
+        return List.of();
     }
 
 
@@ -239,6 +350,4 @@ public class CalendarController {
     }
 }
 
-
-//TODO: REMINDER: MODIFICARE PERMESSI BACKEND PER USARE ENDPOINT ALLREQUESTS
-//TODO: NON PERMETTERE L'ELIMINAZIONE DI RICHIESTE SE NON SI E' ADMIN FACENDO TASTO DESTRO
+//TODO: BUG --> SE SI AGGIUNGE UNA RICHIESTA E VA IN PENDING, ALL'INZIO VIENE VISUALIZZATA COMUNQUE NEL CALENDARIO, REFRESHADO SCOMPARE
