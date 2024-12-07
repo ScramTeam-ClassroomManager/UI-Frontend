@@ -1,10 +1,13 @@
-package it.unical.classroommanager_ui.model;
+package it.unical.classroommanager_ui.controller;
 
 import com.calendarfx.model.CalendarEvent;
 import com.calendarfx.model.Entry;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.RequestDto;
+import it.unical.classroommanager_ui.model.UserManager;
 import javafx.event.EventHandler;
 
 import java.io.BufferedReader;

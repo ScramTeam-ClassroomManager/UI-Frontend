@@ -9,6 +9,7 @@ import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import it.unical.classroommanager_ui.model.*;
+import it.unical.classroommanager_ui.view.CustomEntryDetailsView;
 import javafx.fxml.FXML;
 import com.calendarfx.view.CalendarView;
 import javafx.scene.control.*;
@@ -174,8 +175,16 @@ public class CalendarController {
         calendarView.setEntryDetailsPopOverContentCallback(param -> new CustomEntryDetailsView(param.getEntry()));
 
         calendarView.setContextMenuCallback(param -> {
-            if (UserManager.getInstance().getToken().isEmpty())
-                return new ContextMenu();
+            if (UserManager.getInstance().getToken().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Accesso richiesto");
+                alert.setHeaderText("Azione non consentita");
+                alert.setContentText("Devi effettuare il login per aggiungere una richiesta.");
+                alert.showAndWait();
+
+                // Ritorna null per evitare di aprire un menu vuoto
+                return null;
+            }
 
             ContextMenu contextMenu = new ContextMenu();
             MenuItem addEntry = new MenuItem("Aggiungi Richiesta");
@@ -200,7 +209,7 @@ public class CalendarController {
             contextMenu.getItems().add(addEntry);
             return contextMenu;
         });
-
+        calendarView.getCalendarSources().clear();
         calendarView.getCalendarSources().add(calendarSource);
         calendarView.setShowAddCalendarButton(false);
         calendarView.showDayPage();

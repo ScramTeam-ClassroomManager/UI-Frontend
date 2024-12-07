@@ -17,7 +17,7 @@ module it.unical.classroommanager_ui {
     opens it.unical.classroommanager_ui to javafx.fxml;
     exports it.unical.classroommanager_ui;
     exports it.unical.classroommanager_ui.view;
-    opens it.unical.classroommanager_ui.view to javafx.fxml;
     exports it.unical.classroommanager_ui.controller;
-    opens it.unical.classroommanager_ui.controller to javafx.fxml;
+    opens it.unical.classroommanager_ui.view to com.fasterxml.jackson.databind, javafx.fxml;
+    opens it.unical.classroommanager_ui.controller to com.fasterxml.jackson.databind, javafx.fxml;
 }

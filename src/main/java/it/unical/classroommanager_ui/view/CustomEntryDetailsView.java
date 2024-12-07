@@ -1,4 +1,4 @@
-package it.unical.classroommanager_ui.model;
+package it.unical.classroommanager_ui.view;
 
 import com.calendarfx.model.Entry;
 import javafx.geometry.Insets;
