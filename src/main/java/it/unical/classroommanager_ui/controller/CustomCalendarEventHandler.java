@@ -111,10 +111,10 @@ public class CustomCalendarEventHandler implements EventHandler<CalendarEvent> {
         }
 
         if (calendarEvent.isEntryRemoved()){
-            Entry entry = calendarEvent.getEntry();
+            Entry<RequestDto> entry = (Entry<RequestDto>) calendarEvent.getEntry();
 
             try {
-                URL url = new URL("http://localhost:8080/api/v1/request/deleteRequest/" + entry.getId());
+                URL url = new URL("http://localhost:8080/api/v1/request/deleteRequest/" + entry.getUserObject().getId());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("DELETE");
                 connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());

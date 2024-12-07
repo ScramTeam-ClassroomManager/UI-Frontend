@@ -10,12 +10,14 @@ import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import it.unical.classroommanager_ui.model.*;
 import it.unical.classroommanager_ui.view.CustomEntryDetailsView;
-import it.unical.classroommanager_ui.view.SceneHandler;
 import javafx.fxml.FXML;
 import com.calendarfx.view.CalendarView;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.io.BufferedReader;
@@ -31,7 +33,6 @@ public class CalendarController {
     @FXML
     private CalendarView calendarView;
     private Set<String> departments = new HashSet<>();
-//    private Calendar calendar = new Calendar("Requests");
     private CalendarSource calendarSource = new CalendarSource("Request");
     private MainPageController mainPageController;
 
@@ -76,7 +77,7 @@ public class CalendarController {
                     entry.setTitle(getUserName(request.getUserSerialNumber()) + ": "
                             + request.getReason() + "\n"
                             + "Aula: " + entry.getLocation() + "\n");
-
+                    entry.setUserObject(request);
                     for (Calendar c : calendarSource.getCalendars()) {
                         if (c.getName().equals(getDepartment(request.getClassroomId()))) {
                             entry.setCalendar(c);
@@ -158,6 +159,15 @@ public class CalendarController {
         return entry;
     }
 
+    private void showCustomEntryDetailsView(Entry<?> entry) {
+        CustomEntryDetailsView detailsView = new CustomEntryDetailsView(entry);
+
+        Stage detailsStage = new Stage();
+        detailsStage.setTitle("Dettagli Evento");
+        detailsStage.setScene(new Scene(detailsView));
+        detailsStage.initModality(Modality.APPLICATION_MODAL);
+        detailsStage.show();
+    }
 
     @FXML
     public void init(MainPageController mainPageController) {
@@ -166,9 +176,9 @@ public class CalendarController {
         addAllEvent();
         for (Calendar calendar : calendarSource.getCalendars()) {
             calendar.addEventHandler(new CustomCalendarEventHandler());
-            if (UserManager.getInstance().getToken().isEmpty() || !(UserManager.getInstance().getUser().role().equals("ADMIN"))) {
-                calendar.setReadOnly(true);
-            }
+//            if (UserManager.getInstance().getToken().isEmpty() || !(UserManager.getInstance().getUser().role().equals("ADMIN"))) {
+//                calendar.setReadOnly(true);
+//            }
         }
         calendarView.setEntryDetailsPopOverContentCallback(param -> new CustomEntryDetailsView(param.getEntry()));
 
@@ -180,7 +190,6 @@ public class CalendarController {
                 alert.setContentText("Devi effettuare il login per aggiungere una richiesta.");
                 alert.showAndWait();
 
-                // Ritorna null per evitare di aprire un menu vuoto
                 return null;
             }
 
@@ -207,6 +216,35 @@ public class CalendarController {
             contextMenu.getItems().add(addEntry);
             return contextMenu;
         });
+
+        calendarView.setEntryContextMenuCallback(param -> {
+            Entry<RequestDto> entry = (Entry<RequestDto>) param.getEntry();
+
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem viewDetails = new MenuItem("Vedi dettagli");
+            viewDetails.setOnAction(event -> {
+                showCustomEntryDetailsView(entry);
+            });
+            contextMenu.getItems().add(viewDetails);
+
+            if (!(UserManager.getInstance().getToken().isEmpty()) && UserManager.getInstance().getUser().role().equals("ADMIN")) {
+                MenuItem deleteEntry = new MenuItem("Elimina richiesta");
+                deleteEntry.setOnAction(event -> {
+                    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                            "Vuoi davvero eliminare questa richiesta?");
+                    confirm.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            param.getCalendar().removeEntry(entry); // Rimuovi l'evento
+                        }
+                    });
+                });
+                contextMenu.getItems().add(deleteEntry);
+            }
+
+            return contextMenu;
+        });
+
         calendarView.getCalendarSources().clear();
         calendarView.getCalendarSources().add(calendarSource);
         calendarView.setShowAddCalendarButton(false);
