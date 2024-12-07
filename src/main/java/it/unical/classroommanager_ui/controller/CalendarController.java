@@ -10,6 +10,7 @@ import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import it.unical.classroommanager_ui.model.*;
 import it.unical.classroommanager_ui.view.CustomEntryDetailsView;
+import it.unical.classroommanager_ui.view.SceneHandler;
 import javafx.fxml.FXML;
 import com.calendarfx.view.CalendarView;
 import javafx.scene.control.*;
@@ -23,10 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CalendarController {
 
@@ -212,6 +210,9 @@ public class CalendarController {
         calendarView.getCalendarSources().clear();
         calendarView.getCalendarSources().add(calendarSource);
         calendarView.setShowAddCalendarButton(false);
+        calendarView.setShowPrintButton(false);
+
+        calendarView.setStyle("-fx-background-color: #9b2030");
         calendarView.showDayPage();
     }
 
