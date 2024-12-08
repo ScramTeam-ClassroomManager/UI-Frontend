@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="86.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomDetailsRLInstanceController">
+   <children>
+      <Label layoutX="333.0" layoutY="31.0" style="-fx-text-fill: darkred;" text="PRENOTATA" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="333.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="31.0">
+         <font>
+            <Font name="Trebuchet MS" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="11.0" text="Data prenotazione:" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="254.0" AnchorPane.topAnchor="11.0">
+         <font>
+            <Font name="Trebuchet MS" size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="dateText" layoutX="218.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00/00/00" AnchorPane.bottomAnchor="53.0009765625" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="175.484375" AnchorPane.topAnchor="12.0">
+         <font>
+            <Font name="Trebuchet MS" size="18.0" />
+         </font>
+      </Text>
+      <Label layoutX="59.0" layoutY="49.0" text="Orario:" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="49.0">
+         <font>
+            <Font name="Trebuchet MS" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="hourIconLabel" layoutX="16.0" layoutY="47.0" prefHeight="22.0" prefWidth="40.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="47.0" />
+      <Label fx:id="dateIconLabel" layoutX="16.0" layoutY="11.0" prefHeight="22.0" prefWidth="40.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="11.0" />
+      <Text fx:id="startHour" layoutX="120.0" layoutY="66.9013671875" strokeType="OUTSIDE" strokeWidth="0.0" text="8:30" wrappingWidth="57.0" AnchorPane.bottomAnchor="15.099609375" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="292.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Trebuchet MS" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="endHour" layoutX="189.0" layoutY="66.9013671875" strokeType="OUTSIDE" strokeWidth="0.0" text="9:00" wrappingWidth="75.515625" AnchorPane.bottomAnchor="15.099609375" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="204.484375" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Trebuchet MS" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="170.0" layoutY="64.9013671875" strokeType="OUTSIDE" strokeWidth="0.0" text="-" AnchorPane.bottomAnchor="17.099609375" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="292.390625" AnchorPane.topAnchor="48.0">
+         <font>
+            <Font name="Trebuchet MS" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

@@ -1,12 +1,17 @@
 package it.unical.classroommanager_ui.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import it.unical.classroommanager_ui.model.ClassroomDto;
+import it.unical.classroommanager_ui.model.RequestDto;
 import it.unical.classroommanager_ui.model.Role;
 import it.unical.classroommanager_ui.model.UserManager;
+import it.unical.classroommanager_ui.view.ClassroomDetailsRLInstanceView;
 import it.unical.classroommanager_ui.view.FontIconClass;
 import it.unical.classroommanager_ui.view.imageSelector;
 import javafx.animation.FadeTransition;
@@ -14,17 +19,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class ClassroomDetailsPageController {
 
@@ -92,6 +102,12 @@ public class ClassroomDetailsPageController {
 
     @FXML
     private Button modifyButton;
+
+    @FXML
+    private TextArea reasonTextArea;
+
+    @FXML
+    private ListView<ClassroomDetailsRLInstanceView> requestListView;
 
     MainPageController mainPageController;
     ClassroomDto classroomDto;
@@ -203,6 +219,8 @@ public class ClassroomDetailsPageController {
             hourAlert.setStyle("-fx-text-fill: green");
             hourAlert.setText("✓");
 
+            reasonTextArea.setStyle("-fx-border-color: green");
+
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
@@ -230,7 +248,7 @@ public class ClassroomDetailsPageController {
             // Prepare input
             String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
                             "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
-                    "", classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
+                    reasonTextArea.getText(), classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
 
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
@@ -243,6 +261,8 @@ public class ClassroomDetailsPageController {
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_CREATED) {
                 System.out.println("Richiesta inserita nel sistema con successo.");
+                bookButton.setStyle("-fx-border-color: green");
+                bookAlert.setVisible(false);
             }
             else{
                 System.out.println("Insuccesso nell'inserimento della richiesta nel sistema.");
@@ -256,6 +276,8 @@ public class ClassroomDetailsPageController {
 
                 bookAlert.setStyle("-fx-text-fill: red");
                 bookButton.setStyle("-fx-border-color: red");
+
+                reasonTextArea.setStyle("-fx-border-color: red");
 
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAlert);
                 ft.setFromValue(0.0);
@@ -272,7 +294,7 @@ public class ClassroomDetailsPageController {
         mainPageController.displayModifyClassroomPage(classroomDto);
     }
 
-    public void init(MainPageController mainPageController, ClassroomDto classroomDto){
+    public void init(MainPageController mainPageController, ClassroomDto classroomDto) throws IOException {
         this.mainPageController = mainPageController;
         this.classroomDto = classroomDto;
 
@@ -323,6 +345,70 @@ public class ClassroomDetailsPageController {
         }
         NumberRange<Integer> numberRange = new NumberRange<Integer>(2024,2025);
         datePicker.setYearsRange(numberRange);
+
+
+
+
+        // CALLING BACKEND TO GET ALL ACCEPTED CLASSROOM REQUESTS
+        URL url = new URL("http://localhost:8080/api/v1/request/acceptedRequestsOfClassroom/"+classroomDto.getId());
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("PUT");
+        connection.setRequestProperty("Content-Type","application/json");
+        connection.setDoOutput(true);
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            // Read the response
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                List<RequestDto> requests = objectMapper.readValue(response.toString(), new TypeReference<List<RequestDto>>(){});
+
+                // ORDER THE LIST IN ORDER OF WHAT COMES FIRST IN TIMELINE
+                sortRequestsByDateTime(requests);
+                if (!requests.isEmpty()) {
+                    for (RequestDto request : requests) {
+                        ClassroomDetailsRLInstanceView classroomDetailsRLInstanceView = new ClassroomDetailsRLInstanceView(mainPageController, request);
+                        requestListView.getItems().add(classroomDetailsRLInstanceView);
+                    }
+                }
+
+            } catch (IOException e) {
+                System.err.println("Error reading the response: " + e.getMessage());
+            }
+
+        } else {
+            System.err.println("Richiesta prenotazioni classe fallita, codice risposta:" + responseCode);
+        }
+
+
+
+
+
+    }
+    public static void sortRequestsByDateTime(List<RequestDto> requests) {
+        requests.sort((r1, r2) -> {
+            // First, compare by requestDate
+            int dateComparison = r1.getRequestDate().compareTo(r2.getRequestDate());
+            if (dateComparison != 0) {
+                return dateComparison;
+            }
+
+            // If requestDate is the same, compare by startHour
+            int startHourComparison = r1.getStartHour().compareTo(r2.getStartHour());
+            if (startHourComparison != 0) {
+                return startHourComparison;
+            }
+
+            // If both requestDate and startHour are the same, compare by endHour
+            return r1.getEndHour().compareTo(r2.getEndHour());
+        });
     }
 
 }
