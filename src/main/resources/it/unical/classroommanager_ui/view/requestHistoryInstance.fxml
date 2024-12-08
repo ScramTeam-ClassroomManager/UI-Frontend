@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="286.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.RequestHistoryInstanceController">
+<AnchorPane prefHeight="439.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.RequestHistoryInstanceController">
    <children>
       <VBox layoutX="32.0" layoutY="20.0" prefHeight="218.0" prefWidth="976.0" spacing="15.0">
          <children>
@@ -175,5 +175,30 @@
             <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
          </padding>
       </VBox>
+      <ImageView fx:id="imm_mex" fitHeight="47.0" fitWidth="40.0" layoutX="46.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="928.0" AnchorPane.topAnchor="295.0">
+         <image>
+            <Image url="@resources/Immagini/response.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="risp_segr" layoutX="105.0" layoutY="300.0" prefHeight="30.0" prefWidth="182.0" text="Risposta segreteria:" visible="false" AnchorPane.bottomAnchor="108.6" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="726.6" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font name="Nunito Regular" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="response_area_user" layoutX="312.0" layoutY="300.0" prefHeight="117.0" prefWidth="658.0" styleClass="response-label" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="motiv_rich" layoutX="115.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" text="Motivazione richiesta:" visible="false" AnchorPane.bottomAnchor="109.0" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="709.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font name="Nunito Regular" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imm_reas" fitHeight="47.0" fitWidth="40.0" layoutX="58.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="928.0" AnchorPane.topAnchor="295.0">
+         <image>
+            <Image url="@resources/Immagini/clipboard-question-icon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
