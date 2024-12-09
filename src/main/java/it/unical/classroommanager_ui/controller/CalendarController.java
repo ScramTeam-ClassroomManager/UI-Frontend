@@ -174,12 +174,9 @@ public class CalendarController {
 
         this.mainPageController = mainPageController;
         addAllEvent();
-        for (Calendar calendar : calendarSource.getCalendars()) {
+        for (Calendar calendar : calendarSource.getCalendars())
             calendar.addEventHandler(new CustomCalendarEventHandler());
-//            if (UserManager.getInstance().getToken().isEmpty() || !(UserManager.getInstance().getUser().role().equals("ADMIN"))) {
-//                calendar.setReadOnly(true);
-//            }
-        }
+
         calendarView.setEntryDetailsPopOverContentCallback(param -> new CustomEntryDetailsView(param.getEntry()));
 
         calendarView.setContextMenuCallback(param -> {
@@ -215,6 +212,12 @@ public class CalendarController {
 
             contextMenu.getItems().add(addEntry);
             return contextMenu;
+        });
+
+        calendarView.setEntryEditPolicy(context ->{
+            if (context.getEditOperation() == CalendarView.EditOperation.MOVE)
+                return false;
+            return true;
         });
 
         calendarView.setEntryContextMenuCallback(param -> {
@@ -398,4 +401,3 @@ public class CalendarController {
     }
 }
 
-//TODO: BUG --> SE SI AGGIUNGE UNA RICHIESTA E VA IN PENDING, ALL'INZIO VIENE VISUALIZZATA COMUNQUE NEL CALENDARIO, REFRESHADO SCOMPARE
