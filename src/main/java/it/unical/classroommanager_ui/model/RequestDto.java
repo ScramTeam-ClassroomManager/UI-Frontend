@@ -13,6 +13,7 @@ public class RequestDto {
     private LongProperty classroomId;
     private IntegerProperty userSerialNumber;
     private ObjectProperty<LocalDate> creationDate;
+    private StringProperty adminResponse;
     private StringProperty status;
     private ObjectProperty<LocalDate> requestDate;
     private ObjectProperty<LocalTime> startHour;
@@ -24,6 +25,7 @@ public class RequestDto {
         this.classroomId = new SimpleLongProperty();
         this.userSerialNumber = new SimpleIntegerProperty();
         this.creationDate = new SimpleObjectProperty<>();
+        this.adminResponse = new SimpleStringProperty();
         this.status = new SimpleStringProperty();
         this.requestDate = new SimpleObjectProperty<>();
         this.startHour = new SimpleObjectProperty<>();
@@ -88,6 +90,14 @@ public class RequestDto {
 
     public ObjectProperty<LocalDate> creationDateProperty() {
         return creationDate;
+    }
+
+    public String getAdminResponse() {
+        return adminResponse.get();
+    }
+
+    public void setAdminResponse(String adminResponse) {
+        this.adminResponse.set(adminResponse);
     }
 
     public String getStatus() {

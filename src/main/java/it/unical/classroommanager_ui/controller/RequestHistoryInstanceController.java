@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
@@ -48,6 +50,21 @@ public class RequestHistoryInstanceController {
     @FXML
     private MFXButton deleteButton;
 
+    @FXML
+    private Label response_area_user;
+
+    @FXML
+    private Label motiv_rich;
+
+    @FXML
+    private Label risp_segr;
+
+    @FXML
+    private ImageView imm_mex;
+
+    @FXML
+    private ImageView imm_reas;
+
     private RequestDto request;
 
     @FXML
@@ -72,12 +89,26 @@ public class RequestHistoryInstanceController {
         endHourLabel.setText("" + request.getEndHour());
         requestCreationDateLabel.setText("" + request.getCreationDate());
 
+        if ("PENDING".equals(request.getStatus())) {
+            motiv_rich.setVisible(true);
+            risp_segr.setVisible(false);
+            imm_reas.setVisible(true);
+            imm_mex.setVisible(false);
+            response_area_user.setText(request.getReason());
+        } else {
+            motiv_rich.setVisible(false);
+            risp_segr.setVisible(true);
+            imm_reas.setVisible(false);
+            imm_mex.setVisible(true);
+            response_area_user.setText(request.getAdminResponse());
+        }
+
         StatusLabel.setText(request.getStatus());
-        if ("ACCEPTED".equals(request.getStatus().toString())) {
+        if ("ACCEPTED".equals(request.getStatus())) {
             StatusLabel.setTextFill(Color.GREEN);
-        } else if ("REJECTED".equals(request.getStatus().toString())) {
+        } else if ("REJECTED".equals(request.getStatus())) {
             StatusLabel.setTextFill(Color.RED);
-        } else if ("PENDING".equals(request.getStatus().toString())) {
+        } else if ("PENDING".equals(request.getStatus())) {
             StatusLabel.setTextFill(Color.ORANGE);
         }
 
@@ -103,12 +134,13 @@ public class RequestHistoryInstanceController {
 
         boolean isAdmin = UserManager.getInstance().getUser().role().equalsIgnoreCase("ADMIN");
 
-        if (!isAdmin && ("ACCEPTED".equals(request.getStatus().toString()) || "PENDING".equals(request.getStatus().toString()))) {
+        if (!isAdmin && ("ACCEPTED".equals(request.getStatus()) || "PENDING".equals(request.getStatus()))) {
             deleteButton.setVisible(true);
         } else {
             deleteButton.setVisible(false);
         }
     }
+
 
     @FXML
     private void deleteRequest() {

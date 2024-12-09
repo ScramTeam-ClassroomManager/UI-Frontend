@@ -11,12 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 public class RequestListInstanceController {
@@ -48,6 +50,12 @@ public class RequestListInstanceController {
     @FXML
     private MFXButton RefuseButton;
 
+    @FXML
+    private Label response_area_user;
+
+    @FXML
+    private TextArea response_area;
+
     private MainPageController mainPageController;
     private RequestDto request;
 
@@ -60,6 +68,7 @@ public class RequestListInstanceController {
         startHourLabel.setText(request.getStartHour().toString());
         endHourLabel.setText(request.getEndHour().toString());
         requestCreationDateLabel.setText(request.getCreationDate().toString());
+        response_area_user.setText(request.getReason());
 
         CompletableFuture.runAsync(() -> {
             try {
@@ -112,34 +121,43 @@ public class RequestListInstanceController {
     }
 
     private void updateRequestStatus(Status newStatus) {
-        CompletableFuture.runAsync(() -> {
-            try {
-                String apiUrl = "http://localhost:8080/api/v1/request/changeStatusRequest/" + request.getId() + "/status?status=" + newStatus;
-                HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
-                connection.setRequestMethod("PUT");
-                connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
-                connection.setRequestProperty("Accept", "application/json");
+        String adminResponse = response_area.getText().trim();
+        try {
+            String encodedResponse = java.net.URLEncoder.encode(adminResponse, StandardCharsets.UTF_8);
 
-                int responseCode = connection.getResponseCode();
+            CompletableFuture.runAsync(() -> {
+                try {
+                    String apiUrl = "http://localhost:8080/api/v1/request/changeStatusRequest/" + request.getId() + "/status?status=" + newStatus + "&adminResponse=" + encodedResponse;
+                    HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+                    connection.setRequestMethod("PUT");
+                    connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
+                    connection.setRequestProperty("Accept", "application/json");
 
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    Platform.runLater(() -> {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Status aggiornato");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Lo stato della richiesta è stato aggiornato con successo a " + newStatus + ".");
-                        alert.showAndWait();
+                    int responseCode = connection.getResponseCode();
 
-                        mainPageController.refreshRequestList();
-                    });
-                } else {
-                    System.err.println("Failed to update status. HTTP error code : " + responseCode);
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Status aggiornato");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Lo stato della richiesta è stato aggiornato con successo a " + newStatus + ".");
+                            alert.showAndWait();
+
+                            mainPageController.refreshRequestList();
+                        });
+                    } else {
+                        System.err.println("Failed to update status. HTTP error code : " + responseCode);
+                    }
+                } catch (IOException e) {
+                    System.out.println("Errore nell'aggiornamento delle richieste");
                 }
-            } catch (IOException e) {
-                System.out.println("Errore nell'aggiornamento delle richieste");
-            }
-        });
+            });
+        } catch (Exception e) {
+            System.err.println("Errore nella codifica della risposta dell'admin: " + e.getMessage());
+        }
     }
+
+
 
 
     @FXML

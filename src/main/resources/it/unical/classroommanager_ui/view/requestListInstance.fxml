@@ -3,6 +3,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="334.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.RequestListInstanceController">
+<AnchorPane prefHeight="650.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.RequestListInstanceController">
     <children>
         <VBox layoutX="32.0" layoutY="20.0" prefHeight="218.0" prefWidth="976.0" spacing="15.0">
             <children>
@@ -148,7 +149,7 @@
             </padding>
         </VBox>
 
-        <HBox layoutY="255.0" prefHeight="63.0" prefWidth="1014.0" spacing="100.0">
+        <HBox layoutY="255.0" prefHeight="63.0" prefWidth="1014.0" spacing="100.0" AnchorPane.bottomAnchor="10.0">
             <children>
                 <MFXButton fx:id="AcceptButton" onAction="#PressAccept" prefHeight="64.0" prefWidth="163.0" style="-fx-background-color: #24c712; -fx-background-radius: 10;" text="ACCEPT" textFill="WHITE">
                     <font>
@@ -165,5 +166,35 @@
                 </MFXButton>
             </children>
         </HBox>
+      <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="46.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/response.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="105.0" layoutY="387.0" prefHeight="30.0" prefWidth="199.0" text="Motivazione risposta:">
+         <font>
+            <Font name="Nunito Regular" size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="response_area" layoutX="309.0" layoutY="372.0" prefHeight="194.0" prefWidth="658.0" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="response_area_user" layoutX="309.0" layoutY="241.0" prefHeight="117.0" prefWidth="658.0" styleClass="response-label" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="motiv_rich" layoutX="102.0" layoutY="241.0" prefHeight="30.0" prefWidth="200.0" text="Motivazione richiesta:">
+         <font>
+            <Font name="Nunito Regular" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imm_reas" fitHeight="47.0" fitWidth="40.0" layoutX="50.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/clipboard-question-icon.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

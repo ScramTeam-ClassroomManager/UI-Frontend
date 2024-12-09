@@ -41,4 +41,6 @@
     -fx-icon-color: black;
 }
 
-
+.response-label {
+    -fx-alignment: top-left;
+}
