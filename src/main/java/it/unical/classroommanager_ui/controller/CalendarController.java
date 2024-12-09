@@ -3,6 +3,7 @@ package it.unical.classroommanager_ui.controller;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
+import com.calendarfx.view.DateControl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -174,12 +175,9 @@ public class CalendarController {
 
         this.mainPageController = mainPageController;
         addAllEvent();
-        for (Calendar calendar : calendarSource.getCalendars()) {
+        for (Calendar calendar : calendarSource.getCalendars())
             calendar.addEventHandler(new CustomCalendarEventHandler());
-//            if (UserManager.getInstance().getToken().isEmpty() || !(UserManager.getInstance().getUser().role().equals("ADMIN"))) {
-//                calendar.setReadOnly(true);
-//            }
-        }
+
         calendarView.setEntryDetailsPopOverContentCallback(param -> new CustomEntryDetailsView(param.getEntry()));
 
         calendarView.setContextMenuCallback(param -> {
@@ -215,6 +213,12 @@ public class CalendarController {
 
             contextMenu.getItems().add(addEntry);
             return contextMenu;
+        });
+
+        calendarView.setEntryEditPolicy(context ->{
+            if (context.getEditOperation() == CalendarView.EditOperation.MOVE)
+                return false;
+            return true;
         });
 
         calendarView.setEntryContextMenuCallback(param -> {
