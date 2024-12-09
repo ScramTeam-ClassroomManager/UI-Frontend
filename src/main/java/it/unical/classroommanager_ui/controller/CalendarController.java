@@ -3,7 +3,6 @@ package it.unical.classroommanager_ui.controller;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
-import com.calendarfx.view.DateControl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -402,4 +401,3 @@ public class CalendarController {
     }
 }
 
-//TODO: BUG --> SE SI AGGIUNGE UNA RICHIESTA E VA IN PENDING, ALL'INZIO VIENE VISUALIZZATA COMUNQUE NEL CALENDARIO, REFRESHADO SCOMPARE
