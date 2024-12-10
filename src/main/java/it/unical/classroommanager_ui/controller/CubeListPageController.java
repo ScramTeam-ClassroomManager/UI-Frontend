@@ -20,56 +20,56 @@ import java.util.List;
 
 public class CubeListPageController {
 
-    @FXML
-    private ListView<CubeListInstanceView> cubeList;
-
-    @FXML
-    private BorderPane BPaneListPage;
-
-    public void setBPane(BorderPane BPane) {
-        this.BPaneListPage = BPane;
-    }
-
-    @FXML
-    private AnchorPane cubeListPane;
-
-    private List<CubeDto> cubes;
-
-    public void fillCubeList(MainPageController mainPageController) throws IOException {
-        try {
-            URL url = new URL("http://localhost:8080/api/v1/cube/cubes");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-
-            int responseCode = connection.getResponseCode();
-            StringBuilder response = new StringBuilder();
-
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(
-                            (responseCode == HttpURLConnection.HTTP_OK) ? connection.getInputStream() : connection.getErrorStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-            }
-
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                cubes = objectMapper.readValue(response.toString(), new TypeReference<List<CubeDto>>() {});
-
-                cubes.sort(Comparator.comparingInt(CubeDto::getNumber));
-
-                cubeList.getItems().clear();
-                for (CubeDto cube : cubes) {
-                    CubeListInstanceView cubeListInstanceView = new CubeListInstanceView(mainPageController, cube);
-                    cubeList.getItems().add(cubeListInstanceView);
-                }
-            } else {
-                System.err.println("Failed : HTTP error code : " + responseCode);
-            }
-        } catch (Exception e) {
-            System.out.println("Problemi nella ricezione dei cubi.");
-        }
-    }
+//    @FXML
+//    private ListView<CubeListInstanceView> cubeList;
+//
+//    @FXML
+//    private BorderPane BPaneListPage;
+//
+//    public void setBPane(BorderPane BPane) {
+//        this.BPaneListPage = BPane;
+//    }
+//
+//    @FXML
+//    private AnchorPane cubeListPane;
+//
+//    private List<CubeDto> cubes;
+//
+//    public void fillCubeList(MainPageController mainPageController) throws IOException {
+//        try {
+//            URL url = new URL("http://localhost:8080/api/v1/cube/cubes");
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//            connection.setRequestProperty("Accept", "application/json");
+//
+//            int responseCode = connection.getResponseCode();
+//            StringBuilder response = new StringBuilder();
+//
+//            try (BufferedReader reader = new BufferedReader(
+//                    new InputStreamReader(
+//                            (responseCode == HttpURLConnection.HTTP_OK) ? connection.getInputStream() : connection.getErrorStream()))) {
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    response.append(line);
+//                }
+//            }
+//
+//            if (responseCode == HttpURLConnection.HTTP_OK) {
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                cubes = objectMapper.readValue(response.toString(), new TypeReference<List<CubeDto>>() {});
+//
+//                cubes.sort(Comparator.comparingInt(CubeDto::getNumber));
+//
+//                cubeList.getItems().clear();
+//                for (CubeDto cube : cubes) {
+//                    CubeListInstanceView cubeListInstanceView = new CubeListInstanceView(mainPageController, cube);
+//                    cubeList.getItems().add(cubeListInstanceView);
+//                }
+//            } else {
+//                System.err.println("Failed : HTTP error code : " + responseCode);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Problemi nella ricezione dei cubi.");
+//        }
+//    }
 }

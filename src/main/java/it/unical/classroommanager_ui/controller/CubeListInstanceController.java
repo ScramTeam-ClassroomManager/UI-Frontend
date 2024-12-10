@@ -8,32 +8,32 @@ import javafx.scene.input.MouseEvent;
 
 public class CubeListInstanceController {
 
-    @FXML
-    private Label cubeNumberLabel;
-
-    @FXML
-    private Label departmentLabel;
-
-    @FXML
-    private MFXButton ViewAuleButton;
-
-    private MainPageController mainPageController;
-    private CubeDto cube;
-
-    public void init(MainPageController mainPageController, CubeDto cube) {
-        this.mainPageController = mainPageController;
-        this.cube = cube;
-
-        cubeNumberLabel.setText("" + cube.getNumber());
-        departmentLabel.setText(cube.getDepartment());
-
-        ViewAuleButton.setOnMouseClicked(this::clickViewAule);
-    }
-
-    @FXML
-    void clickViewAule(MouseEvent event) {
-        if (mainPageController != null && cube != null) {
-            mainPageController.displayClassroomsByCube(cube.getNumber());
-        }
-    }
+//    @FXML
+//    private Label cubeNumberLabel;
+//
+//    @FXML
+//    private Label departmentLabel;
+//
+//    @FXML
+//    private MFXButton ViewAuleButton;
+//
+//    private MainPageController mainPageController;
+//    private CubeDto cube;
+//
+//    public void init(MainPageController mainPageController, CubeDto cube) {
+//        this.mainPageController = mainPageController;
+//        this.cube = cube;
+//
+//        cubeNumberLabel.setText("" + cube.getNumber());
+//        departmentLabel.setText(cube.getDepartment());
+//
+//        ViewAuleButton.setOnMouseClicked(this::clickViewAule);
+//    }
+//
+//    @FXML
+//    void clickViewAule(MouseEvent event) {
+//        if (mainPageController != null && cube != null) {
+//            mainPageController.displayClassroomsByCube(cube.getNumber());
+//        }
+//    }
 }
