@@ -9,15 +9,15 @@ import javafx.scene.layout.Pane;
 
 public class CubeListInstanceView extends Pane {
 
-    public CubeListInstanceView(MainPageController mainPageController, CubeDto cube) {
-        FXMLLoader loader = new FXMLLoader(CubeListInstanceView.class.getResource("cubeListInstance.fxml"));
-        try {
-            AnchorPane root = loader.load();
-            CubeListInstanceController controller = loader.getController();
-            controller.init(mainPageController, cube);
-            this.getChildren().add(root);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public CubeListInstanceView(MainPageController mainPageController, CubeDto cube) {
+//        FXMLLoader loader = new FXMLLoader(CubeListInstanceView.class.getResource("cubeListInstance.fxml"));
+//        try {
+//            AnchorPane root = loader.load();
+//            CubeListInstanceController controller = loader.getController();
+//            controller.init(mainPageController, cube);
+//            this.getChildren().add(root);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
