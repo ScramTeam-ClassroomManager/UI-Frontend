@@ -60,15 +60,7 @@ public class CustomCalendarEventHandler implements EventHandler<CalendarEvent> {
                 LocalDate startDate = entry.getStartDate();
                 LocalDate endDate = entry.getStartDate();
                 endDate = startDate.plusMonths(3);
-                /* TODO: controllo
-                LocalDate winterDate = LocalDate.of(LocalDate.now().getYear(), 12,20);
-                LocalDate fallgDate = LocalDate.of(LocalDate.now().getYear(), 9,1);
-                LocalDate springgDate = LocalDate.of(LocalDate.now().getYear(), 3,1);
-                LocalDate summerDate = LocalDate.of(LocalDate.now().getYear(), 6,31);
-                if(startDate.isBefore(winterDate) && startDate.isAfter(fallgDate)){
 
-                }
-                 */
                 while (startDate.isBefore(endDate)) {
                     RequestDto requestDto = parseRequest(entry);
                     requestDto.setRequestDate(startDate);
