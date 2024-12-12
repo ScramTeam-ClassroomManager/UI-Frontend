@@ -110,6 +110,13 @@ public class CalendarController {
         MFXDatePicker datePicker = new MFXDatePicker();
         MFXComboBox<LocalTime> startHourCB = new MFXComboBox<>();
         MFXComboBox<LocalTime> endHourCB = new MFXComboBox<>();
+        MFXComboBox<String> ripetizioni = new MFXComboBox<>();
+
+        ripetizioni.getItems().add("Mai");
+        ripetizioni.getItems().add("Mensile");
+        ripetizioni.getItems().add("Semestrale");
+
+        ripetizioni.getSelectionModel().selectFirst();
 
         for (int i = 8; i < 21; i++){
             startHourCB.getItems().add(LocalTime.of(i,0));
@@ -134,6 +141,9 @@ public class CalendarController {
         grid.add(new Label("Ora Fine:"), 0, 4);
         grid.add(endHourCB, 1, 4);
 
+        grid.add(new Label("Ripeti per:"), 0, 5);
+        grid.add(ripetizioni, 1, 5);
+
         dialog.getDialogPane().setContent(grid);
 
 
@@ -154,8 +164,8 @@ public class CalendarController {
             entry.changeStartTime(startHourCB.getValue());
             entry.changeEndDate(datePicker.getValue());
             entry.changeEndTime(endHourCB.getValue());
+            entry.getProperties().put("repetition", ripetizioni.getValue());
         });
-
         return entry;
     }
 
