@@ -35,6 +35,7 @@ public class DepartmentListPageController {
 
     public void setMainPageController(MainPageController mainPageController){
         MainPageController = mainPageController;
+        BPaneListPage = mainPageController.getBPane();
     }
 
     public void fillDepartmentList(MainPageController mainPageController) throws IOException {

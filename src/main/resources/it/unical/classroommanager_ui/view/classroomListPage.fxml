@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -15,6 +16,11 @@
 <AnchorPane fx:id="classroomListPane" prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomListPageController">
    <children>
       <HBox alignment="CENTER_LEFT" spacing="15" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+         <ImageView fx:id="backArrow" fitHeight="34.0" fitWidth="34.0" onMouseClicked="#PressBack" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@resources/Immagini/back-arrow-icon.png" />
+            </image>
+         </ImageView>
          <HBox alignment="CENTER_LEFT" spacing="10">
             <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -25,6 +31,9 @@
                </effect>
             </ImageView>
             <MFXComboBox fx:id="filterCubeNumber" promptText="Cubo :" />
+            <HBox.margin>
+               <Insets left="40.0" />
+            </HBox.margin>
          </HBox>
 
          <HBox alignment="CENTER_LEFT" spacing="10">

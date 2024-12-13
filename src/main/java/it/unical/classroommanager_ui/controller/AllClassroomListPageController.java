@@ -7,13 +7,17 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import it.unical.classroommanager_ui.model.ClassroomDto;
 import it.unical.classroommanager_ui.view.ClassroomListInstanceView;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.layout.BorderPane;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -48,6 +52,9 @@ public class AllClassroomListPageController {
 
     @FXML
     private MFXButton applyFiltersButton;
+
+    @FXML
+    private ImageView backArrow;
 
     private MainPageController mainPageController;
     private List<ClassroomDto> classRooms;
@@ -189,4 +196,21 @@ public class AllClassroomListPageController {
             System.out.println("Nessuna aula trovata con i filtri specificati.");
         }
     }
+
+    @FXML
+    void PressBack(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/unical/classroommanager_ui/view/departmentListPage.fxml"));
+            AnchorPane departmentPage = loader.load();
+
+            DepartmentListPageController departmentListPageController = loader.getController();
+            departmentListPageController.setMainPageController(mainPageController);
+            departmentListPageController.fillDepartmentList(mainPageController);
+
+            mainPageController.getBPane().setCenter(departmentPage);
+        } catch (IOException e) {
+            System.err.println("Errore durante il ritorno alla pagina dei dipartimenti: " + e.getMessage());
+        }
+    }
+
 }
