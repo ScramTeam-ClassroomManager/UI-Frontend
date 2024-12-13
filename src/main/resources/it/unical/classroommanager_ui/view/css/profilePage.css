@@ -1,0 +1,73 @@
+/* General Styles for Profile Page */
+
+/* Background styling for the profile pane */
+#profilePane {
+    -fx-background-color: #f9f9f9;
+    -fx-padding: 20px;
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+/* Styling for Labels */
+.profile-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 5px;
+}
+
+/* Styling for Text Fields */
+.profile-field {
+    -fx-pref-width: 300px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.profile-field:focused {
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 2px;
+}
+
+/* Styling for Buttons */
+.primary-button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.secondary-button {
+    -fx-background-color: #f44336;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #e53935;
+}
+
+/* Styling for the Image View */
+ImageView {
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 75px;
+    -fx-border-width: 2px;
+}
+
+/* Styling for Containers */
+HBox, VBox {
+    -fx-spacing: 10px;
+    -fx-alignment: CENTER;
+}

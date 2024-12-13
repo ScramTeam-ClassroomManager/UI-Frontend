@@ -2,23 +2,24 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ProfilePageController">
+<AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ProfilePageController">
    <children>
-      <Label alignment="CENTER" layoutX="334.0" layoutY="29.0" prefHeight="17.0" prefWidth="453.0" text="Dettagli del profilo utente" AnchorPane.bottomAnchor="689.0" AnchorPane.leftAnchor="334.0" AnchorPane.rightAnchor="333.0" AnchorPane.topAnchor="29.0">
+      <Label alignment="CENTER" layoutX="396.0" layoutY="14.0" prefHeight="42.0" prefWidth="316.0" text="User profile details" AnchorPane.bottomAnchor="704.0" AnchorPane.leftAnchor="396.0" AnchorPane.rightAnchor="408.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Trebuchet MS Bold" size="25.0" />
          </font>
       </Label>
       <VBox layoutX="231.0" layoutY="182.0" prefHeight="223.0" prefWidth="351.0" AnchorPane.topAnchor="182.0">
          <children>
-            <Label prefHeight="31.0" prefWidth="251.0" text="Nome:">
+            <Label prefHeight="31.0" prefWidth="251.0" text="Name:" textFill="#9b2030">
                <font>
                   <Font name="Trebuchet MS Bold" size="27.0" />
                </font>
@@ -28,7 +29,7 @@
                   <Font name="Trebuchet MS" size="23.0" />
                </font>
             </Text>
-            <Label prefHeight="31.0" prefWidth="251.0" text="Cognome:">
+            <Label prefHeight="31.0" prefWidth="251.0" text="Surname:" textFill="#9b2030">
                <font>
                   <Font name="Trebuchet MS Bold" size="27.0" />
                </font>
@@ -41,12 +42,12 @@
                   <Font name="Trebuchet MS" size="23.0" />
                </font>
             </Text>
-            <Label prefHeight="31.0" prefWidth="251.0" text="Email:">
+            <Label prefHeight="31.0" prefWidth="251.0" text="Email:" textFill="#9b2030">
                <font>
                   <Font name="Trebuchet MS Bold" size="27.0" />
                </font>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </Label>
             <Text fx:id="emailtext" strokeType="OUTSIDE" strokeWidth="0.0">
@@ -60,27 +61,36 @@
          <children>
             <HBox prefHeight="43.0" prefWidth="310.0">
                <children>
-                  <Label prefHeight="41.0" prefWidth="104.0" text="Ruolo:">
+                  <Label prefHeight="41.0" prefWidth="89.0" text="Role:" textFill="#9b2030">
                      <font>
                         <Font name="Trebuchet MS Bold" size="34.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
                   </Label>
                   <Label fx:id="roleLabel" prefHeight="38.0" prefWidth="174.0">
                      <font>
                         <Font size="26.0" />
                      </font>
                      <HBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="15.0" />
                      </HBox.margin>
                   </Label>
                </children>
             </HBox>
             <HBox prefHeight="43.0" prefWidth="284.0">
                <children>
-                  <Label prefHeight="41.0" prefWidth="163.0" text="Matricola:">
+                  <Label prefHeight="41.0" prefWidth="163.0" text="Matricola:" textFill="#9b2030">
                      <font>
                         <Font name="Trebuchet MS Bold" size="34.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets top="50.0" />
+                     </padding>
                   </Label>
                   <Label fx:id="serialNumberLabel" prefHeight="14.0" prefWidth="85.0">
                      <font>
@@ -89,6 +99,9 @@
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
+                     <padding>
+                        <Insets top="50.0" />
+                     </padding>
                   </Label>
                </children>
                <VBox.margin>
@@ -97,5 +110,25 @@
             </HBox>
          </children>
       </VBox>
+      <ImageView fitHeight="105.0" fitWidth="104.0" layoutX="127.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/badge-pass-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="59.0" fitWidth="56.0" layoutX="151.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/email-symbol-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="59.0" fitWidth="56.0" layoutX="554.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/administrator-developer-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="59.0" fitWidth="56.0" layoutX="554.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/user-data-icon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
