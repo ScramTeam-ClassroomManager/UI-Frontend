@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +44,18 @@ public class MainPageController {
 
     @FXML
     private Label labelCalendario;
+
+    @FXML
+    private ImageView ImmInser;
+
+    @FXML
+    private ImageView ImmStorico;
+
+    @FXML
+    private ImageView ImmLogIn;
+
+    @FXML
+    private ImageView ImmLogOut;
 
     String currPage = "";
 
@@ -222,15 +235,25 @@ public class MainPageController {
         if (!(UserManager.getInstance().getToken().isEmpty())) {
             if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())) {
                 labelInserimentoAula.setVisible(true);
+                ImmLogOut.setVisible(true);
+                ImmLogIn.setVisible(false);
             } else {
                 labelInserimentoAula.setVisible(false);
+                ImmInser.setVisible(false);
+                ImmStorico.setVisible(false);
                 labelStoricoPren.setVisible(false);
+                ImmLogOut.setVisible(true);
+                ImmLogIn.setVisible(false);
             }
             displayDepartments();
         } else {
             labelLogout.setText("Login");
             labelInserimentoAula.setVisible(false);
             labelStoricoPren.setVisible(false);
+            ImmInser.setVisible(false);
+            ImmStorico.setVisible(false);
+            ImmLogOut.setVisible(false);
+            ImmLogIn.setVisible(true);
             displayDepartments();
         }
     }

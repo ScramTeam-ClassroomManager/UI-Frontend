@@ -1,10 +1,16 @@
 package it.unical.classroommanager_ui.controller;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import it.unical.classroommanager_ui.model.User;
 import it.unical.classroommanager_ui.model.UserManager;
+import it.unical.classroommanager_ui.view.SceneHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class ProfilePageController {
 

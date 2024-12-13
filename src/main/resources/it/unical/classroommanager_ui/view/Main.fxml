@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,7 +19,7 @@
    <left>
       <AnchorPane prefHeight="760.0" prefWidth="326.0" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="labelCubi" prefHeight="760.0" prefWidth="379.0" spacing="20.0">
+            <VBox fx:id="labelCubi" prefHeight="668.0" prefWidth="379.0" spacing="20.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="151.0" prefWidth="347.0">
                      <children>
@@ -56,85 +57,188 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label fx:id="labelCalendario" onMouseClicked="#clickCalendario" text="Calendario" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="labelStoricoPren" onMouseClicked="#clickStoricoPren" text="Storico prenotazioni" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="labelInserimentoAula" onMouseClicked="#clickInserisciAula" text="Inserisci un aula" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="150.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label fx:id="labelLogout" onMouseClicked="#clickLogout" text="Log out" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/college-university-icon.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="labelAule" onMouseClicked="#clickAule" text="Aule" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/edit-document-icon.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="labelRichieste" onMouseClicked="#clickRichieste" text="Richieste" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/schedule-calendar-icon.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="labelCalendario" onMouseClicked="#clickCalendario" text="Calendario" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fx:id="ImmStorico" fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/order-history-icon.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="labelStoricoPren" onMouseClicked="#clickStoricoPren" text="Storico prenotazioni" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="8.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fx:id="ImmInser" fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/add-company-icon.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="labelInserimentoAula" onMouseClicked="#clickInserisciAula" text="Inserisci un aula" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="5.0" top="150.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@resources/Immagini/account.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                        </ImageView>
+                        <Label fx:id="labelProfilo" onMouseClicked="#clickProfilo" text="Profilo" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" top="150.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
+            <ImageView fx:id="ImmLogOut" fitHeight="42.0" fitWidth="40.0" layoutX="4.0" layoutY="687.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="687.0">
+               <image>
+                  <Image url="@resources/Immagini/exit-icon.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+            </ImageView>
+            <Label fx:id="labelLogout" layoutX="56.0" layoutY="686.0" onMouseClicked="#clickLogout" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="36.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <ImageView fx:id="ImmLogIn" fitHeight="42.0" fitWidth="40.0" layoutX="70.0" layoutY="709.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="687.0">
+               <image>
+                  <Image url="@resources/Immagini/enter-icon.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
