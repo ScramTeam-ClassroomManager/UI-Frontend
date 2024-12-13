@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -7,11 +8,15 @@
 
 <AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.DepartmentListPageController">
    <children>
-      <ListView fx:id="departmentsList" layoutY="43.0" prefHeight="717.0" prefWidth="1120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0" />
+      <ListView fx:id="departmentsList" layoutY="91.0" prefHeight="669.0" prefWidth="1120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0" />
       <Text layoutX="18.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dipartimenti Università della Calabria :">
          <font>
             <Font name="Trebuchet MS" size="22.0" />
          </font>
       </Text>
+      <MFXButton layoutX="18.0" layoutY="50.0" onAction="#viewAllClassrooms" style="-fx-border-color: rgb(155, 32, 48); -fx-border-radius: 10;" text="Visualizza tutte le aule">
+         <font>
+            <Font size="14.0" />
+         </font></MFXButton>
    </children>
 </AnchorPane>

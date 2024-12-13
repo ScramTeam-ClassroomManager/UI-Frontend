@@ -53,63 +53,6 @@ public class MainPageController {
         }
     }
 
-//    void displayClassrooms(){
-//        if (!(UserManager.getInstance().getToken().isEmpty())) {
-//            if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString()) && !currPage.equals("aule")) {
-//                try {
-//                    FXMLLoader loader = new FXMLLoader(CreateClassroomPageView.class.getResource("newClassroomPage.fxml"));
-//                    AnchorPane nuovoAnchorPane = loader.load();
-//                    CreateClassroomPageController createClassroomPageController = loader.getController();
-//                    createClassroomPageController.init(this);
-//
-//                    createClassroomPageController.setBPane(BPane);
-//                    BPane.setCenter(nuovoAnchorPane);
-//
-//                    currPage = "aule";
-//
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            } else {
-//                if (!currPage.equals("aule")) {
-//                    try {
-//                        FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
-//                        AnchorPane nuovoAnchorPane = loader.load();
-//                        ClassroomListPageController classroomListPageController = loader.getController();
-//                        classroomListPageController.init(this);
-//
-//                        classroomListPageController.setBPane(BPane);
-//                        BPane.setCenter(nuovoAnchorPane);
-//
-//                        currPage = "aule";
-//
-//
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                }
-//            }
-//        }
-//        else{
-//            if (!currPage.equals("aule")) {
-//                try {
-//                    FXMLLoader loader = new FXMLLoader(ClassroomListPageView.class.getResource("classroomListPage.fxml"));
-//                    AnchorPane nuovoAnchorPane = loader.load();
-//                    ClassroomListPageController classroomListPageController = loader.getController();
-//                    classroomListPageController.init(this);
-//
-//                    classroomListPageController.setBPane(BPane);
-//                    BPane.setCenter(nuovoAnchorPane);
-//
-//                currPage = "aule";
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//
-//        }
-//    }
-
     void displayClassroomDetails(ClassroomDto classroomDto){
         ClassroomDetailsPageView classroomDetailsPageView = new ClassroomDetailsPageView(this, classroomDto);
 
@@ -263,6 +206,7 @@ public class MainPageController {
             AnchorPane nuovoAnchorPane = loader.load();
             DepartmentListPageController departmentListPageController = loader.getController();
             departmentListPageController.fillDepartmentList(this);
+            departmentListPageController.setMainPageController(this);
 
             departmentListPageController.setBPane(BPane);
             BPane.setCenter(nuovoAnchorPane);
@@ -335,7 +279,6 @@ public class MainPageController {
             AnchorPane nuovoAnchorPane = loader.load();
             ClassroomListPageController classroomListPageController = loader.getController();
 
-            // Inizializza il controller con il riferimento al MainPageController e l'ID del dipartimento
             classroomListPageController.init(this, departmentId);
 
             classroomListPageController.setBPane(BPane);
@@ -347,8 +290,4 @@ public class MainPageController {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
 }

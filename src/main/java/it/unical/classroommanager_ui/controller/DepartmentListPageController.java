@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.unical.classroommanager_ui.model.DepartmentDto;
 import it.unical.classroommanager_ui.view.DepartmentListInstanceView;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -24,12 +25,16 @@ public class DepartmentListPageController {
     @FXML
     private BorderPane BPaneListPage;
 
-    private MainPageController mainPageController;
+    private MainPageController MainPageController;
 
     private List<DepartmentDto> departments;
 
     public void setBPane(BorderPane BPane) {
         this.BPaneListPage = BPane;
+    }
+
+    public void setMainPageController(MainPageController mainPageController){
+        MainPageController = mainPageController;
     }
 
     public void fillDepartmentList(MainPageController mainPageController) throws IOException {
@@ -67,5 +72,23 @@ public class DepartmentListPageController {
             System.out.println("Problemi nella ricezione dei dipartimenti.");
         }
     }
+
+    @FXML
+    private void viewAllClassrooms() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/unical/classroommanager_ui/view/AllClassroomListPage.fxml"));
+            AnchorPane allClassroomPage = loader.load();
+
+            AllClassroomListPageController allClassroomListPageController = loader.getController();
+            allClassroomListPageController.init(MainPageController);
+
+            BPaneListPage.setCenter(allClassroomPage);
+        } catch (IOException e) {
+            System.err.println("Errore durante il caricamento della schermata delle aule: " + e.getMessage());
+        }
+    }
+
+
+
 
 }

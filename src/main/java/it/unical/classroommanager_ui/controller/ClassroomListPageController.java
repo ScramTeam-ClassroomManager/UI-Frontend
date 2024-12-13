@@ -149,11 +149,6 @@ public class ClassroomListPageController {
         }
     }
 
-
-
-
-
-
     public void loadCubesByDepartment(long departmentId) {
         try {
             URL url = new URL("http://localhost:8080/api/v1/cube/cubesByDepartment/" + departmentId);
@@ -188,10 +183,37 @@ public class ClassroomListPageController {
         }
     }
 
+    public void fillAllClassrooms() throws IOException {
+        try {
+            URL url = new URL("http://localhost:8080/api/v1/class/getAllClassrooms");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
 
+            int responseCode = connection.getResponseCode();
+            StringBuilder response = new StringBuilder();
 
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            (responseCode == HttpURLConnection.HTTP_OK) ? connection.getInputStream() : connection.getErrorStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
 
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                classRooms = objectMapper.readValue(response.toString(), new TypeReference<List<ClassroomDto>>() {});
 
+                updateClassroomList();
+            } else {
+                System.err.println("Errore durante il caricamento delle aule: " + responseCode);
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante il caricamento delle aule: " + e.getMessage());
+        }
+    }
 
 
     private void updateClassroomList() {

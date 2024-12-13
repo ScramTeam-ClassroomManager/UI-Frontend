@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="allClassroomListPane" prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.AllClassroomListPageController">
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="15" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/Immagini/logo-Copia.png" />
+                    </image>
+                    <effect>
+                        <ColorAdjust brightness="-1.0" />
+                    </effect>
+                </ImageView>
+                <MFXComboBox fx:id="filterCubeNumber" promptText="Cubo :" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/Immagini/community-icon.png" />
+                    </image>
+                </ImageView>
+                <MFXTextField fx:id="filterCapability" promptText="Capienza : " />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/Immagini/power-plug-icon.png" />
+                    </image>
+                </ImageView>
+                <MFXTextField fx:id="filterPlugs" promptText="Prese :" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/Immagini/projector-icon.png" />
+                    </image>
+                </ImageView>
+                <MFXComboBox fx:id="filterProjector" promptText="Proiettore :">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Con proiettore" />
+                            <String fx:value="Senza proiettore" />
+                        </FXCollections>
+                    </items>
+                </MFXComboBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/Immagini/college-university-icon.png" />
+                    </image>
+                </ImageView>
+                <MFXComboBox fx:id="filterType" promptText="Tipo Aula :">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="NORMAL" />
+                            <String fx:value="AUDITORIUM" />
+                        </FXCollections>
+                    </items>
+                </MFXComboBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <MFXButton fx:id="applyFiltersButton" onAction="#applyFilters" text="Applica Filtri" />
+            </HBox>
+        </HBox>
+
+        <ListView fx:id="allClassroomList" layoutY="69.0" prefHeight="691.0" prefWidth="1120.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="69.0" />
+    </children>
+</AnchorPane>
