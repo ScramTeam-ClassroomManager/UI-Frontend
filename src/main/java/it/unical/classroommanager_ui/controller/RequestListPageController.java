@@ -79,9 +79,6 @@ public class RequestListPageController {
                 RequestListInstanceView requestListInstanceView = new RequestListInstanceView(mainPageController, request);
                 requestList.getItems().add(requestListInstanceView);
             }
-
-            requestListPane.setMinHeight(150 + requestList.getItems().size() * 137);
-            requestList.setMinHeight(requestList.getItems().size() * 137);
         }
     }
 
