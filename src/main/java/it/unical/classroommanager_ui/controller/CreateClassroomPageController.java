@@ -110,7 +110,7 @@ public class CreateClassroomPageController {
 
             removePhotoButton.setDisable(false);
 
-            stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+            stackImage.setStyle("-fx-border-width: 2; -fx-border-color: rgb(155, 32, 48);");
 
             Image image = new Image(selectedFile.getPath());
 
@@ -132,7 +132,7 @@ public class CreateClassroomPageController {
 
         removePhotoButton.setDisable(true);
 
-        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: rgb(155, 32, 48);");
 
     }
 
@@ -502,7 +502,7 @@ public class CreateClassroomPageController {
 
     public void init(MainPageController mainPageController){
         this.mainPageController = mainPageController;
-        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: rgb(155, 32, 48);");
 
         typeCBox.getItems().addAll("NORMAL", "AUDITORIUM");
 

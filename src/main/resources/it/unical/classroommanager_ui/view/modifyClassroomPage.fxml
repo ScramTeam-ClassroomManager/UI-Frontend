@@ -6,13 +6,14 @@
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ModifyClassroomPageController">
+<AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ModifyClassroomPageController">
    <children>
       <StackPane fx:id="stackImage" layoutX="79.0" layoutY="104.0" prefHeight="250.0" prefWidth="250.0" AnchorPane.leftAnchor="79.0" AnchorPane.topAnchor="104.0">
          <children>
@@ -112,5 +113,10 @@
             <Font name="Trebuchet MS Bold" size="24.0" />
          </font>
       </Text>
+      <ImageView fx:id="backArrow" fitHeight="45.0" fitWidth="46.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#PressBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Immagini/back-arrow-icon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

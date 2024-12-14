@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -112,7 +113,7 @@ public class ModifyClassroomPageController {
 
             removePhotoButton.setDisable(false);
 
-            stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+            stackImage.setStyle("-fx-border-width: 2; -fx-border-color: rgb(155, 32, 48);");
 
             Image image = new Image(selectedFile.getPath());
 
@@ -134,7 +135,7 @@ public class ModifyClassroomPageController {
 
         removePhotoButton.setDisable(true);
 
-        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: rgb(155, 32, 48);");
 
     }
 
@@ -529,8 +530,17 @@ public class ModifyClassroomPageController {
         this.photoExists = imageSelector.classroomImageExists(classroomDto.getName());
 
         imageContainer.setImage(imageSelector.classroomImage(classroomDto.getName()));
-        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: #4DA6FF;");
+        stackImage.setStyle("-fx-border-width: 2; -fx-border-color: rgb(155, 32, 48);");
 
 
+    }
+
+    @FXML
+    void PressBack(MouseEvent event) {
+        if (mainPageController != null) {
+            mainPageController.displayClassroomDetails(classroomDto);
+        } else {
+            System.err.println("Errore: mainPageController è null!");
+        }
     }
 }

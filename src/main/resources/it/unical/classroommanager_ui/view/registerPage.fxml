@@ -52,8 +52,8 @@
 
             <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <MFXTextField fx:id="nameField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Nome" />
-                  <MFXTextField fx:id="surnameField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Cognome" />
+                  <MFXTextField fx:id="nameField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Nome" style="-fx-border-color: rgb(155, 32, 48);" />
+                  <MFXTextField fx:id="surnameField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Cognome" style="-fx-border-color: rgb(155, 32, 48);" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -82,8 +82,8 @@
 
             <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <MFXTextField fx:id="emailField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Email" />
-                  <MFXTextField fx:id="serialnumberField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Matricola" />
+                  <MFXTextField fx:id="emailField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Email" style="-fx-border-color: rgb(155, 32, 48);" />
+                  <MFXTextField fx:id="serialnumberField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Matricola" style="-fx-border-color: rgb(155, 32, 48);" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -114,8 +114,8 @@
                <children>
                   <HBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <MFXPasswordField fx:id="passwordField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Password" />
-                        <MFXPasswordField fx:id="repeatPasswordField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Conferma Password" />
+                        <MFXPasswordField fx:id="passwordField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Password" style="-fx-border-color: rgb(155, 32, 48);" />
+                        <MFXPasswordField fx:id="repeatPasswordField" alignment="CENTER" prefHeight="2.0" prefWidth="250.0" promptText="Conferma Password" style="-fx-border-color: rgb(155, 32, 48);" />
                      </children>
                   </HBox>
                   <Label fx:id="repeatPasswordErrorLabel" prefHeight="17.0" prefWidth="183.0" text="Le password non coincidono" textFill="WHITE" visible="false">
@@ -171,7 +171,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="330.0">
                      <children>
-                        <MFXComboBox fx:id="roleComboBox" alignment="CENTER" prefHeight="50.0" prefWidth="250.0" promptText="Seleziona il ruolo">
+                        <MFXComboBox fx:id="roleComboBox" alignment="CENTER" prefHeight="50.0" prefWidth="250.0" promptText="Seleziona il ruolo" style="-fx-border-color: rgb(155, 32, 48);">
                            <VBox.margin>
                               <Insets left="45.0" />
                            </VBox.margin>
