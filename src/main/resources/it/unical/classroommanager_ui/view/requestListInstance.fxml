@@ -22,9 +22,9 @@
                                 <Image url="@resources/Immagini/college-university-icon.png" />
                             </image>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="57.0" text="Aula:">
+                        <Label prefHeight="30.0" prefWidth="57.0" text="Aula:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="classroomNameLabel" prefWidth="182.0">
@@ -40,9 +40,9 @@
                                 <Insets left="210.0" />
                             </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="76.0" text="Utente:">
+                        <Label prefHeight="30.0" prefWidth="76.0" text="Utente:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="userNameLabel" prefWidth="200.0">
@@ -60,9 +60,9 @@
                                 <Image url="@resources/Immagini/reason.png" />
                             </image>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="157.0" text="Motivo:">
+                        <Label prefHeight="30.0" prefWidth="157.0" text="Motivo:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="reasonLabel" prefHeight="30.0" prefWidth="431.0">
@@ -75,9 +75,9 @@
                                 <Image url="@resources/Immagini/edit-date-calendar-icon.png" />
                             </image>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="302.0" text="Data Creazione Richiesta:">
+                        <Label prefHeight="30.0" prefWidth="302.0" text="Data Creazione Richiesta:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="requestCreationDateLabel" prefWidth="182.0">
@@ -95,9 +95,9 @@
                                 <Image url="@resources/Immagini/reschedule-date-icon.png" />
                             </image>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="139.0" text="Data Richiesta:">
+                        <Label prefHeight="30.0" prefWidth="139.0" text="Data Richiesta:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="requestDateLabel" prefWidth="182.0">
@@ -113,9 +113,9 @@
                                 <Insets left="20.0" />
                             </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="98.0" text="Ora Inizio:">
+                        <Label prefHeight="30.0" prefWidth="98.0" text="Ora Inizio:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="startHourLabel" prefWidth="83.0">
@@ -131,9 +131,9 @@
                                 <Insets left="20.0" />
                             </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="30.0" prefWidth="86.0" text="Ora Fine:">
+                        <Label prefHeight="30.0" prefWidth="86.0" text="Ora Fine:" textFill="#9b2030">
                             <font>
-                                <Font name="Nunito Regular" size="20.0" />
+                                <Font name="Trebuchet MS" size="20.0" />
                             </font>
                         </Label>
                         <Label fx:id="endHourLabel" prefWidth="83.0">
@@ -171,9 +171,9 @@
             <Image url="@resources/Immagini/response.png" />
          </image>
       </ImageView>
-      <Label layoutX="105.0" layoutY="387.0" prefHeight="30.0" prefWidth="199.0" text="Motivazione risposta:">
+      <Label layoutX="105.0" layoutY="387.0" prefHeight="30.0" prefWidth="199.0" text="Motivazione risposta:" textFill="#9b2030">
          <font>
-            <Font name="Nunito Regular" size="20.0" />
+            <Font name="Trebuchet MS" size="20.0" />
          </font>
       </Label>
       <TextArea fx:id="response_area" layoutX="309.0" layoutY="372.0" prefHeight="194.0" prefWidth="658.0" wrapText="true">
@@ -186,9 +186,9 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="motiv_rich" layoutX="102.0" layoutY="241.0" prefHeight="30.0" prefWidth="200.0" text="Motivazione richiesta:">
+      <Label fx:id="motiv_rich" layoutX="102.0" layoutY="241.0" prefHeight="30.0" prefWidth="212.0" text="Motivazione richiesta:" textFill="#9b2030">
          <font>
-            <Font name="Nunito Regular" size="20.0" />
+            <Font name="Trebuchet MS" size="20.0" />
          </font>
       </Label>
       <ImageView fx:id="imm_reas" fitHeight="47.0" fitWidth="40.0" layoutX="50.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">

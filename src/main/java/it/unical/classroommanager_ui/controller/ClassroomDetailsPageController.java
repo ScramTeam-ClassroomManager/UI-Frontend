@@ -17,11 +17,14 @@ import it.unical.classroommanager_ui.view.imageSelector;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -108,6 +111,9 @@ public class ClassroomDetailsPageController {
 
     @FXML
     private ListView<ClassroomDetailsRLInstanceView> requestListView;
+
+    @FXML
+    private ImageView backArrow;
 
     MainPageController mainPageController;
     ClassroomDto classroomDto;
@@ -409,6 +415,22 @@ public class ClassroomDetailsPageController {
             // If both requestDate and startHour are the same, compare by endHour
             return r1.getEndHour().compareTo(r2.getEndHour());
         });
+    }
+
+    @FXML
+    void PressBack(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/unical/classroommanager_ui/view/departmentListPage.fxml"));
+            AnchorPane departmentPage = loader.load();
+
+            DepartmentListPageController departmentListPageController = loader.getController();
+            departmentListPageController.setMainPageController(mainPageController);
+            departmentListPageController.fillDepartmentList(mainPageController);
+
+            mainPageController.getBPane().setCenter(departmentPage);
+        } catch (IOException e) {
+            System.err.println("Errore durante il ritorno alla pagina dei dipartimenti: " + e.getMessage());
+        }
     }
 
 }

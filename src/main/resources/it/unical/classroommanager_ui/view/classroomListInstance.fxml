@@ -10,14 +10,14 @@
 
 <AnchorPane prefHeight="93.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomListInstanceController">
    <children>
-      <Label layoutX="656.0" layoutY="31.0" prefHeight="30.0" prefWidth="64.0" text="Cubo:">
+      <Label layoutX="656.0" layoutY="31.0" prefHeight="30.0" prefWidth="64.0" text="Cubo:" textFill="#9b2030">
          <font>
-            <Font name="Nunito Regular" size="20.0" />
+            <Font name="Trebuchet MS" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="380.0" layoutY="31.0" prefHeight="30.0" prefWidth="92.0" text="Capienza:">
+      <Label layoutX="380.0" layoutY="31.0" prefHeight="30.0" prefWidth="92.0" text="Capienza:" textFill="#9b2030">
          <font>
-            <Font name="Nunito Regular" size="20.0" />
+            <Font name="Trebuchet MS" size="20.0" />
          </font>
       </Label>
       <Label fx:id="classroomNameLabel" layoutX="151.0" layoutY="31.0" prefHeight="30.0" prefWidth="150.0">
@@ -53,9 +53,9 @@
             <Image url="@resources/Immagini/community-icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="93.0" layoutY="31.0" text="Aula:">
+      <Label layoutX="93.0" layoutY="31.0" text="Aula:" textFill="#9b2030">
          <font>
-            <Font size="20.0" />
+            <Font name="Trebuchet MS" size="20.0" />
          </font>
       </Label>
       <MFXButton fx:id="reserveButton" layoutX="856.0" layoutY="24.0" onAction="#reservePressed" prefHeight="42.0" prefWidth="123.0" style="-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);" text="PRENOTA" textFill="WHITE">

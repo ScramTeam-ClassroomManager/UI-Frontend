@@ -9,6 +9,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,17 +18,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="894.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomDetailsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="894.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomDetailsPageController">
    <children>
       <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="1104.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <VBox prefHeight="868.0" prefWidth="1194.0">
                <children>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="1125.0">
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="698.0">
                      <children>
+                        <ImageView fx:id="backArrow" fitHeight="45.0" fitWidth="46.0" onMouseClicked="#PressBack" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Immagini/back-arrow-icon.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
                         <VBox prefHeight="432.0" prefWidth="250.0">
                            <HBox.margin>
-                              <Insets left="125.0" top="73.0" />
+                              <Insets left="77.0" top="73.0" />
                            </HBox.margin>
                            <children>
                               <StackPane prefHeight="250.0" prefWidth="250.0">
@@ -42,7 +51,7 @@
                                  <children>
                                     <HBox prefHeight="24.0" prefWidth="585.0">
                                        <children>
-                                          <Label minHeight="-Infinity" minWidth="-Infinity" text="Tipologia dell'aula">
+                                          <Label minHeight="-Infinity" minWidth="-Infinity" text="Tipologia dell'aula" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -74,7 +83,7 @@
                               <Insets left="220.0" top="73.0" />
                            </HBox.margin>
                            <children>
-                              <Text fx:id="textName" strokeType="OUTSIDE" strokeWidth="0.0" text="Aula X" wrappingWidth="462.0">
+                              <Text fx:id="textName" fill="#9b2030" strokeType="OUTSIDE" strokeWidth="0.0" text="Aula X" wrappingWidth="462.0">
                                  <font>
                                     <Font name="Trebuchet MS Bold" size="24.0" />
                                  </font>
@@ -96,7 +105,7 @@
                                  <children>
                                     <HBox prefHeight="24.0" prefWidth="585.0">
                                        <children>
-                                          <Label text="Cubo">
+                                          <Label text="Cubo" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -122,7 +131,7 @@
                                  <children>
                                     <HBox prefHeight="24.0" prefWidth="585.0">
                                        <children>
-                                          <Label text="Piano">
+                                          <Label text="Piano" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -148,7 +157,7 @@
                                  <children>
                                     <HBox prefHeight="24.0" prefWidth="585.0">
                                        <children>
-                                          <Label text="Capienza">
+                                          <Label text="Capienza" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -174,7 +183,7 @@
                                  <children>
                                     <HBox prefHeight="24.0" prefWidth="585.0">
                                        <children>
-                                          <Label text="Proiettore">
+                                          <Label text="Proiettore" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -200,7 +209,7 @@
                                  <children>
                                     <HBox prefHeight="24.0" prefWidth="585.0">
                                        <children>
-                                          <Label text="Numero di prese">
+                                          <Label text="Numero di prese" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -235,7 +244,7 @@
                                     <Font name="Trebuchet MS Bold" size="21.0" />
                                  </font>
                               </Label>
-                              <Label text="Specifica una data">
+                              <Label text="Specifica una data" textFill="#9b2030">
                                  <font>
                                     <Font name="Trebuchet MS" size="18.0" />
                                  </font>
@@ -263,7 +272,7 @@
                                  <children>
                                     <VBox prefHeight="102.0" prefWidth="232.0">
                                        <children>
-                                          <Label text="Specifica l'ora di inizio">
+                                          <Label text="Specifica l'ora di inizio" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -277,7 +286,7 @@
                                     </VBox>
                                     <VBox prefHeight="100.0" prefWidth="246.0">
                                        <children>
-                                          <Label text="Specifica l'ora di fine">
+                                          <Label text="Specifica l'ora di fine" textFill="#9b2030">
                                              <font>
                                                 <Font name="Trebuchet MS" size="18.0" />
                                              </font>
@@ -306,7 +315,7 @@
                               </Label>
                               <VBox prefHeight="80.0" prefWidth="464.0">
                                  <children>
-                                    <Label prefHeight="22.0" prefWidth="273.0" text="Motivazione della richiesta">
+                                    <Label prefHeight="22.0" prefWidth="273.0" text="Motivazione della richiesta" textFill="#9b2030">
                                        <font>
                                           <Font name="Trebuchet MS" size="18.0" />
                                        </font>
@@ -319,7 +328,7 @@
                                           <Insets right="94.0" top="8.0" />
                                        </VBox.margin>
                                     </TextArea>
-                                    <MFXButton fx:id="bookButton" buttonType="RAISED" onAction="#bookClass" text="Prenota">
+                                    <MFXButton fx:id="bookButton" buttonType="RAISED" onAction="#bookClass" style="-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);" text="Prenota" textFill="WHITE">
                                        <font>
                                           <Font name="Nunito Regular" size="20.0" />
                                        </font>
@@ -347,7 +356,7 @@
                                     <Insets top="50.0" />
                                  </VBox.margin>
                               </Label>
-                              <ListView fx:id="requestListView" prefHeight="286.0" prefWidth="512.0" >
+                              <ListView fx:id="requestListView" prefHeight="286.0" prefWidth="512.0">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
