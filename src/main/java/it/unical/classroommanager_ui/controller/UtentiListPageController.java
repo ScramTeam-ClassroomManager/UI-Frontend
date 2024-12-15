@@ -2,6 +2,7 @@ package it.unical.classroommanager_ui.controller;
 
 import it.unical.classroommanager_ui.model.User;
 import it.unical.classroommanager_ui.model.UserDto;
+import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.UtentiListInstanceView;
 import it.unical.classroommanager_ui.view.UtentiListPageView;
 import javafx.fxml.FXML;
@@ -55,11 +56,11 @@ public class UtentiListPageController {
 
     public void fillUtentiList() throws IOException{
         try {
-            URL url = new URL("http://localhost:8080/api/v1/users/getAllUsers");
+            URL url = new URL("http://localhost:8080/api/v1/auth/users");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
 
@@ -97,7 +98,7 @@ public class UtentiListPageController {
         try {
             fillUtentiList();
         } catch (IOException e) {
-            System.err.println("Errore_2 nel caricamento degli utenti: " + e.getMessage());
+            System.err.println("Errore nel caricamento degli utenti: " + e.getMessage());
         }
     }
 }

@@ -105,7 +105,7 @@
             </VBox>
          </children>
       </HBox>
-      <MFXButton fx:id="rimuoviButton" layoutX="856.0" layoutY="29.0" onAction="#reservePressed" prefHeight="42.0" prefWidth="123.0" style="-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);" text="Rimuovi" textFill="WHITE">
+      <MFXButton fx:id="rimuoviButton" layoutX="856.0" layoutY="29.0" onAction="#deletePressed" prefHeight="42.0" prefWidth="123.0" style="-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);" text="Rimuovi" textFill="WHITE">
          <font>
             <Font name="Trebuchet MS" size="20.0" />
          </font>

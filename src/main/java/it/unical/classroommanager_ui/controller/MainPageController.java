@@ -116,23 +116,25 @@ public class MainPageController {
 
     @FXML
     void  clickUtenti(MouseEvent event){
-        if(!currPage.equals("utenti")) {
-            try {
-                FXMLLoader loader = new FXMLLoader(UtentiListPageView.class.getResource("UtentiListPage.fxml"));
-                AnchorPane nuovoAnchorPane = loader.load();
-                UtentiListPageController utentiListPageController = loader.getController();
+        try {
+            FXMLLoader loader = new FXMLLoader(UtentiListPageView.class.getResource("UtentiListPage.fxml"));
+            AnchorPane nuovoAnchorPane = loader.load();
+            UtentiListPageController utentiListPageController = loader.getController();
 
-                utentiListPageController.init(this);
+            utentiListPageController.init(this);
 
-                utentiListPageController.setBPane(BPane);
-                BPane.setCenter(nuovoAnchorPane);
+            utentiListPageController.setBPane(BPane);
+            BPane.setCenter(nuovoAnchorPane);
 
-                currPage = "utenti";
+            currPage = "utenti";
 
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    public void refreshUtenti(){
+        clickUtenti(null);
     }
 
     @FXML
@@ -274,6 +276,8 @@ public class MainPageController {
                 labelStoricoPren.setVisible(false);
                 ImmLogOut.setVisible(true);
                 ImmLogIn.setVisible(false);
+                labelUtenti.setVisible(false);
+                ImmUtenti.setVisible(false);
             }
             displayDepartments();
         } else {
