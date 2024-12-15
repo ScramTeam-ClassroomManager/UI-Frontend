@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.SortEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +27,9 @@ public class MainPageController {
 
     @FXML
     private Label labelAule;
+
+    @FXML
+    private Label labelUtenti;
 
     @FXML
     private Label labelLogout;
@@ -56,6 +60,9 @@ public class MainPageController {
 
     @FXML
     private ImageView ImmLogOut;
+
+    @FXML
+    private ImageView ImmUtenti;
 
     String currPage = "";
 
@@ -105,6 +112,27 @@ public class MainPageController {
 
     public void refreshRequestList() {
         displayRequests();
+    }
+
+    @FXML
+    void  clickUtenti(MouseEvent event){
+        if(!currPage.equals("utenti")) {
+            try {
+                FXMLLoader loader = new FXMLLoader(UtentiListPageView.class.getResource("UtentiListPage.fxml"));
+                AnchorPane nuovoAnchorPane = loader.load();
+                UtentiListPageController utentiListPageController = loader.getController();
+
+                utentiListPageController.init(this);
+
+                utentiListPageController.setBPane(BPane);
+                BPane.setCenter(nuovoAnchorPane);
+
+                currPage = "utenti";
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @FXML
@@ -235,8 +263,10 @@ public class MainPageController {
         if (!(UserManager.getInstance().getToken().isEmpty())) {
             if (UserManager.getInstance().getUser().role().equals(Role.ADMIN.toString())) {
                 labelInserimentoAula.setVisible(true);
+                labelUtenti.setVisible(true);
                 ImmLogOut.setVisible(true);
                 ImmLogIn.setVisible(false);
+                ImmUtenti.setVisible(true);
             } else {
                 labelInserimentoAula.setVisible(false);
                 ImmInser.setVisible(false);
@@ -250,10 +280,12 @@ public class MainPageController {
             labelLogout.setText("Login");
             labelInserimentoAula.setVisible(false);
             labelStoricoPren.setVisible(false);
+            labelUtenti.setVisible(false);
             ImmInser.setVisible(false);
             ImmStorico.setVisible(false);
             ImmLogOut.setVisible(false);
             ImmLogIn.setVisible(true);
+            ImmUtenti.setVisible(false);
             displayDepartments();
         }
     }

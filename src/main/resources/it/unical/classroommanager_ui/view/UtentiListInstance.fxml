@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="93.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.UtentiListInstanceController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="300.0">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/Immagini/badge-pass-icon.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER_LEFT">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="250.0" text="Name:" textFill="#9b2030">
+                           <font>
+                              <Font name="Trebuchet MS" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="UtentiNameLabel" prefHeight="30.0" prefWidth="300.0">
+                           <font>
+                              <Font name="Nunito Regular" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="250.0" text="Surname:" textFill="#9b2030">
+                           <font>
+                              <Font name="Trebuchet MS" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="UtentiSuernameLabel" prefHeight="30.0" prefWidth="300.0">
+                           <font>
+                              <Font name="Nunito Regular" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="330.0" layoutY="25.0">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/Immagini/administrator-developer-icon.png" />
+               </image>
+            </ImageView>
+            <VBox>
+               <children>
+                  <Label prefHeight="25.0" prefWidth="50.0" text="Role:" textFill="#9b2030">
+                     <font>
+                        <Font name="Trebuchet MS" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="UtentiRoleLabel" prefHeight="30.0" prefWidth="150.0">
+                     <font>
+                        <Font name="Nunito Regular" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="600.0" layoutY="25.0">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/Immagini/user-data-icon.png" />
+               </image>
+            </ImageView>
+            <VBox>
+               <children>
+                  <Label prefHeight="25.0" prefWidth="100.0" text="Matricola:" textFill="#9b2030">
+                     <font>
+                        <Font name="Trebuchet MS" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="7.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="UtentiMatriolaLabel" prefHeight="30.0" prefWidth="150.0">
+                     <font>
+                        <Font name="Nunito Regular" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets right="1.0" />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </HBox>
+      <MFXButton fx:id="rimuoviButton" layoutX="856.0" layoutY="29.0" onAction="#reservePressed" prefHeight="42.0" prefWidth="123.0" style="-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);" text="Rimuovi" textFill="WHITE">
+         <font>
+            <Font name="Trebuchet MS" size="20.0" />
+         </font>
+      </MFXButton>
+   </children>
+</AnchorPane>
