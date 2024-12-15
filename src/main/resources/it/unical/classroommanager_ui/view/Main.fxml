@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="BPane" focusTraversable="true" minHeight="725.0" minWidth="1450.0" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
+<BorderPane fx:id="BPane" focusTraversable="true" minHeight="725.0" minWidth="1450.0" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.MainPageController">
    <left>
       <AnchorPane prefHeight="760.0" prefWidth="326.0" style="-fx-background-color: rgb(155, 32, 48);" BorderPane.alignment="CENTER">
          <children>
@@ -175,6 +175,32 @@
                            </HBox.margin>
                         </ImageView>
                         <Label fx:id="labelInserimentoAula" onMouseClicked="#clickInserisciAula" text="Inserisci un aula" textFill="WHITE">
+                           <font>
+                              <Font name="Georgia" size="36.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fx:id="ImmUtenti" fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@resources/Immagini/account.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                        </ImageView>
+                        <Label fx:id="labelUtenti" onMouseClicked="#clickUtenti" text="Utenti" textFill="WHITE">
                            <font>
                               <Font name="Georgia" size="36.0" />
                            </font>
