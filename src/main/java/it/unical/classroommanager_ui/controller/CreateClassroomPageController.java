@@ -118,7 +118,6 @@ public class CreateClassroomPageController {
 
             imageCheck = true;
         }
-
     }
 
     @FXML
@@ -381,7 +380,7 @@ public class CreateClassroomPageController {
         else{
             cube = true;
             if (classroomCube.getText()==null || classroomCube.getText().isEmpty()){
-                cubeText = "0";
+                cubeText = "30"; // CUBO STANDARD DIPARTIMENTO MATEMATICA E INFORMATICA
             }
             else{
                 cubeText = classroomCube.getText();

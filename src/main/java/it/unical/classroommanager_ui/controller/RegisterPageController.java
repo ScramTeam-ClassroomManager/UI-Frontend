@@ -1,5 +1,6 @@
 package it.unical.classroommanager_ui.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import it.unical.classroommanager_ui.model.Role;
@@ -21,6 +22,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class RegisterPageController {
@@ -515,8 +517,14 @@ public class RegisterPageController {
 
         if (name && surname && email && password && repeatPassword && serialNumber && role){
 
-            // start connection
-            URL url = new URL("http://localhost:8080/api/v1/auth/register");
+            // starts connection
+            URL url;
+            if(!roleComboBox.getValue().toString().equals(Role.ADMIN.toString())) {
+                url = new URL("http://localhost:8080/api/v1/auth/register");
+            }
+            else{
+                url = new URL("http://localhost:8080/api/v1/auth/registeradmin");
+            }
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json");
@@ -604,12 +612,25 @@ public class RegisterPageController {
                 System.out.println("Registration failed: " + responseCode);
             }
 
+            if(roleComboBox.getValue().toString().equals(Role.ADMIN.toString())) {
+                try {
+                    String responseString = response.toString();
+                    ObjectMapper objectMapper = new ObjectMapper();
 
+                    Map<String, Object> responseMap = objectMapper.readValue(responseString, Map.class);
+
+                    String token = (String) responseMap.get("token");
+                    UserManager.getInstance().setToken(token);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
             // LO PORTA ALLA PAG PRINCIPALE E LO FA LOGGARE
             UserManager.getInstance().setUser(new User(serialnumberField.getText(), nameField.getText(), surnameField.getText(),
                     emailField.getText(), passwordField.getText(), roleComboBox.getValue().toString()));
-            SceneHandler.getInstance().createLoginScene();
+            SceneHandler.getInstance().createMainPageScene();
 
         }
 
