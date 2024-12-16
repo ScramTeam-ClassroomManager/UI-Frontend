@@ -18,13 +18,14 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -134,22 +135,20 @@ public class ClassroomDetailsPageController {
             date = false;
             datePicker.setStyle("-fx-border-color: red");
             dateAlert.setStyle("-fx-text-fill: red");
-            dateAlert.setText("Se vuoi prenotare l'aula devi inserire una data successiva ad oggi.");
             FadeTransition ft = new FadeTransition(Duration.seconds(1), dateAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-            dateAlert.setVisible(true);
+            //dateAlert.setVisible(true);
         } else {
             date = true;
             datePicker.setStyle("-fx-border-color: green");
             dateAlert.setStyle("-fx-text-fill: green");
-            dateAlert.setText("✓");
             FadeTransition ft = new FadeTransition(Duration.seconds(1), dateAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-            dateAlert.setVisible(true);
+            //dateAlert.setVisible(true);
         }
 
         // CHECK START HOUR
@@ -157,12 +156,11 @@ public class ClassroomDetailsPageController {
             startHour = false;
             startHourCB.setStyle("-fx-border-color: red");
             hourAlert.setStyle("-fx-text-fill: red");
-            hourAlert.setText("Se vuoi prenotare l'aula devi inserire un'ora di inizio e di fine.");
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-            hourAlert.setVisible(true);
+            //hourAlert.setVisible(true);
         } else {
             startHour = true;
         }
@@ -179,18 +177,17 @@ public class ClassroomDetailsPageController {
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-            hourAlert.setVisible(true);
+            //hourAlert.setVisible(true);
         } else {
             endHour = true;
             endHourCB.setStyle("-fx-border-color: green");
             hourAlert.setStyle("-fx-text-fill: green");
-            hourAlert.setText("✓");
             startHourCB.setStyle("-fx-border-color: green");
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-            hourAlert.setVisible(true);
+            //hourAlert.setVisible(true);
         }
 
         if (date && startHour && endHour) {
@@ -219,8 +216,36 @@ public class ClassroomDetailsPageController {
 
                 if (responseCode == HttpURLConnection.HTTP_CREATED) {
                     System.out.println("Richiesta inserita con successo: " + requestDate);
+                    repetitionComboBox.setStyle("-fx-border-color: green");
+                    reasonTextArea.setStyle("-fx-border-color: green");
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+                    alert.setTitle("Conferma");
+                    alert.setHeaderText("Avviso");
+                    alert.setContentText("Prenotazione effettuata correttamente");
+
+                    alert.getDialogPane().setMinHeight(200);
+                    alert.getDialogPane().setMinWidth(200);
+                    alert.show();
                 } else {
                     System.out.println("Errore nell'inserimento della richiesta: " + requestDate);
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                    alert.setTitle("Errore");
+                    alert.setHeaderText("Avviso");
+                    alert.setContentText("Aula già occupata nella data selezionata");
+
+                    alert.getDialogPane().setMinHeight(200);
+                    alert.getDialogPane().setMinWidth(200);
+                    alert.show();
+
+                    startHourCB.setStyle("-fx-border-color: red");
+                    endHourCB.setStyle("-fx-border-color: red");
+                    datePicker.setStyle("-fx-border-color: red");
+                    reasonTextArea.setStyle("-fx-border-color: red");
+                    repetitionComboBox.setStyle("-fx-border-color: red");
+
                     break;
                 }
 
@@ -228,6 +253,7 @@ public class ClassroomDetailsPageController {
                 repeatCount++;
             }
         }
+
     }
 
     private int postRequest(String jsonInputString) {

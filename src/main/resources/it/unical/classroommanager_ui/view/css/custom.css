@@ -229,3 +229,11 @@
 #requestListView {
     -fx-border-color: rgb(155, 32, 48);
 }
+
+#repetitionComboBox {
+    -fx-border-color: rgb(155, 32, 48);
+}
+
+#repetitionComboBox .caret .mfx-font-icon {
+    -mfx-color: rgb(155, 32, 48);
+}
