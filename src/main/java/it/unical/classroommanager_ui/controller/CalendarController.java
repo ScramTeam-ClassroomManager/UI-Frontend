@@ -5,6 +5,7 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -12,10 +13,13 @@ import it.unical.classroommanager_ui.model.*;
 import it.unical.classroommanager_ui.view.CustomEntryDetailsView;
 import javafx.fxml.FXML;
 import com.calendarfx.view.CalendarView;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -91,8 +95,7 @@ public class CalendarController {
         }
     }
 
-
-    private Entry createEntry(){
+    private Entry createEntry() {
         Entry<RequestDto> entry = new Entry<>();
 
         Dialog<Pair<String, String>> dialog = new Dialog<>();
@@ -102,30 +105,35 @@ public class CalendarController {
         MFXTextField titleField = new MFXTextField();
         titleField.setPromptText("Motivazione");
         titleField.setPrefWidth(160);
+        titleField.setId("classroomName");
 
         MFXTextField locationField = new MFXTextField();
         locationField.setPromptText("Aula");
         locationField.setPrefWidth(160);
+        locationField.setId("classroomCube");
 
         MFXDatePicker datePicker = new MFXDatePicker();
-        MFXComboBox<LocalTime> startHourCB = new MFXComboBox<>();
-        MFXComboBox<LocalTime> endHourCB = new MFXComboBox<>();
-        MFXComboBox<String> ripetizioni = new MFXComboBox<>();
+        datePicker.setId("datePicker");
 
+        MFXComboBox<LocalTime> startHourCB = new MFXComboBox<>();
+        startHourCB.setId("startHourCB");
+        MFXComboBox<LocalTime> endHourCB = new MFXComboBox<>();
+        endHourCB.setId("endHourCB");
+
+        MFXComboBox<String> ripetizioni = new MFXComboBox<>();
+        ripetizioni.setId("typeCBox");
         ripetizioni.getItems().add("Mai");
         ripetizioni.getItems().add("Mensile");
         ripetizioni.getItems().add("Semestrale");
-
         ripetizioni.getSelectionModel().selectFirst();
 
-        for (int i = 8; i < 21; i++){
-            startHourCB.getItems().add(LocalTime.of(i,0));
+        for (int i = 8; i < 21; i++) {
+            startHourCB.getItems().add(LocalTime.of(i, 0));
             startHourCB.getItems().add(LocalTime.of(i, 30));
 
-            endHourCB.getItems().add(LocalTime.of(i,0));
+            endHourCB.getItems().add(LocalTime.of(i, 0));
             endHourCB.getItems().add(LocalTime.of(i, 30));
         }
-
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -140,15 +148,26 @@ public class CalendarController {
         grid.add(startHourCB, 1, 3);
         grid.add(new Label("Ora Fine:"), 0, 4);
         grid.add(endHourCB, 1, 4);
-
         grid.add(new Label("Ripeti per:"), 0, 5);
         grid.add(ripetizioni, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
 
+        dialog.getDialogPane().getStylesheets().add(
+                getClass().getResource("/it/unical/classroommanager_ui/view/css/custom.css").toExternalForm()
+        );
 
         ButtonType createButtonType = new ButtonType("Crea", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
+        ButtonType cancelButtonType = ButtonType.CANCEL;
+        dialog.getDialogPane().getButtonTypes().addAll(createButtonType, cancelButtonType);
+
+        Button createButton = (Button) dialog.getDialogPane().lookupButton(createButtonType);
+        createButton.setStyle("-fx-background-radius: 10; -fx-background-color: rgb(155, 32, 48);");
+        createButton.setTextFill(javafx.scene.paint.Color.WHITE);
+
+        Button cancelButton = (Button) dialog.getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.setStyle("-fx-background-radius: 10; -fx-background-color: grey;");
+        cancelButton.setTextFill(javafx.scene.paint.Color.WHITE);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == createButtonType) {
@@ -158,16 +177,21 @@ public class CalendarController {
         });
 
         dialog.showAndWait().ifPresent(result -> {
-            entry.setTitle(result.getKey());
-            entry.setLocation(result.getValue());
-            entry.changeStartDate(datePicker.getValue());
-            entry.changeStartTime(startHourCB.getValue());
-            entry.changeEndDate(datePicker.getValue());
-            entry.changeEndTime(endHourCB.getValue());
-            entry.getProperties().put("repetition", ripetizioni.getValue());
+            if (result != null) {
+                entry.setTitle(result.getKey());
+                entry.setLocation(result.getValue());
+                entry.changeStartDate(datePicker.getValue());
+                entry.changeStartTime(startHourCB.getValue());
+                entry.changeEndDate(datePicker.getValue());
+                entry.changeEndTime(endHourCB.getValue());
+                entry.getProperties().put("repetition", ripetizioni.getValue());
+            }
         });
+
         return entry;
     }
+
+
 
     private void showCustomEntryDetailsView(Entry<?> entry) {
         CustomEntryDetailsView detailsView = new CustomEntryDetailsView(entry);
@@ -248,7 +272,7 @@ public class CalendarController {
                             "Vuoi davvero eliminare questa richiesta?");
                     confirm.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            param.getCalendar().removeEntry(entry); // Rimuovi l'evento
+                            param.getCalendar().removeEntry(entry);
                         }
                     });
                 });
