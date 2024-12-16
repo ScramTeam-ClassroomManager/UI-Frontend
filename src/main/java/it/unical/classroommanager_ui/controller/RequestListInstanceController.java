@@ -52,16 +52,7 @@ public class RequestListInstanceController {
     private MFXButton RefuseButton;
 
     @FXML
-    private Label response_area_user;
-
-    @FXML
     private TextArea response_area;
-
-    @FXML
-    private Label motiv_rich;
-
-    @FXML
-    private ImageView imm_reas;
 
     private MainPageController mainPageController;
     private RequestDto request;
@@ -75,11 +66,6 @@ public class RequestListInstanceController {
         startHourLabel.setText(request.getStartHour().toString());
         endHourLabel.setText(request.getEndHour().toString());
         requestCreationDateLabel.setText(request.getCreationDate().toString());
-        //response_area_user.setText(request.getReason());
-
-        response_area_user.setVisible(false);
-        motiv_rich.setVisible(false);
-        imm_reas.setVisible(false);
 
 
         CompletableFuture.runAsync(() -> {

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.RequestListInstanceController">
+<AnchorPane prefHeight="515.0" prefWidth="1014.0" stylesheets="@css/custom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.RequestListInstanceController">
     <children>
         <VBox layoutX="32.0" layoutY="20.0" prefHeight="218.0" prefWidth="976.0" spacing="15.0">
             <children>
@@ -57,7 +57,7 @@
                     <children>
                         <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@resources/Immagini/reason.png" />
+                                <Image url="@resources/Immagini/clipboard-question-icon.png" />
                             </image>
                         </ImageView>
                         <Label prefHeight="30.0" prefWidth="157.0" text="Motivo:" textFill="#9b2030">
@@ -166,35 +166,20 @@
                 </MFXButton>
             </children>
         </HBox>
-      <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="46.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="47.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@resources/Immagini/response.png" />
          </image>
       </ImageView>
-      <Label layoutX="105.0" layoutY="387.0" prefHeight="30.0" prefWidth="199.0" text="Motivazione risposta:" textFill="#9b2030">
+      <Label layoutX="106.0" layoutY="243.0" prefHeight="30.0" prefWidth="199.0" text="Motivazione risposta:" textFill="#9b2030">
          <font>
             <Font name="Trebuchet MS" size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="response_area" layoutX="309.0" layoutY="372.0" prefHeight="194.0" prefWidth="658.0" wrapText="true">
+      <TextArea fx:id="response_area" layoutX="310.0" layoutY="228.0" prefHeight="194.0" prefWidth="658.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </TextArea>
-      <Label fx:id="response_area_user" layoutX="309.0" layoutY="241.0" prefHeight="117.0" prefWidth="658.0" styleClass="response-label" wrapText="true">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="motiv_rich" layoutX="102.0" layoutY="241.0" prefHeight="30.0" prefWidth="212.0" text="Motivazione richiesta:" textFill="#9b2030">
-         <font>
-            <Font name="Trebuchet MS" size="20.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="imm_reas" fitHeight="47.0" fitWidth="40.0" layoutX="50.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@resources/Immagini/clipboard-question-icon.png" />
-         </image>
-      </ImageView>
     </children>
 </AnchorPane>
