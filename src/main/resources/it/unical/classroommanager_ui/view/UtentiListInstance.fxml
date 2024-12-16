@@ -97,6 +97,9 @@
                      <font>
                         <Font name="Nunito Regular" size="20.0" />
                      </font>
+                     <padding>
+                        <Insets left="7.0" />
+                     </padding>
                   </Label>
                </children>
                <opaqueInsets>

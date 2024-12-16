@@ -5,6 +5,7 @@ import it.unical.classroommanager_ui.model.UserDto;
 import it.unical.classroommanager_ui.model.UserManager;
 import it.unical.classroommanager_ui.view.UtentiListInstanceView;
 import it.unical.classroommanager_ui.view.UtentiListPageView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +45,12 @@ public class UtentiListPageController {
 
     @FXML
     private AnchorPane classroomListPane;
+
+    @FXML
+    private MFXButton invioButton;
+
+    @FXML
+    private MFXTextField searchBar;
 
     MainPageController mainPageController;
     List<UserDto> users;
@@ -100,6 +107,24 @@ public class UtentiListPageController {
         } catch (IOException e) {
             System.err.println("Errore nel caricamento degli utenti: " + e.getMessage());
         }
+    }
+
+    @FXML
+    void invio(ActionEvent event) {
+        String searchText = searchBar.getText().toLowerCase();
+
+        List<UserDto> filteredUsers = users.stream()
+                .filter(user -> (user.getFirstName() + " " + user.getLastName()).toLowerCase().contains(searchText)
+                        || (String.valueOf(user.getSerialNumber()).contains(searchText)))
+                .toList();
+
+        UtentiList.getItems().clear();
+
+        for (UserDto user : filteredUsers) {
+            UtentiListInstanceView utentiListInstanceView = new UtentiListInstanceView(mainPageController, user);
+            UtentiList.getItems().add(utentiListInstanceView);
+        }
+
     }
 }
 

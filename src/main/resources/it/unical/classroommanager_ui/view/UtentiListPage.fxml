@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="classroomListPane" prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.UtentiListPageController">
    <children>
-      <HBox alignment="CENTER_LEFT" spacing="15" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10" />
+      <HBox alignment="CENTER_LEFT" spacing="15.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/Immagini/search-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <MFXTextField fx:id="searchBar" prefWidth="250.0" promptText="Search" style="-fx-border-color: rgb(155, 32, 48);">
+               <HBox.margin>
+                  <Insets left="-15.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MFXTextField>
+            <MFXButton fx:id="invioButton" onAction="#invio" prefHeight="34.0" prefWidth="70.0" style="-fx-border-color: rgb(155, 32, 48); -fx-border-radius: 10;" text="Invio">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="-5.0" />
+               </HBox.margin></MFXButton>
+         </children>
+         <padding>
+            <Insets left="5.0" />
+         </padding></HBox>
       <ListView fx:id="UtentiList" layoutY="69.0" prefHeight="691.0" prefWidth="1120.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="69.0" />
    </children>
 </AnchorPane>
