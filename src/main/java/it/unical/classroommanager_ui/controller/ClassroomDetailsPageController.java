@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -242,29 +243,14 @@ public class ClassroomDetailsPageController {
 
         if (date && startHour && endHour){
 
-            URL url = new URL("http://localhost:8080/api/v1/request/addRequest");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type","application/json");
-            connection.setDoOutput(true);
-
-            connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
-
 
             // Prepare input
             String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
                             "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
                     reasonTextArea.getText(), classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
 
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-            catch(Exception e){
-                throw new IOException();
-            }
+            int responseCode = postRequest(jsonInputString);
 
-            int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_CREATED) {
                 System.out.println("Richiesta inserita nel sistema con successo.");
                 bookButton.setStyle("-fx-border-color: green");
@@ -293,6 +279,29 @@ public class ClassroomDetailsPageController {
             }
         }
 
+    }
+
+    private int postRequest(String jsonInputString) {
+        try {
+
+            URL url = new URL("http://localhost:8080/api/v1/request/addRequest");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            connection.setRequestProperty("Authorization", "Bearer " + UserManager.getInstance().getToken());
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            } catch (Exception e) {
+                throw new IOException();
+            }
+
+             return connection.getResponseCode();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
