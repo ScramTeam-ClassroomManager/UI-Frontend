@@ -12,14 +12,14 @@
 
 <AnchorPane prefHeight="760.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ProfilePageController">
    <children>
-      <Label alignment="CENTER" layoutX="396.0" layoutY="14.0" prefHeight="42.0" prefWidth="316.0" text="User profile details" AnchorPane.bottomAnchor="704.0" AnchorPane.leftAnchor="396.0" AnchorPane.rightAnchor="408.0" AnchorPane.topAnchor="14.0">
+      <Label alignment="CENTER" layoutX="396.0" layoutY="14.0" prefHeight="42.0" prefWidth="316.0" text="Dettagli profilo" AnchorPane.bottomAnchor="704.0" AnchorPane.leftAnchor="396.0" AnchorPane.rightAnchor="408.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Trebuchet MS Bold" size="25.0" />
          </font>
       </Label>
       <VBox layoutX="231.0" layoutY="182.0" prefHeight="223.0" prefWidth="351.0" AnchorPane.topAnchor="182.0">
          <children>
-            <Label prefHeight="31.0" prefWidth="251.0" text="Name:" textFill="#9b2030">
+            <Label prefHeight="31.0" prefWidth="251.0" text="Nome:" textFill="#9b2030">
                <font>
                   <Font name="Trebuchet MS Bold" size="27.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Font name="Trebuchet MS" size="23.0" />
                </font>
             </Text>
-            <Label prefHeight="31.0" prefWidth="251.0" text="Surname:" textFill="#9b2030">
+            <Label prefHeight="31.0" prefWidth="251.0" text="Cognome:" textFill="#9b2030">
                <font>
                   <Font name="Trebuchet MS Bold" size="27.0" />
                </font>
@@ -61,7 +61,7 @@
          <children>
             <HBox prefHeight="43.0" prefWidth="310.0">
                <children>
-                  <Label prefHeight="41.0" prefWidth="89.0" text="Role:" textFill="#9b2030">
+                  <Label prefHeight="41.0" prefWidth="107.0" text="Ruolo:" textFill="#9b2030">
                      <font>
                         <Font name="Trebuchet MS Bold" size="34.0" />
                      </font>
