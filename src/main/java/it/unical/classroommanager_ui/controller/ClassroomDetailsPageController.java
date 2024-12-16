@@ -116,6 +116,9 @@ public class ClassroomDetailsPageController {
     @FXML
     private ImageView backArrow;
 
+    @FXML
+    private MFXComboBox<String> repetitionComboBox;
+
     MainPageController mainPageController;
     ClassroomDto classroomDto;
 
@@ -126,159 +129,105 @@ public class ClassroomDetailsPageController {
         boolean startHour;
         boolean endHour;
 
-
         // CHECK DATE
-        if(datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
+        if (datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())) {
             date = false;
-
             datePicker.setStyle("-fx-border-color: red");
-
             dateAlert.setStyle("-fx-text-fill: red");
             dateAlert.setText("Se vuoi prenotare l'aula devi inserire una data successiva ad oggi.");
-
             FadeTransition ft = new FadeTransition(Duration.seconds(1), dateAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-
             dateAlert.setVisible(true);
-        }
-        else{
+        } else {
             date = true;
-
             datePicker.setStyle("-fx-border-color: green");
-
             dateAlert.setStyle("-fx-text-fill: green");
             dateAlert.setText("✓");
-
             FadeTransition ft = new FadeTransition(Duration.seconds(1), dateAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-
             dateAlert.setVisible(true);
         }
 
         // CHECK START HOUR
-        if(startHourCB.getValue() == null){
+        if (startHourCB.getValue() == null) {
             startHour = false;
-
             startHourCB.setStyle("-fx-border-color: red");
-
             hourAlert.setStyle("-fx-text-fill: red");
-            hourAlert.setText("Se vuoi prenotare l'aula devi inserire un ora di inizio e di fine.");
-
+            hourAlert.setText("Se vuoi prenotare l'aula devi inserire un'ora di inizio e di fine.");
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-
             hourAlert.setVisible(true);
-        }
-        else{
+        } else {
             startHour = true;
         }
 
         // CHECK END HOUR
-        if(endHourCB.getValue() == null ){
-
+        if (endHourCB.getValue() == null || endHourCB.getValue().isBefore(startHourCB.getValue()) ||
+                endHourCB.getValue().equals(startHourCB.getValue())) {
             endHour = false;
-
-            endHourCB.setStyle("-fx-border-color: red");
-
-            hourAlert.setStyle("-fx-text-fill: red");
-            hourAlert.setText("Se vuoi prenotare l'aula devi inserire un ora di inizio e di fine.");
-
-            FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-
-            hourAlert.setVisible(true);
-        }
-        else if(endHourCB.getValue().isBefore(startHourCB.getValue()) ||
-                endHourCB.getValue().equals(startHourCB.getValue())){
-            endHour = false;
-
             endHourCB.setStyle("-fx-border-color: red");
             startHourCB.setStyle("-fx-border-color: red");
-
             hourAlert.setStyle("-fx-text-fill: red");
-            hourAlert.setText("L'ora finale deve essere succesiva a quella di inizio.");
-
+            hourAlert.setText("L'ora finale deve essere successiva a quella di inizio.");
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-
             hourAlert.setVisible(true);
-        }
-        else{
+        } else {
             endHour = true;
-
             endHourCB.setStyle("-fx-border-color: green");
-
             hourAlert.setStyle("-fx-text-fill: green");
             hourAlert.setText("✓");
-
             startHourCB.setStyle("-fx-border-color: green");
-
-            hourAlert.setStyle("-fx-text-fill: green");
-            hourAlert.setText("✓");
-
-            reasonTextArea.setStyle("-fx-border-color: green");
-
             FadeTransition ft = new FadeTransition(Duration.seconds(1), hourAlert);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
             ft.play();
-
-            hourAlert.setVisible(true);
-
             hourAlert.setVisible(true);
         }
 
+        if (date && startHour && endHour) {
+            String repetitionType = repetitionComboBox.getValue();
+            LocalDate requestDate = datePicker.getValue();
 
+            int repeatCount = 0;
+            int maxRepeats = 1;
+            int weeksIncrement = 0;
 
-
-        if (date && startHour && endHour){
-
-
-            // Prepare input
-            String jsonInputString = String.format("{\"reason\": \"%s\", \"classroomId\": \"%s\"," +
-                            "\"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
-                    reasonTextArea.getText(), classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), datePicker.getValue());
-
-            int responseCode = postRequest(jsonInputString);
-
-            if (responseCode == HttpURLConnection.HTTP_CREATED) {
-                System.out.println("Richiesta inserita nel sistema con successo.");
-                bookButton.setStyle("-fx-border-color: green");
-                bookAlert.setVisible(false);
+            if ("Mensile".equals(repetitionType)) {
+                maxRepeats = 4;
+                weeksIncrement = 1;
+            } else if ("Semestrale".equals(repetitionType)) {
+                maxRepeats = 12;
+                weeksIncrement = 1;
             }
-            else{
-                System.out.println("Insuccesso nell'inserimento della richiesta nel sistema.");
 
-                startHourCB.setStyle("-fx-border-color: red");
-                endHourCB.setStyle("-fx-border-color: red");
-                hourAlert.setVisible(false);
+            while (repeatCount < maxRepeats) {
+                String jsonInputString = String.format(
+                        "{\"reason\": \"%s\", \"classroomId\": \"%s\", \"startHour\": \"%s\", \"endHour\": \"%s\", \"requestDate\": \"%s\"}",
+                        reasonTextArea.getText(), classroomDto.getId(), startHourCB.getValue(), endHourCB.getValue(), requestDate
+                );
 
-                datePicker.setStyle("-fx-border-color: red");
-                dateAlert.setVisible(false);
+                int responseCode = postRequest(jsonInputString);
 
-                bookAlert.setStyle("-fx-text-fill: red");
-                bookButton.setStyle("-fx-border-color: red");
+                if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                    System.out.println("Richiesta inserita con successo: " + requestDate);
+                } else {
+                    System.out.println("Errore nell'inserimento della richiesta: " + requestDate);
+                    break;
+                }
 
-                reasonTextArea.setStyle("-fx-border-color: red");
-
-                FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAlert);
-                ft.setFromValue(0.0);
-                ft.setToValue(1.0);
-                ft.play();
-                bookAlert.setVisible(true);
+                requestDate = requestDate.plusWeeks(weeksIncrement);
+                repeatCount++;
             }
         }
-
     }
 
     private int postRequest(String jsonInputString) {
@@ -360,6 +309,10 @@ public class ClassroomDetailsPageController {
         }
         NumberRange<Integer> numberRange = new NumberRange<Integer>(2024,2025);
         datePicker.setYearsRange(numberRange);
+
+        repetitionComboBox.getItems().add("Mai");
+        repetitionComboBox.getItems().add("Mensile");
+        repetitionComboBox.getItems().add("Semestrale");
 
 
 

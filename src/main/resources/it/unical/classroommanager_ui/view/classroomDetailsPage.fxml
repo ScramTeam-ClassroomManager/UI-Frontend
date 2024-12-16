@@ -18,6 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="894.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unical.classroommanager_ui.controller.ClassroomDetailsPageController">
    <children>
       <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="1104.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -308,6 +309,16 @@
                                     <Insets top="-2.0" />
                                  </VBox.margin>
                               </Label>
+                              <Label text="Ripetizione" textFill="#9b2030">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="18.0" />
+                                 </font>
+                              </Label>
+                              <MFXComboBox fx:id="repetitionComboBox">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </MFXComboBox>
                               <Label fx:id="bookAlert" prefHeight="17.0" prefWidth="407.0" text="Esiste già una prenotazione per questa fascia oraria" visible="false">
                                  <font>
                                     <Font name="Trebuchet MS" size="14.0" />
